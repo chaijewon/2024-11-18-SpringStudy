@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 
+        1. 등록된 모든 클래스 메모리 할당 
+        2. setter에 값을 채운다 
+        3. 사용자(개발자) 사용 
+        4. 메모리 해제 
+        
+        => 클래스마다 메모리 할당 
+        => 패키지 단위 메모리 할당 
+           <context:component-scan basepackage=""/>
+           
+     -->
+    <bean id="std" class="com.sist.spring1.Student"
+       p:hakbun="1"
+       p:kor="90"
+       p:math="80"
+       p:eng="70"
+       p:human-ref="hu"
+       init-method="init"
+       destroy-method="destory"
+    />
+    <bean id="hu" class="com.sist.spring1.Human"
+       p:name="홍길동"
+       p:sex="남자"
+       p:address="서울"
+    />
+</beans>

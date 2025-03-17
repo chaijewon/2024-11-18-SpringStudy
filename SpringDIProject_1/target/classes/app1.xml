@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <!-- 디폴트 생성자가 있는 경우에만 사용이 가능
+        new Sawon()
+    -->
+   <bean id="sa1" class="com.sist.main.Sawon">
+     <property name="sabun"><value>1</value></property>
+     <property name="name" value="홍길동"/>
+     <!--  sa.setName("홍길동") -->
+     <property name="dept" value="개발부"/>
+     <property name="loc" value="서울"/>
+     <property name="pay" value="3000"/>
+   </bean>
+   <!-- 멤버변수 초기화 -->
+   <bean id="sa2" class="com.sist.main.Sawon"
+     p:sabun="2"
+     p:name="심청이"
+     p:dept="총무부"
+     p:loc="경기"
+     p:pay="3500"
+   />
+   
+   <!-- 생성자 매개변수를 이용한 초기화 -->
+   <bean id="sa3" class="com.sist.main.Sawon">
+     <constructor-arg><value>3</value></constructor-arg>
+     <constructor-arg><value>박문수</value></constructor-arg>
+     <constructor-arg><value>영업부</value></constructor-arg>
+     <constructor-arg><value>대전</value></constructor-arg>
+     <constructor-arg><value>4500</value></constructor-arg>
+   </bean>
+   <!-- 가장 많이 사용 -->
+   <bean id="sa4" class="com.sist.main.Sawon"
+     c:sabun="4"
+     c:name="이순신"
+     c:dept="기획부"
+     c:loc="강원"
+     c:pay="4000"
+   />
+   
+   <bean id="sa5" class="com.sist.main.Sawon"
+     c:_0="5"
+     c:_1="강감찬"
+     c:_2="기획부"
+     c:_3="인천"
+     c:_4="5000"
+   />
+</beans>
+
+
+
+
+
