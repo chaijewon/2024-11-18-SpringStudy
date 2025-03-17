@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 등록된 클래스 : 빈 -->
+    <bean id="sawon" class="com.sist.spring5.Sawon"/>
+    <!-- 
+        clsMap.put("sawon",Class.forName("com.sist.spring5.Sawon"))
+     -->
+    <bean id="member" class="com.sist.spring5.Member"/>
+    <bean id="std" class="com.sist.spring5.Student"/>
+</beans>
