@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="sa" class="com.sist.spring.Sawon">
+    <property name="name" value="홍길동"/>
+    <property name="sex" value="남자"/>
+    <property name="age" value="25"/>
+  </bean>
+</beans>
