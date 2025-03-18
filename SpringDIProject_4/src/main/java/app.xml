@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- DI
+         객체 생성 ~ 객체 소멸 
+                |
+            멤버변수의 초기화 : DI 
+                   => setXxx() / 생성자 
+                                 1. <bean>
+                                     <constructor-age></constructor-age>
+                                    </bean>
+                                 2. <bean
+                                      c:매개변수명="값"
+                                    />
+                                    class A
+                                    {
+                                       public A(String name){}
+                                    }
+                   => setter 
+                      1. <bean>
+                          <property name="변수명" value="초기값">
+                         </bean> 
+                      2. <bean 
+                            p:변수명="초기값"
+                          />
+         객체 생성 
+         =======
+           <bean id="aa" class="패키지명.클래스명">
+           
+         DI => 객체생성~소멸까지 생명주기를 관리 
+         => 게임프로그램 : 복잡한 클래스 관계도가 있는 경우 
+         
+         => 라이브러리 / 사용자 정의 
+            ================== DI
+            | => DB , 보안 
+     
+         class BasicDataSource
+         {
+            private String driverClassName,url,username,password
+            => setDriverClassName()
+            => setUrl()
+            => setUsername()
+            => setPassword()
+         }  
+         
+         a=10
+         b="aaa"    
+         a="bbb"
+         +
+         var a=10
+         val b=20
+     -->
+     <!-- 오라클 정보를 모아준다  -->
+     <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+        p:driverClassName="oracle.jdbc.driver.OracleDriver"
+        p:url="jdbc:oracle:thin:@localhost:1521:XE"
+        p:username="hr"
+        p:password="happy"
+     />
+     <!-- MyBatis 전송 : getConnection/disConnection 
+          class BasicDataSource implements DataSource
+          {
+             
+          }
+     -->
+     <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+          p:dataSource-ref="ds"
+     />
+     <!-- Mapper 구현 : PreparedStatement/ResultSet -->
+     
+</beans>
+
+
+
+
+
