@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="mem" class="com.sist.member.Member"
+      p:sawon-ref="sa"
+    />
+    <bean id="sa" class="com.sist.sawon.Sawon"/>
+    <!-- 
+          등록된 모든 클래스 메모리 할당 
+          setter처리
+     -->
+</beans>
