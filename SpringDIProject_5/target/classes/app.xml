@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="mem" class="com.sist.member.MemberManager"/>
+    <!-- 
+             map.put("mem",new MemberManager()) 
+             map.put("sa",new SawonManager()) => DL
+             map.put("goods",new GoodsManager())
+             
+             생성 = 초기화 = 소멸 : 컨테이너 
+     -->
+    <bean id="sa" class="com.sist.sawon.SawonManager"/>
+    <bean id="goods" class="com.sist.goods.GoodsManager"/>
+</beans>

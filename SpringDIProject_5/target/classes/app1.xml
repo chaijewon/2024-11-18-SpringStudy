@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+    <context:component-scan base-package="com.sist.*"/>
+    <!-- 
+         객체 생성 
+         @Component, : 일반 클래스 
+         @Repository, : DAO
+         @Service, : BI => DAO여러개를 한번에 모아서 처리 
+         @Controller, : Model
+         @RestController, : Model
+         @ControllerAdvice, : 공통예외처리 
+         @Configuration : XML대신 자바이용
+         
+         DI관련 
+         @Autowired, : 자동 주입 
+         @PostConstruct, : init-method
+         @PreDestroy,  : destory-method
+         @Resource : 객체 생성 => 사용이 안됨 (1.8까지만 지원)
+         
+         class A
+         {
+            private B b;
+            public void setB(B b)
+            {
+                this.b=b
+            }
+         }
+         <bean id="b" class="B"/>
+         <bean id="a" class="A"
+          p:b-ref="b"/>
+          
+         class A
+         {
+            @Autowired
+            private B b;
+            
+         }
+     -->
+</beans>
