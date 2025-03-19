@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+    <!-- 데이터베이스 정보 읽기 -->
+    <util:properties id="db" location="classpath:db.properties"/>
+    <!-- Transaction : AOP기반 -->
+    <bean id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+      p:driverClassName="#{db['driver']}"
+      p:url="#{db['url']}"
+      p:username="#{db['username']}"
+      p:password="#{db['password']}"
+    />
+    <!-- SqlSessionFactory로 전송 : getConnection/disConnection -->
+    <bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
+       p:dataSource-ref="ds"
+    />
+    <!-- PreparedStatement/ResultSet : MapperFactoryBean-->
+    <mybatis-spring:scan base-package="com.sist.mapper" factory-ref="ssf"/>
+    <!-- 
+          @Transactional
+          public BoardVO boardDetailData(int no)
+          {
+              BoardVO vo=new BoardVO();
+              try
+              {
+                 =============================
+                  getConnection()
+                  conn.setAutoCommit(false);
+                  ==========================
+                  String sql="";
+                  ps=conn.preparedStatement(sql)
+                  ResultSet rs=ps.executeQuery()
+                  while(rs.next())
+                  {
+                  }
+                  rs.close()
+                  ===================
+                  conn.commit()
+                  ===================
+              }catch(Exception ex)
+              {
+                  ===================
+                  conn.rollback()
+                  ===================
+                  ex.printStackTrace()
+              }
+              finally
+              {
+                  ========================
+                  disConnection()
+                  conn.setAutoCommit(true)
+                  ========================
+              }
+              return vo;
+          }
+     -->
+    
+</beans>
