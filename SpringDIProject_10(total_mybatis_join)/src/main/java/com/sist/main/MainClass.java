@@ -3,9 +3,12 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.sist.config.DatabaseConfig;
+import com.sist.config.EmpConfg;
 import com.sist.service.*;
 import com.sist.vo.*;
 @Component
@@ -16,8 +19,13 @@ public class MainClass {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         // XML => 전송 => 관리 
-		ApplicationContext app=
-				new ClassPathXmlApplicationContext("application-*.xml");
+		//ApplicationContext app=
+				//new ClassPathXmlApplicationContext("application-*.xml");
+		// 자바로 클래스 설정 
+		Class[] cls={EmpConfg.class,DatabaseConfig.class};
+		AnnotationConfigApplicationContext app=
+			 new AnnotationConfigApplicationContext(cls);
+		
 		MainClass mc=(MainClass)app.getBean("mainClass");
 		List<EmpVO> eList=mc.service.empListData();
 		System.out.println("=========== 사원 목록 =========");
