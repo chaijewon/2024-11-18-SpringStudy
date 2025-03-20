@@ -9,7 +9,7 @@ import com.sist.dao.FoodDAO;
 import com.sist.vo.FoodVO;
 
 @Service
-public class FoodServiceImpl {
+public class FoodServiceImpl implements FoodService{
    @Autowired
    private FoodDAO fDao;
    
