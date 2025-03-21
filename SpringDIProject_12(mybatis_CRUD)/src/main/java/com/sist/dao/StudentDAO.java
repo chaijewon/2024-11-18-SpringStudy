@@ -6,6 +6,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import com.sist.vo.*;
 // Annotation => 자동 구현 
 // XML => 개발자 구현 
+
 public class StudentDAO extends SqlSessionDaoSupport{
 	public List<StudentVO> studentListData()
 	{
