@@ -11,8 +11,8 @@ public class MainClass1 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
         ApplicationContext app=
-        		new ClassPathXmlApplicationContext("app1.xml");
-        StudentDAO dao=(StudentDAO)app.getBean("dao");
+        		new ClassPathXmlApplicationContext("app2.xml");
+        StudentDAO2 dao=(StudentDAO2)app.getBean("dao");
         Scanner scan=new Scanner(System.in);
         while(true)
         {
