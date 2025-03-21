@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 
+     mybatis.jar
+     mybatis-spring.jar
+ -->
+<configuration>
+  <typeAliases>
+    <typeAlias type="com.sist.vo.StudentVO" alias="StudentVO"/>
+  </typeAliases>
+  <mappers>
+    <mapper resource="com/sist/mapper/student-mapper.xml"/>
+  </mappers>
+</configuration>
