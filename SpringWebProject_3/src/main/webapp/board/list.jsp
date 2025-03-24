@@ -13,7 +13,7 @@
  margin-top: 50px;
 }
 .row{
-  margin: opx auto;
+  margin: 0px auto;
   width: 800px;
 }
 </style>
@@ -44,6 +44,13 @@
 	         <td width=10% class="text-center">${vo.hit }</td>
 	       </tr>
        </c:forEach>
+       <tr>
+         <td colspan="5" class="text-center">
+          <a href="#" class="btn btn-sm btn-success">이전</a>
+           ${curpage } page / ${totalpage } pages
+          <a href="#" class="btn btn-sm btn-info">다음</a>
+         </td>
+       </tr>
      </table>
     </div>
   </div>

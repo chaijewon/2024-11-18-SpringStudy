@@ -11,7 +11,7 @@
  margin-top: 50px;
 }
 .row{
-  margin: opx auto;
+  margin: 0px auto;
   width: 800px;
 }
 </style>
@@ -54,8 +54,8 @@
      </tr>
      <tr>
        <td colspan="2" align=center>
-         <input type=submit value="글쓰기">
-         <input type=button value="취소"
+         <input type=submit value="글쓰기" class="btn-sm btn-danger">
+         <input type=button value="취소" class="btn-sm btn-primary"
           onclick="javascript:history.back()"
          >
        </td>
