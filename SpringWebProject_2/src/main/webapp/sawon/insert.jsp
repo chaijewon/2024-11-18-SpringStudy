@@ -27,7 +27,7 @@
   <div class="container">
     <div class="row">
      <h3 class="text-center">사원 등록</h3>
-     <form method=post action="insert_ok.do">
+     <form method=post action="insert_ok4.do">
      <table class="table">
        <tr>
          <th width=20%>사번</th>
