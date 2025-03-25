@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.*;
 import com.sist.dao.*;
@@ -140,6 +141,47 @@ public class BoardController {
 		BoardVO vo=dao.boardUpdateData(no);
 		model.addAttribute("vo", vo);
 		return "board/update";
+	}
+	
+	/*@RequestMapping("update_ok.do")
+	public String board_update_ok(BoardVO vo,Model model)
+	{
+		boolean bCheck=dao.boardUpdate(vo);
+		model.addAttribute("bCheck", bCheck);
+		model.addAttribute("no", vo.getNo());
+		
+		return "board/update_ok";
+	}*/
+	/*@RequestMapping("update_ok.do")
+	@ResponseBody ==> 승격 
+	// out.write() => 자바스크립트 전송 , JSON , 일반 문자열 전송
+	public String board_update_ok(BoardVO vo)
+	{
+		String result="";
+		boolean bCheck=dao.boardUpdate(vo);
+		if(bCheck==true)
+		{
+		    result="<script>"
+		          +"location.href=\"detail.do?no="+vo.getNo()+"\""
+		          +"</script>";
+		}
+		else
+		{
+			result="<script>"
+				  +"alert(\"비밀번호가 틀립니다!!\");"
+				  +"history.back();"
+				  +"</script>";
+				  
+		}
+		return result;
+	}*/
+	// delete.do?no=${vo.no } // 데이터형이 다른 경우 400 Bad request
+	// 404 , 500 , 400 , 403
+	@RequestMapping("delete.do")
+	public String board_delete(int no,Model model)
+	{
+		model.addAttribute("no", no);
+		return "board/delete";
 	}
 }
 

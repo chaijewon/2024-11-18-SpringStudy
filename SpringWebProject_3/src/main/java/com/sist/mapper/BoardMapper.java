@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -53,6 +54,19 @@ public interface BoardMapper {
 		 +"SYSDATE,0)")
   public void boardInsert(BoardVO vo);
   // 수정 
+  @Select("SELECT pwd FROM freeboard "
+		 +"WHERE no=#{no}")
+  public String boardGetPassword(int no);
+  
+  @Update("UPDATE freeboard SET "
+		 +"name=#{name},subject=#{subject},"
+		 +"content=#{content} "
+		 +"WHERE no=#{no}")
+  public void boardUpdate(BoardVO vo);
   // 삭제 
+  @Delete("DELETE FROM freeboard "
+		 +"WHERE no=#{no}")
+  public void boardDelete(int no);
+  
   
 }

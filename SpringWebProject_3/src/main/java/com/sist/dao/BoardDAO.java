@@ -1,10 +1,12 @@
 package com.sist.dao;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.*;
@@ -14,6 +16,9 @@ import com.sist.vo.*;
 public class BoardDAO {
    @Autowired
    private BoardMapper mapper;
+   
+   @Autowired
+   private BCryptPasswordEncoder encoder;
    
    /*
     *   @Select("SELECT no,subject,name,hit,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,num "
@@ -59,6 +64,49 @@ public class BoardDAO {
    public BoardVO boardUpdateData(int no)
    {
 	   return mapper.boardDetailData(no);
+   }
+   /*
+    *   @Select("SELECT pwd FROM freeboard "
+		 +"WHERE no=#{no}")
+		  public String boardGetPassword(int no);
+		  
+		  @Update("UPDATE freeboard SET "
+				 +"name=#{name},subject=#{subject},"
+				 +"content=#{content} "
+				 +"WHERE no=#{no}")
+		  public void boardUpdate(BoardVO vo);
+    */
+   public boolean boardUpdate(BoardVO vo)
+   {
+	   boolean bCheck=false;
+	   String db_pwd=mapper.boardGetPassword(vo.getNo());
+	   if(encoder.matches(vo.getPwd(), db_pwd))
+	   {
+		   mapper.boardUpdate(vo);
+		   bCheck=true;
+	   }
+	   /*else
+	   {
+		   bCheck=false;   
+	   }*/
+	   return bCheck;
+   }
+   
+   /*
+    *   @Delete("DELETE FROM freeboard "
+		 +"WHERE no=#{no}")
+        public void boardDelete(int no);
+    */
+   public boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   String db_pwd=mapper.boardGetPassword(no);
+	   if(encoder.matches(pwd, db_pwd))
+	   {
+		   bCheck=true;
+		   mapper.boardDelete(no);
+	   }
+	   return bCheck;
    }
    
 }
