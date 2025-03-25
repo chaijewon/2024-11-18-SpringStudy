@@ -16,12 +16,15 @@
   margin: 0px auto;
   width: 800px;
 }
+h3{
+  text-align: center;
+}
 </style>
 </head>
 <body>
   <div class="container">
     <div class="row">
-     <h3 class="text-center">Spring를 이용한 게시판</h3>
+     <h3>Spring를 이용한 게시판</h3>
      <table class="table">
       <tr>
         <td><a href="insert.do" class="btn btn-sm btn-primary">새글</a></td>
@@ -38,7 +41,7 @@
        <c:forEach var="vo" items="${list }">
          <tr>
 	         <td width=10% class="text-center">${vo.no }</td>
-	         <td width=45%>${vo.subject }</td>
+	         <td width=45%><a href="detail.do?no=${vo.no }">${vo.subject }</a></td>
 	         <td width=15% class="text-center">${vo.name}</td>
 	         <td width=20% class="text-center">${vo.dbday }</td>
 	         <td width=10% class="text-center">${vo.hit }</td>
@@ -46,9 +49,9 @@
        </c:forEach>
        <tr>
          <td colspan="5" class="text-center">
-          <a href="#" class="btn btn-sm btn-success">이전</a>
+          <a href="list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-sm btn-success">이전</a>
            ${curpage } page / ${totalpage } pages
-          <a href="#" class="btn btn-sm btn-info">다음</a>
+          <a href="list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-info">다음</a>
          </td>
        </tr>
      </table>

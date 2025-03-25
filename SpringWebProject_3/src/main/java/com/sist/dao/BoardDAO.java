@@ -3,6 +3,7 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,4 +40,25 @@ public class BoardDAO {
    {
 	   mapper.boardInsert(vo);
    }
+   /*
+    *   @Update("UPDATE freeboard SET "
+		 +"hit=hit+1 "
+		 +"WHERE no=#{no}")
+		  public void hitIncrement(int no);
+		  @Select("SELECT no,name,subject,content,hit,TO_CHAR(regdate,'YYYY-MM-DD') as dbday "
+				 +"FROM freeboard "
+				 +"WHERE no=#{no}")
+		  public BoardVO boardDetailData(int no);
+    */
+   public BoardVO boardDetailData(int no)
+   {
+	   mapper.hitIncrement(no);
+	   return mapper.boardDetailData(no);
+   }
+   
+   public BoardVO boardUpdateData(int no)
+   {
+	   return mapper.boardDetailData(no);
+   }
+   
 }
