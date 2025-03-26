@@ -30,4 +30,10 @@ public class FoodRecipeServiceImpl implements FoodRecipeService{
 		return fDao.foodDetailData(fno);
 	}
 
+	@Override
+	public int foodTotalPage() {
+		// TODO Auto-generated method stub
+		return fDao.foodTotalPage();
+	}
+
 }
