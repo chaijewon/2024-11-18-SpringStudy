@@ -2,7 +2,17 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-
+    <!-- 
+       = 톰캣 = web server : 톰캣이 읽어가는 파일 
+         web.xml (환경 설정 파일)
+         server.xml (파일 위치 저장)
+         => HOSTING 
+            = java / tomcat 
+            = 파일 올리기 => server.xml에 등록 
+       Controller가 작동 => DispatcherServlet
+          |
+       등록된 클래스 메모리 할당 = 스프링 관리 => WebApplicationContext
+     -->
 	<servlet>
       <servlet-name>dispatcher</servlet-name>
       <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

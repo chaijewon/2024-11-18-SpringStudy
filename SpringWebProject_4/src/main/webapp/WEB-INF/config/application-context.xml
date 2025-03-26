@@ -11,10 +11,53 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
     <aop:aspectj-autoproxy/>
     <context:component-scan base-package="com.sist.*"/>
+    <mvc:annotation-driven/>
+    <!-- 
+       sendRedirect => forward처럼 데이터를 전송 
+        = RedirectAttrbutes ra
+          ra.addAttribute("",값)
+          ======================
+          return "redirect:detail.do?no=1"
+       model.addAttribute("키",Object) => request
+     -->
+     <!--                   =========== web.xml
+        사용자 요청 (.do) ===== DispatcherServlet : 요청을 받아서 응답
+                                  |
+                              HandlerMapping : @RequestMapping를 찾아서 메소드 호출 
+                                  |
+                              Controller = @RequestMapping : 개발자 = 요청에 대한 처리
+                                  | Model
+                               ViewResolver : JSP를 찾아서 request를 전송 
+                                  | request변환 => 경로명 / 확장자 
+                                 JSP 
+                                 
+                               => @RequestMapping : GET/POST
+                                        |
+                                 =================
+                                 |                |
+                               @GetMapping      @PostMapping => Spring6에서는 @RequestMapping가 제거
+                               
+                                 service() / doGet(),doPost()
+                                 
+                                 | GET => 목록 / <a> location.href
+                                                sendRedirect
+                                 | post => 입력 => <form> , ajax 
+                                                  axios.post()
+                                 
+                              @GetMapping  : 화면 출력 
+                              @PostMapping : INSERT
+                              ====================== 두개로 주로 사용
+                              @PutMapping : UPDATE
+                              @DeleteMapping : DELETE
+      -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/"
           p:suffix=".jsp"
     />
-    <!-- tiles / multipart -->
+    <!-- tiles / multipart 
+      multipartResover : Spring에서 사용 
+    -->
+    <bean id="multipartResolver"
+      class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>
