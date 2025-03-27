@@ -14,9 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sist.vo.*;
-
-import co.elastic.clients.elasticsearch.security.get_role.Role;
-
+import com.sist.manager.*;
 import com.sist.service.*;
 // JSP로 요청 처리 결과값 전송 
 @Controller
@@ -26,6 +24,8 @@ public class FoodRecipeController {
    @Autowired
    private FoodRecipeService service;
    
+   @Autowired
+   private WordManager wm;
    // 목록 => 405
    /*
     *   404 파일 찾기 오류 
@@ -87,6 +87,8 @@ public class FoodRecipeController {
    public String food_detail(int fno,Model model)
    {
 	   FoodVO vo=service.foodDetailData(fno);
+	   List<WordVO> list=wm.wordListData(vo.getContent());
+	   model.addAttribute("list", list);
 	   model.addAttribute("vo", vo);
 	   return "food/food_detail";
    }

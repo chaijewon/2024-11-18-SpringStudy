@@ -23,11 +23,9 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['단어', '횟수'],
-          ['Work',     11],
-          ['Eat',      2],
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+          <c:forEach var="wvo" items="${list}">
+          ['<c:out value="${wvo.word}"/>',   <c:out value="${wvo.count}"/>],
+          </c:forEach>
         ]);
 
         var options = {
