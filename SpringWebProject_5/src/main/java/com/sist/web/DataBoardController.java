@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 /*
  *    1. DataBase 연동 
  *    2. Web 연동
@@ -145,14 +146,28 @@ public class DataBoardController {
 		   else
 		   {
 			   vo.setFilecount(list.size());
+			  
 		   }
 		   
 		   int no=dDao.boardInsert(vo);
-		   
+		   System.out.println("no="+no);
 		   // 파일 저장 => 데이터베이스에 저장 
-		   for(MultipartFile mf:list)
+		   
+		   FileInfoVO fvo=new FileInfoVO();
+		   if(list.size()>0)
 		   {
-			   
+			   for(MultipartFile mf:list)
+			   {
+				   String filename=mf.getOriginalFilename();
+				   File file=new File(path+filename);
+				   mf.transferTo(file);// 업로드 
+				   
+				   fvo.setFilename(filename);
+				   fvo.setFilesize(file.length());
+				   fvo.setNo(no);
+				   
+				   fDao.boardFileInsert(fvo);
+			   }
 		   }
 		   
 		   

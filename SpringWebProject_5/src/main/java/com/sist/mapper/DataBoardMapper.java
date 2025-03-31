@@ -22,7 +22,7 @@ public interface DataBoardMapper {
    @Insert("INSERT INTO springDataBoard VALUES("
 		  +"sdb_no_seq.nextval,#{name},"
 		  +"#{subject},#{content},#{pwd},"
-		  +"SYSDATE,0,#{filecount}")
+		  +"SYSDATE,0,#{filecount})")
    public int boardInsert(DataBoardVO vo);
    
    @Select("SELECT sdb_no_seq.currval FROM DUAL")
