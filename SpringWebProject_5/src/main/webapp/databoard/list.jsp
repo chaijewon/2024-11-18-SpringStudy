@@ -38,14 +38,17 @@ h3{
          <th width=20% class="text-center">작성일</th>
          <th width=10% class="text-center">조회수</th>
        </tr>
+       <c:set var="count" value="${count }"/>
+       
        <c:forEach var="vo" items="${list }">
          <tr>
-	         <td width=10% class="text-center">${vo.no }</td>
+	         <td width=10% class="text-center">${count}</td>
 	         <td width=45%><a href="detail.do?no=${vo.no }">${vo.subject }</a></td>
 	         <td width=15% class="text-center">${vo.name}</td>
 	         <td width=20% class="text-center">${vo.dbday }</td>
 	         <td width=10% class="text-center">${vo.hit }</td>
 	       </tr>
+	       <c:set var="count" value="${count-1 }"/>
        </c:forEach>
        <tr>
          <td colspan="5" class="text-center">

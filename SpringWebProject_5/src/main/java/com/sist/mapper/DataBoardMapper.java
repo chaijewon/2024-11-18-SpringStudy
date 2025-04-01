@@ -4,11 +4,12 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 
 public interface DataBoardMapper {
-   @Select("SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday, num "
+   @Select("SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit, num "
 		  +"FROM (SELECT no,subject,name,regdate,hit,rownum as num "
 		  +"FROM (SELECT no,subject,name,regdate,hit "
 		  +"FROM springDataBoard ORDER BY no DESC)) "
@@ -28,6 +29,13 @@ public interface DataBoardMapper {
    @Select("SELECT sdb_no_seq.currval FROM DUAL")
    public int boardCurentNoData();
    
+   @Update("UPDATE springDataBoard SET "
+		  +"hit=hit+1 "
+		  +"WHERE no=#{no}")
+   public void hitIncrement(int no);
    
+   @Select("SELECT * FROM springdataboard "
+		  +"WHERE no=#{no}")
+   public DataBoardVO databoardDetailData(int no);
    
 }

@@ -3,6 +3,7 @@ package com.sist.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -42,6 +43,22 @@ public class DataBoardDAO {
    public int boardInsert(DataBoardVO vo)
    {
 	   mapper.boardInsert(vo);
-	   return mapper.boardCurentNoData();
+	   return mapper.boardCurentNoData();// 현재 번호 
+   }
+   
+   /*
+    *   @Update("UPDATE springDataBoard SET "
+		  +"hit=hit+1 "
+		  +"WHERE no=#{no}")
+	   public void hitIncrement(int no);
+	   
+	   @Select("SELECT * FROM springdataboard "
+			  +"WHERE no=#{no}")
+	   public DataBoardVO databoardDetailData(int no);
+    */
+   public DataBoardVO databoardDetailData(int no)
+   {
+	   mapper.hitIncrement(no);
+	   return mapper.databoardDetailData(no);
    }
 }
