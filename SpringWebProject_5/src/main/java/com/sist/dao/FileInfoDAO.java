@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,14 @@ public class FileInfoDAO {
   public List<FileInfoVO> fileListData(int no)
   {
 	  return mapper.fileListData(no);
+  }
+  /*
+   *   @Delete("DELETE FROM springfileInfo "
+			  +"WHERE no=#{no}")
+	   public void fileInfoDelete(int no);
+   */
+  public void fileInfoDelete(int no)
+  {
+	  mapper.fileInfoDelete(no);
   }
 }

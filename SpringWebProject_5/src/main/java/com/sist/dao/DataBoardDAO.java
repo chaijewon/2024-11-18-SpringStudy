@@ -1,5 +1,6 @@
 package com.sist.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -60,5 +61,31 @@ public class DataBoardDAO {
    {
 	   mapper.hitIncrement(no);
 	   return mapper.databoardDetailData(no);
+   }
+   /*
+    *   @Select("SELECT pwd FROM springdataboard "
+		  +"WHERE no=#{no}")
+	   public String databoardGetPassword(int no);
+	   
+	   @Delete("DELETE FROM springdataboard "
+			  +"WHERE no=#{no}")
+	   public void databoardDelete(int no);
+    */
+   public String databoardGetPassword(int no)
+   {
+	   return mapper.databoardGetPassword(no);
+   }
+   public void databoardDelete(int no)
+   {
+	   mapper.databoardDelete(no);
+   }
+   /*
+    *   @Select("SELECT filecount FROM springdataboard "
+		  +"WHERE no=#{no}")
+   public int databoardFileCount(int no);
+    */
+   public int databoardFileCount(int no)
+   {
+	   return mapper.databoardFileCount(no);
    }
 }

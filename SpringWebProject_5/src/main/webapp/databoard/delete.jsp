@@ -25,13 +25,12 @@ h3{
   <div class="container">
     <div class="row">
      <h3>삭제하기</h3>
-     <form method=post action="delete_ok.do">
      <table class="table">
       <tr>
        <td width=30%>비밀번호</td>
        <td width=70%>
         <input type="password" name=pwd size=20
-         class="input-sm">
+         class="input-sm" v-model="pwd" ref="pwd">
        </td>
       </tr>
       <tr>
@@ -44,7 +43,6 @@ h3{
         </td>
       </tr>
      </table>
-     </form>
     </div>
   </div>
   <script>
@@ -57,7 +55,30 @@ h3{
     	},
     	methods:{
     		boardDel:function(){
-    		  alert("hello~~")	
+    		  if(this.pwd==="")
+    		  {
+    			  this.$refs.pwd.focus() //$('#pwd').focus()
+    			  return
+    		  }
+    		  // axios.post()
+    		  axios.get('delete_ok.do',{
+    			  params:{
+    				  no:this.no,
+    				  pwd:this.pwd
+    			  }
+    		  }).then(response=>{
+    			  // 결과값을 받아서 처리
+    			  if(response.data==='yes')
+    			  {
+    				  location.href="list.do";
+    			  }
+    			  else
+    		      {
+    				  alert("비밀번호가 틀립니다")
+    				  this.pwd=''
+    				  this.$refs.pwd.focus()
+    		      }
+    		  })
     		}
     	}
     }).mount('.container')
