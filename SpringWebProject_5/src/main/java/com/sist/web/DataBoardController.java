@@ -360,4 +360,11 @@ public class DataBoardController {
 	   model.addAttribute("no", no);
 	   return "databoard/delete";   
    }
+   @GetMapping("databoard/update.do")
+   public String databoard_update(int no,Model model)
+   {
+	   DataBoardVO vo=dDao.databoardUpdateData(no);
+	   model.addAttribute("vo", vo);
+	   return "databoard/update";
+   }
 }

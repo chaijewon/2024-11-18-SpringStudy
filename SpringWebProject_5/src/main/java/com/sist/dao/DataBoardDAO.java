@@ -88,4 +88,19 @@ public class DataBoardDAO {
    {
 	   return mapper.databoardFileCount(no);
    }
+   
+   public DataBoardVO databoardUpdateData(int no)
+   {
+	   return mapper.databoardDetailData(no);
+   }
+   /*
+    *   @Update("UPDATE springdataboard SET "
+		  +"name=#{name},subject=#{subject},content=#{content} "
+		  +"WHERE no=#{no}")
+        public void databoardUpdate(DataBoardVO vo);
+    */
+   public void databoardUpdate(DataBoardVO vo)
+   {
+	   mapper.databoardUpdate(vo);
+   }
 }
