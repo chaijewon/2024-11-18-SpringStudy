@@ -20,6 +20,9 @@ public class RecipeServiceImpl implements RecipeService{
     @Autowired
     private RecipeDAO rDao;
 	
+    @Autowired
+    private RecipeDetailDAO dDao;
+    
 	@Override
 	public List<RecipeVO> recipeListData(Map map) {
 		// TODO Auto-generated method stub
@@ -30,6 +33,12 @@ public class RecipeServiceImpl implements RecipeService{
 	public int recipeTotalPage() {
 		// TODO Auto-generated method stub
 		return rDao.recipeTotalPage();
+	}
+
+	@Override
+	public RecipeDetailVO recipeDetailData(int no) {
+		// TODO Auto-generated method stub
+		return dDao.recipeDetailData(no);
 	}
 
 }
