@@ -27,7 +27,7 @@ p {
 	    <div class="thumbnail">
 	      <a href="../recipe/detail.do?no=${vo.no}">
 	        <img src="${vo.poster }" title="${vo.title }"
-	          style="width:180px;height: 150px">
+	          style="width:200px;height: 150px">
 	        <div class="caption">
 	          <p>${vo.title }</p>
 	        </div>

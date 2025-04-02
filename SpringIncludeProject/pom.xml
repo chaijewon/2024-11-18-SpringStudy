@@ -160,24 +160,14 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-	    <!-- Jsoup -->
-	    <dependency>
-		    <groupId>org.jsoup</groupId>
-		    <artifactId>jsoup</artifactId>
-		    <version>1.12.1</version>
-		</dependency>	
+	    
 		<!-- JSON -->
 		<dependency>
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
 		</dependency>
-		<!-- JAXB -->
-		<dependency>
-		    <groupId>javax.xml.bind</groupId>
-		    <artifactId>jaxb-api</artifactId>
-		    <version>2.3.1</version>
-		</dependency>
+		
 		<!-- AspectJ -->
 		<dependency>
          <groupId>org.springframework</groupId>
@@ -255,19 +245,6 @@
       </dependency>
 
       <dependency>
-         <groupId>org.nuiton.thirdparty</groupId>
-         <artifactId>Rserve</artifactId>
-         <version>1.7-3</version>
-      </dependency>
-      <dependency>
-         <groupId>org.nuiton.thirdparty</groupId>
-         <artifactId>REngine</artifactId>
-         <version>1.7-3</version>
-      </dependency>
-      <!-- 
-         @Select("<script>SELECT~~ <if test="">")
-       -->
-      <dependency>
          <groupId>org.mybatis</groupId>
          <artifactId>mybatis</artifactId>
          <version>3.2.8</version>
@@ -277,21 +254,8 @@
          <artifactId>mybatis-spring</artifactId>
          <version>1.2.0</version>
       </dependency>
-      <dependency>
-         <groupId>org.mongodb</groupId>
-         <artifactId>mongo-java-driver</artifactId>
-         <version>2.13.0-rc1</version>
-      </dependency>
-      <dependency>
-         <groupId>org.nuiton.thirdparty</groupId>
-         <artifactId>JRI</artifactId>
-         <version>0.9-6</version>
-      </dependency>
-      <dependency>
-         <groupId>com.github.lucarosellini.rJava</groupId>
-         <artifactId>JRIEngine</artifactId>
-         <version>0.9-7</version>
-      </dependency>
+      
+      
       <dependency>
          <groupId>aopalliance</groupId>
          <artifactId>aopalliance</artifactId>
