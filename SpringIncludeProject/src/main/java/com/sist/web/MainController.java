@@ -15,6 +15,7 @@ public class MainController {
     @GetMapping("main/main.do")
     public String main_main(String page,Model model)
     {
+    	
     	Map map=CommonsPagination.pageConfig(page, 12);
     	List<RecipeVO> list=service.recipeListData(map);
     	int totalpage=service.recipeTotalPage();
@@ -31,6 +32,7 @@ public class MainController {
     	model.addAttribute("endPage", endPage);
     	
     	model.addAttribute("main_jsp", "../main/home.jsp");
+    	// kList
     	return "main/main";
     }
 }

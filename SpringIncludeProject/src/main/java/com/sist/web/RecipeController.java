@@ -16,6 +16,7 @@ public class RecipeController {
    @GetMapping("recipe/detail.do")
    public String recipe_detail(int no,Model model)
    {
+	   
 	   RecipeDetailVO vo=service.recipeDetailData(no);
 	   
 	   String data=vo.getFoodmake();
@@ -36,7 +37,7 @@ public class RecipeController {
 	   
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("main_jsp", "../recipe/detail.jsp");
-	   
+	   // kList
 	   return "main/main";
    }
 }

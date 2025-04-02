@@ -14,6 +14,6 @@ public interface MovieMapper {
   @Delete("DELETE FROM aopMovie")
   public void movieDelete();
   
-  @Select("SELECT * FROM aopMovie")
+  @Select("SELECT * FROM aopMovie ORDER BY mno")
   public List<MovieVO> movieListData();
 }

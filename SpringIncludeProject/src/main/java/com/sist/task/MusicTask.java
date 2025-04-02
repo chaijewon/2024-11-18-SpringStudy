@@ -43,7 +43,7 @@ public class MusicTask {
   @Autowired
   private MovieDAO mDao;
   // https://www.kobis.or.kr/kobis/business/main/searchMainDailyBoxOffice.do
-  @Scheduled(fixedRate = 60*1000)
+  //@Scheduled(fixedRate = 60*1000)
   public void movieSchedul()
   {
 	  try
