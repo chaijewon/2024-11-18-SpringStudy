@@ -84,7 +84,133 @@ public class BoardDAO {
 	   }
 	   return list;
    }
+   // 총페이지 
+   public int boardRowCount()
+   {
+	   int total=0;
+	   try
+	   {
+		   getConnection();
+		   String sql="SELECT COUNT(*) FROM springReplyBoard";
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   total=rs.getInt(1);
+		   rs.close();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();   
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return total;
+   }
    // insert / update / detail
+   public void boardInsert(BoardVO vo)
+   {
+	   try
+	   {
+		   getConnection();
+		   String sql="INSERT INTO springReplyBoard("
+				     +"no,name,subject,content,pwd,group_id) "
+				     +"VALUES(srb_no_seq.nextval,?,?,?,?,"
+				     +"(SELECT NVL(MAX(group_id)+1,1) FROM springReplyBoard))";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, vo.getName());
+		   ps.setString(2, vo.getSubject());
+		   ps.setString(3, vo.getContent());
+		   ps.setString(4, vo.getPwd());
+		   ps.executeUpdate();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();   
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+   }
+   /*
+    *   @Aspect
+    *   public class Transactional
+    *   {
+    *      @Around()
+    *      public void around(JoinPoint jp)
+    *      {
+    *          ---------- setAutoCommit(false)
+    *          소스 코딩
+    *          ---------- commit
+    *      }
+    *      @AfterThrowable()
+    *      public void afterThrowing(Exception e)
+    *      {
+    *         // catch
+    *         rollback()
+    *      }
+    *      @After()
+    *      public void after()
+    *      {
+    *         // finally
+    *         setAutoCommit(true)
+    *      }
+    *   } 
+    */
+   public BoardVO boardDetailData(int no)
+   {
+	   BoardVO vo=new BoardVO();
+	   try
+	   {
+		   getConnection();
+		    
+		   // around start
+		   conn.setAutoCommit(false);
+		   
+		   String sql="UPDATE springReplyBoard SET "
+				     +"hit=hit+1 "
+				     +"WHERE no="+no;
+		   ps=conn.prepareStatement(sql);
+		   ps.executeUpdate(); // commit
+		   
+		   sql="SELECT no,name,subject,content,hit,regdate "
+			   +"FROM springReplyBoard "
+			   +"WHERE no="+no;
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setName(rs.getString(2));
+		   vo.setSubject(rs.getString(3));
+		   vo.setContent(rs.getString(4));
+		   vo.setHit(rs.getInt(5));
+		   vo.setRegdate(rs.getDate(6));
+		   
+		   rs.close();
+		   // around end
+		   conn.commit();
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+		   // jdbc => mybatis => jpa 
+		   // ajax = vue = react
+		   // after-throwing 
+		   try
+		   {
+			   conn.rollback();
+		   }catch(Exception e) {}
+	   }
+	   finally
+	   {
+		   try
+		   {
+			   conn.setAutoCommit(true); // after 
+		   }catch(Exception ex) {}
+		   disConnection();
+	   }
+	   return vo;
+   }
    // reply / delete => 트랜잭션 
    
 }
