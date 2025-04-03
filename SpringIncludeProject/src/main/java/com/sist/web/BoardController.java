@@ -44,4 +44,20 @@ public class BoardController {
 	   dao.boardInsert(vo);
 	   return "redirect:../board/list.do";
    }
+   @GetMapping("board/detail.do")
+   public String board_detail(int no,Model model)
+   {
+	   BoardVO vo=dao.boardDetailData(no);
+	   model.addAttribute("vo", vo);
+	   model.addAttribute("main_jsp", "../replyboard/detail.jsp");
+	   return "main/main";
+   }
+   @GetMapping("board/update.do")
+   public String board_update(int no,Model model)
+   {
+	   BoardVO vo=dao.boardUpdateData(no);
+	   model.addAttribute("vo", vo);
+	   model.addAttribute("main_jsp", "../replyboard/update.jsp");
+	   return "main/main";
+   }
 }

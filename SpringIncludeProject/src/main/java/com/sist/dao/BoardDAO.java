@@ -211,6 +211,42 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
+   public BoardVO boardUpdateData(int no)
+   {
+	   BoardVO vo=new BoardVO();
+	   try
+	   {
+		   getConnection();
+		    
+		 
+		   String sql="SELECT no,name,subject,content,hit,regdate "
+			   +"FROM springReplyBoard "
+			   +"WHERE no="+no;
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   vo.setNo(rs.getInt(1));
+		   vo.setName(rs.getString(2));
+		   vo.setSubject(rs.getString(3));
+		   vo.setContent(rs.getString(4));
+		   vo.setHit(rs.getInt(5));
+		   vo.setRegdate(rs.getDate(6));
+		   
+		   rs.close();
+		 
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+		  
+	   }
+	   finally
+	   {
+		  
+		   disConnection();
+	   }
+	   return vo;
+   }
    // reply / delete => 트랜잭션 
    
 }
