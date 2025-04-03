@@ -9,7 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.mapper.RecipeMapper;
 import com.sist.vo.RecipeVO;
-
+/*
+ *          |DispatcherServlet |HandlerMapping
+ *   .do<a> => Model => Mapper(SQL) = DAO = Service
+ *   => Model => JSP출력
+ *   |        | ViewResolver 
+ *   동작 순서 
+ */
 @Repository
 public class RecipeDAO {
   @Autowired
@@ -35,5 +41,14 @@ public class RecipeDAO {
   public int recipeTotalPage()
   {
 	  return mapper.recipeTotalPage();
+  }
+  public List<RecipeVO> recipeFindData(Map map)
+  {
+	 return mapper.recipeFindData(map);  
+  }
+  //        resultType      id         parameterType
+  public int recipeFindTotalPage(Map map)
+  {
+	  return mapper.recipeFindTotalPage(map);
   }
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.RecipeMapper">
+  <!-- 
+     Spring Server 
+     1. DI = xml(DAO) , @Autowired 
+             p: / c:
+     2. AOP = 공통기반 
+     3. 인터셉트 = 자동 로그인 
+     4. @ControllerAdvice : 공통 예외처리 
+     5. 트랜잭션 
+     6. MVC
+     6-1. ORM (MyBatis)
+     *** include 
+     ===================================
+     7. 보안 (spring security) : 자동 로그인 / 권한 부여 / 비밀번호 암호화 
+     8. Task 
+     9. Front 연결 = @RestController 
+     
+     Spring - Boot 
+   -->
+  <select id="recipeFindData" resultType="com.sist.vo.RecipeVO" parameterType="hashmap">
+    SELECT no,poster,title,chef,num 
+    FROM (SELECT no,poster,title,chef,rownum as num
+    FROM (SELECT no,poster,title,chef 
+    FROM recipe WHERE title LIKE '%'||#{fd}||'%' 
+    AND no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipedetail)))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="recipeFindTotalPage" resultType="int"
+   parameterType="hashmap"
+  >
+    SELECT CEIL(COUNT(*)/12.0) FROM recipe
+    WHERE REGEXP_LIKE(title,#{fd}) 
+    AND no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipedetail)
+  </select>
+</mapper>

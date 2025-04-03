@@ -1,6 +1,7 @@
 package com.sist.commons;
 // => 메모리 할당 (X) => static메소드 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.collections.map.HashedMap;
@@ -17,7 +18,7 @@ public class CommonsPagination {
 		  page="1";
 	  int curpage=Integer.parseInt(page);
 	  
-	  Map map=new HashedMap();
+	  Map map=new HashMap();
 	  int start=(rowSize*curpage)-(rowSize-1);
 	  int end=rowSize*curpage;
 	  map.put("start", start);

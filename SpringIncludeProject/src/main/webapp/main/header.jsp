@@ -18,8 +18,8 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">레시피
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">쉐프</a></li>
-          <li><a href="#">레시피 검색</a></li>
+          <li><a href="../recipe/chef_list.do">쉐프</a></li>
+          <li><a href="../recipe/find.do">레시피 검색</a></li>
         </ul>
       </li>
       <li><a href="#">채팅</a></li>
