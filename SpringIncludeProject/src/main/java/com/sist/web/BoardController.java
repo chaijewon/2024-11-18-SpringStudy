@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sist.vo.*;
+import com.sist.commons.CommonsPagination;
 import com.sist.dao.*;
 @Controller
 public class BoardController {
    @Autowired
-   private BoardDAO dao;
+   private BoardDAO2 dao;
    
    @GetMapping("board/list.do")
    public String board_list(String page,Model model)
    {
-	   if(page==null)
-		   page="1";
-	   int curpage=Integer.parseInt(page);
-	   List<BoardVO> list=dao.boardListData(curpage);
+	   Map map=CommonsPagination.pageConfig(page, 10);
+	   int curpage=(int)map.get("curpage");
+	   List<BoardVO> list=dao.boardListData(map);
 	   int count=dao.boardRowCount();
 	   int totalpage=(int)(Math.ceil(count/10.0));
 	   count=count-((curpage*10)-10);
@@ -52,12 +52,12 @@ public class BoardController {
 	   model.addAttribute("main_jsp", "../replyboard/detail.jsp");
 	   return "main/main";
    }
-   @GetMapping("board/update.do")
+   /*@GetMapping("board/update.do")
    public String board_update(int no,Model model)
    {
 	   BoardVO vo=dao.boardUpdateData(no);
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("main_jsp", "../replyboard/update.jsp");
 	   return "main/main";
-   }
+   }*/
 }
