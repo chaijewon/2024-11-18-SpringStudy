@@ -23,7 +23,7 @@
         </ul>
       </li>
       <li><a href="#">채팅</a></li>
-      <li><a href="#">답변형게시판</a></li>
+      <li><a href="../board/list.do">답변형게시판</a></li>
     </ul>
   </div>
 </nav>

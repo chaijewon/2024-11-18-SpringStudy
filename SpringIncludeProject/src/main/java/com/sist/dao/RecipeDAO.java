@@ -6,8 +6,10 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.mapper.RecipeMapper;
+import com.sist.vo.ChefVO;
 import com.sist.vo.RecipeVO;
 /*
  *          |DispatcherServlet |HandlerMapping
@@ -50,5 +52,15 @@ public class RecipeDAO {
   public int recipeFindTotalPage(Map map)
   {
 	  return mapper.recipeFindTotalPage(map);
+  }
+  
+  public List<ChefVO> chefListData(Map map)
+  {
+	  return mapper.chefListData(map);
+  }
+  
+  public int chefTotalPage()
+  {
+	  return mapper.chefTotalPage();
   }
 }
