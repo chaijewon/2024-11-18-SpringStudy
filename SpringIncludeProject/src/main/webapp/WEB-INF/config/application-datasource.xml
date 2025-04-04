@@ -22,6 +22,7 @@
        maxIdle   8
        maxWait   10000
      -->
+   
     <tx:annotation-driven/>
     <!-- 
          @Transactional => AOP를 이용해서 처리

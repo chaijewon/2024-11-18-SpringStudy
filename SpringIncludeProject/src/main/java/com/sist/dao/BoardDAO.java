@@ -247,6 +247,48 @@ public class BoardDAO {
 	   }
 	   return vo;
    }
+   // 수정하기 
+   public boolean boardUpdate(BoardVO vo)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		   getConnection(); //자동 
+		   String sql="SELECT pwd FROM springReplyBoard "
+				     +"WHERE no="+vo.getNo();
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next(); // 메모리에 데이터 출력 위치에 커서 이동 
+		   String db_pwd=rs.getString(1);
+		   rs.close();
+		   
+		   if(db_pwd.equals(vo.getPwd()))
+		   {
+			   bCheck=true;
+			   sql="UPDATE springReplyBoard SET "
+				  +"name=?,subject=?,content=? "
+				  +"WHERE no=?";
+			   ps=conn.prepareStatement(sql);
+			   // ?에 값을 채운다 
+			   ps.setString(1, vo.getName());
+			   ps.setString(2, vo.getSubject());
+			   ps.setString(3, vo.getContent());
+			   ps.setInt(4, vo.getNo());
+			   ps.executeUpdate();
+		   }
+		   
+		   
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();   
+	   }
+	   finally
+	   {
+		   disConnection();
+	   }
+	   return bCheck;
+   }
    // reply / delete => 트랜잭션 
    
 }
