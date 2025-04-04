@@ -374,5 +374,73 @@ public class BoardDAO {
 		   disConnection();
 	   }
    }
+   // 삭제 하기 
+   public boolean boardDelete(int no,String pwd)
+   {
+	   boolean bCheck=false;
+	   try
+	   {
+		  getConnection();
+		  conn.setAutoCommit(false);
+		  // 비밀번호 확인 
+		  String sql="SELECT root,depth,pwd "
+				    +"FROM springReplyBoard "
+				    +"WHERE no="+no;
+		  ps=conn.prepareStatement(sql);
+		  ResultSet rs=ps.executeQuery();
+		  rs.next();
+		  int root=rs.getInt(1);
+		  int depth=rs.getInt(2);
+		  String db_pwd=rs.getString(3);
+		  if(db_pwd.equals(pwd))
+		  {
+			  bCheck=true;
+			  if(depth==0)// 삭제
+			  {
+				  sql="DELETE FROM springReplyBoard "
+				     +"WHERE no="+no;
+				  ps=conn.prepareStatement(sql);
+				  ps.executeUpdate();
+			  }
+			  else //수정 
+			  {
+				  String msg="관리자가 삭제한 게시물입니다";
+				  sql="UPDATE springReplyBoard SET "
+				     +"subject=?,content=? "
+					 +"WHERE no=?";
+				  ps=conn.prepareStatement(sql);
+				  ps.setString(1, msg);
+				  ps.setString(2, msg);
+				  ps.setInt(3, no);
+				  ps.executeUpdate();
+			  }
+			  sql="UPDATE springReplyBoard SET "
+			     +"depth=depth-1 "
+				 +"WHERE no="+root;
+			  ps=conn.prepareStatement(sql);
+			  ps.executeUpdate();
+		  }
+		  // depth확인 
+		  // => 삭제 여부 depth=0 => 삭제 , update 
+		  // => depth--
+		  conn.commit();
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();
+		   try
+		   {
+			   conn.rollback();
+		   }catch(Exception e) {}
+	   }
+	   finally
+	   {
+		   try
+		   {
+			   conn.setAutoCommit(true);
+		   }catch(Exception ex) {}
+		   disConnection();
+	   }
+	   return bCheck;
+   }
    
 }

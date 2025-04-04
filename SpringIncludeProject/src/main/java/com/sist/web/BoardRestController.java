@@ -32,7 +32,13 @@ public class BoardRestController {
 	   return result;
    }
    
-   
+   @PostMapping("board/delete_ok.do")
+   public String board_delete(int no,String pwd)
+   {
+	   String result="";
+	   
+	   return result;
+   }
    
    
 }
