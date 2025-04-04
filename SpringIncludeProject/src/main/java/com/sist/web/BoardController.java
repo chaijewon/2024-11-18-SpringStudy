@@ -1,4 +1,5 @@
 package com.sist.web;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class BoardController {
 	   int count=dao.boardRowCount();
 	   int totalpage=(int)(Math.ceil(count/10.0));
 	   count=count-((curpage*10)-10);
+	   
+	   String msg="관리자가 삭제한 게시물입니다";
+	   String today=new SimpleDateFormat("yyyy-MM-dd")
+			        .format(new Date());
+	   model.addAttribute("msg", msg);
+	   model.addAttribute("today", today);
 	   
 	   model.addAttribute("list", list);
 	   model.addAttribute("curpage", curpage);

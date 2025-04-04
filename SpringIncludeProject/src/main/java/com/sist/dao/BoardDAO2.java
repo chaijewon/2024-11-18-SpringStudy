@@ -61,7 +61,7 @@ public class BoardDAO2 {
 	   mapper.boardInsert(vo);
    }
    
-   
+   @Transactional
    public BoardVO boardDetailData(int no)
    {
 	   mapper.hitIncrement(no);

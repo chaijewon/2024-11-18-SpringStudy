@@ -36,7 +36,18 @@ public class BoardRestController {
    public String board_delete(int no,String pwd)
    {
 	   String result="";
-	   
+	   boolean bCheck=dao.boardDelete(no, pwd);
+	   if(bCheck==true)
+	   {
+		  result="<script>location.href=\"../board/list.do\";</script>";   
+	   }
+	   else
+	   {
+		   result="<script>"
+				 +"alert(\"비밀번호가 틀립니다\");"
+				 +"history.back();"
+				 +"</script>";
+	   }
 	   return result;
    }
    

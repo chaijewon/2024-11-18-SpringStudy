@@ -36,7 +36,14 @@
 	          </c:forEach>
 	          <img src="../replyboard/re_icon.png">
 	         </c:if>
-	         <a href="detail.do?no=${vo.no }">${vo.subject }</a>
+	         
+	         <c:if test="${vo.subject!=msg }">
+	          <a href="detail.do?no=${vo.no }">${vo.subject }</a>
+	         </c:if>
+	         <c:if test="${vo.subject==msg }">
+	          <span style="color:gray">${vo.subject }</span>
+	         </c:if>
+	         
 	         </td>
 	         <td width=15% class="text-center">${vo.name}</td>
 	         <td width=20% class="text-center">
