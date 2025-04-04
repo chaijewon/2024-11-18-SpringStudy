@@ -61,5 +61,19 @@ public class BoardController {
 	   return "main/main";
    }
    
+   @GetMapping("board/reply.do")
+   public String board_reply(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   model.addAttribute("main_jsp", "../replyboard/reply.jsp");
+	   return "main/main"; // ../(X)
+   }
+   
+   @PostMapping("board/reply_ok.do")
+   public String board_reply_ok(int pno,BoardVO vo)
+   {
+	   dao.replyInsert(pno, vo);
+	   return "redirect:../board/list.do";
+   }
    
 }

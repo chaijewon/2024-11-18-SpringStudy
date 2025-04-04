@@ -47,10 +47,10 @@ public class BoardDAO {
 		   // SELECT no,subject,name,hit,regdate FROM board
 		   // LIMIT 11,10
 		  getConnection();
-		  String sql="SELECT no,subject,name,hit,regdate,num "
-				    +"FROM (SELECT no,subject,name,hit,regdate,rownum as num "
-				    +"FROM (SELECT no,subject,name,hit,regdate "
-				    +"FROM springReplyBoard ORDER BY no DESC)) "
+		  String sql="SELECT no,subject,name,hit,regdate,group_tab,num "
+				    +"FROM (SELECT no,subject,name,hit,group_tab,regdate,rownum as num "
+				    +"FROM (SELECT no,subject,name,hit,group_tab,regdate "
+				    +"FROM springReplyBoard ORDER BY group_id DESC,group_step ASC)) "
 				    +"WHERE num BETWEEN ? AND ?";
 		  ps=conn.prepareStatement(sql);
 		  int rowSize=10;
@@ -70,6 +70,7 @@ public class BoardDAO {
 			  vo.setName(rs.getString(3));
 			  vo.setHit(rs.getInt(4));
 			  vo.setRegdate(rs.getDate(5));
+			  vo.setGroup_tab(rs.getInt(6));
 			  list.add(vo);
 		  }
 		  
@@ -289,6 +290,89 @@ public class BoardDAO {
 	   }
 	   return bCheck;
    }
-   // reply / delete => 트랜잭션 
+   // reply / delete => 트랜잭션
+   /*
+    *                 고유번호 그룹 (답변별로 모아서)
+    *                          그룹안에서 출력 순서 
+    *                              레벨  상위게시물번호 
+    *                                         답변 갯수
+    *                  no  gi  gs+1  gt+1  root  depth
+    *   AAAAAA          1   1  0   0    0     2
+    *   =>DDDDDD      5   1  1   1    1     0
+    *   =>BBBBBB      3   1  2   1    1     1
+    *   =>CCCCCCC    4   1  3   2    3     0
+    *     
+    *   EEEEEE          2   2  0   0    0     2
+    *     
+    *     =>            6   2  2   1    2     1
+    *      =>           7   2  3   2    6     0
+    *     =>            8   2  1   1    2     0
+    *     
+    *      
+    */
+   public void replyInsert(int pno,BoardVO vo)
+   {
+	   try
+	   {
+		   getConnection();
+		   conn.setAutoCommit(false); // around start
+		   // SQL문장 여러개 있는 경우 
+		   // => 상위 게시물 => group_id , group_step , group_tab
+		   String sql="SELECT group_id,group_step,group_tab "
+				     +"FROM springReplyBoard "
+				     +"WHERE no="+pno;
+		   ps=conn.prepareStatement(sql);
+		   ResultSet rs=ps.executeQuery();
+		   rs.next();
+		   int gi=rs.getInt(1); // => 그대로 
+		   int gs=rs.getInt(2); // => +1
+		   int gt=rs.getInt(3); // => +1
+		   rs.close();
+		   // => group_step을 증가 (그룹별 출력 순서 변경) 
+		   sql="UPDATE springReplyBoard SET "
+			  +"group_step=group_step+1 "
+			  +"WHERE group_id=? AND group_step>?";
+		   ps=conn.prepareStatement(sql);
+		   ps.setInt(1, gi);
+		   ps.setInt(2, gs);
+		   ps.executeUpdate();
+		   // => insert 
+		   sql="INSERT INTO springReplyBoard(no,name,subject,content,pwd,group_id,group_step,group_tab,root) "
+			  +"VALUES(srb_no_seq.nextval,?,?,?,?,?,?,?,?)";
+		   ps=conn.prepareStatement(sql);
+		   ps.setString(1, vo.getName());
+		   ps.setString(2, vo.getSubject());
+		   ps.setString(3, vo.getContent());
+		   ps.setString(4, vo.getPwd());
+		   ps.setInt(5, gi);
+		   ps.setInt(6, gs+1);
+		   ps.setInt(7, gt+1);
+		   ps.setInt(8, pno);
+		   ps.executeUpdate();
+		   // => depth ++
+		   sql="UPDATE springReplyBoard SET "
+		      +"depth=depth+1 "
+			  +"WHERE no="+pno;
+		   ps=conn.prepareStatement(sql);
+		   ps.executeUpdate();
+		   conn.commit(); // around end
+		   
+	   }catch(Exception ex)
+	   {
+		   ex.printStackTrace();   
+		   try
+		   {
+			   conn.rollback(); // after-throwing
+		   }catch(Exception e) {}
+	   }
+	   finally
+	   {
+		   try
+		   {
+			   conn.setAutoCommit(true); // after
+		   }catch(Exception ex) {}
+		   disConnection();
+	   }
+   }
    
 }
