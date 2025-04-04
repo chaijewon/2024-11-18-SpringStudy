@@ -39,12 +39,14 @@ public class BoardController {
 	   model.addAttribute("totalpage", totalpage);
        model.addAttribute("count", count);	   
  	   model.addAttribute("main_jsp", "../replyboard/list.jsp");
-	   return "main/main"; // forward 
+	   
+ 	   return "main/main"; // forward 
    }
    @GetMapping("board/insert.do")
    public String board_insert(Model model)
    {
 	   model.addAttribute("main_jsp", "../replyboard/insert.jsp");
+	   
 	   return "main/main";
    }
    @PostMapping("board/insert_ok.do")
@@ -60,6 +62,7 @@ public class BoardController {
 	   BoardVO vo=dao.boardDetailData(no);
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("main_jsp", "../replyboard/detail.jsp");
+	   
 	   return "main/main";
    }
    @GetMapping("board/update.do")
@@ -68,6 +71,7 @@ public class BoardController {
 	   BoardVO vo=dao.boardUpdateData(no);
 	   model.addAttribute("vo", vo);
 	   model.addAttribute("main_jsp", "../replyboard/update.jsp");
+	   
 	   return "main/main";
    }
    

@@ -9,4 +9,19 @@
     <put-attribute name="nav" value="/WEB-INF/main/nav.jsp"/>
     <put-attribute name="content" value="/WEB-INF/main/content.jsp"/>
   </definition>
+  <!-- 
+  <definition name="board/list" extends="main">
+    <put-attribute name="content" value="/WEB-INF/board/list.jsp"></put-attribute>
+  </definition>
+  <definition name="notice/list" extends="main">
+    <put-attribute name="content" value="/WEB-INF/notice/list.jsp"></put-attribute>
+  </definition>
+  -->
+  <definition name="*/*" extends="main">
+    <put-attribute name="content" value="/WEB-INF/{1}/{2}.jsp"></put-attribute>
+  </definition>
+  
+  <definition name="*/*/*" extends="main">
+    <put-attribute name="content" value="/WEB-INF/{1}/{2}/{3}.jsp"></put-attribute>
+  </definition>
 </tiles-definitions>
