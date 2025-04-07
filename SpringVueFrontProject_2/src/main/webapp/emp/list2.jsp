@@ -34,15 +34,37 @@ h3{
             <th>직위</th>
             <th>급여</th>
           </tr>
+          <tr v-for="vo in ld.emp">
+            <td>{{vo.empno}}</td>
+            <td>{{vo.ename}}</td>
+            <td>{{vo.dbday}}</td>
+            <td>{{vo.job}}</td>
+            <td>{{vo.sal}}</td>
+          </tr>
         </table>
       </div>
+      <div class="row">
+       <h3>부서정보</h3>
+       <table class="table">
+        <tr>
+         <th>부서번호</th>
+         <th>부서명</th>
+         <th>근무지</th>
+        </tr>
+        <tr v-for="vo in ld.dept">
+         <th>{{vo.deptno}}</th>
+         <th>{{vo.dname}}</th>
+         <th>{{vo.loc}}</th>
+        </tr>
+       </table>
+     </div>
    </div>
    <script>
     let app=Vue.createApp({
     	// Model => 데이터 관리 => VO
     	data(){
     		return {
-    	      list:[]		
+    	      ld:{} // ld.emp , ld.dept
     		}
     	},
     	// ViewModel => 데이터 처리 => 서버에서 데이터 읽기,사용자 이벤트 처리 
@@ -52,6 +74,7 @@ h3{
     		axios.get('http://localhost:8080/web/emp/list_vue.do')
     		.then(response=>{
     			console.log(response)
+    			this.ld=response.data
     			// 실행된 데이터 읽기 => 
     			/*
     			   axios.get (post) : 요청 
