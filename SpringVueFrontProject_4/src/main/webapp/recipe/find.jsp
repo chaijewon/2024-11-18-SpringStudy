@@ -27,7 +27,7 @@ p{
   <div class="container">
     <div class="row">
      <input type="text" size=20 class="input-sm"
-      ref="fd" v-model="fd">
+      ref="fd" v-model="fd" v-on:keyup.enter="find()">
     </div>
     <div style="height: 10px"></div>
     <div class="row">
@@ -73,6 +73,17 @@ p{
        },
        // 사용자 정의 함수 => 이벤트 처리 
        methods:{
+    	   find(){
+    		 this.curpage=1
+    		 if(this.fd==="")
+    		 {
+    			 this.$refs.fd.focus()// 태그를 가지고 온다 
+    			 // $('#fd').focus()
+    			 // document.querySelector("#fd").focus()
+    			 return
+    		 }
+    		 this.dataRecv()
+    	   },
     	   prev:function(){
     		   this.curpage=this.curpage>1?this.curpage-1:this.curpage
     		   this.dataRecv()
