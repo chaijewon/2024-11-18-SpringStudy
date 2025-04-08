@@ -256,7 +256,7 @@ p{
     		   this.dataRecv()
     	   },
     	   dataRecv(){
-    		   axios.get('http://localhost:8080/web/recipe/list_vue.do',{
+    		   axios.get('../recipe/list_vue.do',{
         		   params:{
         			   page:this.curpage
         		   }
