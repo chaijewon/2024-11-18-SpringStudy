@@ -265,7 +265,9 @@ p{
         		   this.recipe_list=response.data.list
         		   this.curpage=response.data.curpage
         		   this.totalpage=response.data.totalpage
-        	   }) 
+        	   }).catch(error=>{
+     			  console.log(error.response)
+     		   }) 
     	   }
        }
     }).mount(".container")

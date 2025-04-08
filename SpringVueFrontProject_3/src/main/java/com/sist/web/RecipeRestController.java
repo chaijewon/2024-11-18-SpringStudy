@@ -8,6 +8,11 @@ import java.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.dao.*;
 import com.sist.vo.*;
+
+/*
+ *   
+ */
+
 @RestController
 public class RecipeRestController {
    // 필요한 객체 => 스프링에 요청 
@@ -24,5 +29,18 @@ public class RecipeRestController {
 			   new ObjectMapper();
 	   String json=mapper.writeValueAsString(list);
 	   return json;
+   }
+   /*
+    *       params:{
+        			   page:this.curpage,
+        			   fd:this.fd
+        		   }
+    */
+   @GetMapping(value="recipe/find_vue.do",
+		   produces = "text/plain;charset=UTF-8")
+   public String find_vue(int page,String fd)throws Exception
+   {
+	   
+	   return "";
    }
 }

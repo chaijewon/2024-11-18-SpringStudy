@@ -36,4 +36,24 @@ public class RecipeDAO {
    {
 	   return  mapper.recipeTotalPage();
    }
+   /*
+    *   @Select("SELECT no,poster,title,num "
+			 +"FROM (SELECT no,poster,title,rownum as num "
+			 +"FROM (SELECT + INDEX_ASC(recipe recipe_no_pk) no,poster,title "
+			 +"FROM recipe WHERE title LIKE '%'||#{fd}||'%')) "
+			 +"WHERE num BETWEEN #{start} AND #{end}")
+        public List<RecipeVO> recipeFindListData(Map map);
+	  
+       @Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
+		 +"WHERE title LIKE '%'||#{fd}||'%'")
+       public int recipeFindTotalPage(String fd);
+    */
+   public List<RecipeVO> recipeFindListData(Map map)
+   {
+	   return mapper.recipeFindListData(map);
+   }
+   public int recipeFindTotalPage(String fd)
+   {
+	   return mapper.recipeFindTotalPage(fd);
+   }
 }

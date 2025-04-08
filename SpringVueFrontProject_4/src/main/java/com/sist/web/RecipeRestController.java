@@ -73,6 +73,29 @@ public class RecipeRestController {
 	   
 	   return json;
    }
+   @GetMapping(value="recipe/find_vue.do",
+		   produces = "text/plain;charset=UTF-8")
+   public String find_vue(int page,String fd)throws Exception
+   {
+	   int rowSize=12;
+	   int start=(rowSize*page)-(rowSize-1);
+	   int end=rowSize*page;
+	   Map map=new HashMap();
+	   map.put("start", start);
+	   map.put("end", end);
+	   map.put("fd", fd);
+	   List<RecipeVO> list=dao.recipeFindListData(map);
+	   int totalpage=dao.recipeFindTotalPage(fd);
+	   
+	   map=new HashMap();
+	   map.put("curpage", page);
+	   map.put("totalpage", totalpage);
+	   map.put("list", list);
+	   
+	   ObjectMapper mapper=new ObjectMapper();
+	   String json=mapper.writeValueAsString(map);
+	   return json;
+   }
 }
 
 
