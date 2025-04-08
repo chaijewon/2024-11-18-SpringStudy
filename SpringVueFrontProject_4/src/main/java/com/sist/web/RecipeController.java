@@ -64,4 +64,9 @@ public class RecipeController {
 	{
 		return "recipe/list";
 	}
+	@GetMapping("recipe/detail.do")
+	public String recipe_detail()
+	{
+		return "recipe/detail";
+	}
 }

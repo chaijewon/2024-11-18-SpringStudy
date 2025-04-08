@@ -96,6 +96,38 @@ public class RecipeRestController {
 	   String json=mapper.writeValueAsString(map);
 	   return json;
    }
+   /*
+    *   params:{
+				   no:this.no
+			   }
+    */
+   @GetMapping(value="recipe/detail_vue.do",
+		   produces = "text/plain;charset=UTF-8")
+   public String recipe_detail(int no) throws Exception
+   {
+	   RecipeDetailVO vo=dao.recipeDetailData(no);
+	   List<String> mList=new ArrayList<String>();
+	   List<String> iList=new ArrayList<String>();
+	   
+	   // 문장^image\n문장^image\n문장^image\n
+	   String[] makes=vo.getFoodmake().split("\n");
+	   for(String m:makes)
+	   {
+		   StringTokenizer st=new StringTokenizer(m,"^");
+		   mList.add(st.nextToken());
+		   iList.add(st.nextToken());
+	   }
+	   
+	   Map map=new HashMap();
+	   map.put("vo", vo);
+	   map.put("mList", mList);
+	   map.put("iList", iList);
+	   
+	   ObjectMapper mapper=new ObjectMapper();
+	   String json=mapper.writeValueAsString(map);
+	   
+	   return json;
+   }
 }
 
 

@@ -29,4 +29,9 @@ public interface RecipeMapper {
   @Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
 		 +"WHERE title LIKE '%'||#{fd}||'%'")
   public int recipeFindTotalPage(String fd);
+  
+  // 상세보기 
+  @Select("SELECT * FROM recipeDetail "
+		 +"WHERE no=#{no}")
+  public RecipeDetailVO recipeDetailData(int no);
 }

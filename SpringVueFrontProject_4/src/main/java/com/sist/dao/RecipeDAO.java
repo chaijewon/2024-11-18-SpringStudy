@@ -56,4 +56,14 @@ public class RecipeDAO {
    {
 	   return mapper.recipeFindTotalPage(fd);
    }
+   
+   /*
+    *   @Select("SELECT * FROM recipe "
+		 +"WHERE no=#no}")
+  public RecipeVO recipeDetailData(int no);
+    */
+   public RecipeDetailVO recipeDetailData(int no)
+   {
+	   return mapper.recipeDetailData(no);
+   }
 }
