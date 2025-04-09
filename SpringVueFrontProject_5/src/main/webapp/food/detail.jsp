@@ -26,14 +26,14 @@
       <table class="table">
        <tr>
         <td class="text-center">
-         <img :src="detail_vo.poster" style="width: 750px;height: 350px">
+         <img :src="'http://www.menupan.com'+detail_vo.poster" style="width: 750px;height: 350px">
         </td>
        </tr>
        <tr>
-        <td class="text-center"><h3 id="name">{{detail_vo.title}}</h3></td>
+        <td class="text-center"><h3 id="name">{{detail_vo.name}}</h3></td>
        </tr>
        <tr>
-        <td>{{detail_vo.msg}}</td>
+        <td>{{detail_vo.content}}</td>
        </tr>
        <tr>
         <td>{{detail_vo.address}}</td>
@@ -53,17 +53,15 @@
     let detailApp=Vue.createApp({
     	data(){
     		return {
-    		   no:${param.no},
-    		   type:${param.type},
-    		   detail_vo:{}
+    		   fno:${param.fno},
+    		   detail_vo:{},
+    		   address:''
     		}
     	},
     	mounted(){
-    		axios.get('http://localhost:8080/web/seoul/detail_vue.do',{
+    		axios.get('http://localhost:8080/web/food/detail_vue.do',{
     			params:{
-    				no:this.no,
-    				type:this.type,
-    				address:''
+    				fno:this.fno
     			}
     		}).then(response=>{
     			console.log(response.data)

@@ -19,4 +19,8 @@ public interface FoodMapper {
 		   +"FROM project_food "
 		   +"WHERE type LIKE '%'||#{type}||'%'")
 	public int foodTotalPage(Map map);
+	
+	@Select("SELECT * FROM project_food "
+		   +"WHERE fno=#{fno}")
+	public FoodVO foodDetailData(int fno);
 }
