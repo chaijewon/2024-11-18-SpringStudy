@@ -1,0 +1,70 @@
+package com.sist.dao;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// https://recipe1.ezmember.co.kr/img/mobile/
+		String[] msg={"cate1_01.png:전체"
+				,"cate1_09.png:밑반찬"
+				, "cate1_07.png:메인반찬"
+				, "cate1_03.png:국|탕"
+				, "cate1_16.png:찌개"
+				, "cate2_12.png:초스피드"
+				, "cate2_05.png:손님접대"
+				, "cate1_10.png:밥|죽|떡"
+				, "cate2_07.png:술안주"
+				, "cate1_08.png:면|만두"
+				, "cate2_11.png:일상"
+				, "cate1_11.png:빵"
+				, "cate2_03.png:다이어트"
+				, "cate1_06.png:디저트"
+				, "cate1_12.png:샐러드"
+				, "cate1_15.png:양식"
+				, "cate1_05.png:김치|젓갈|장류"
+				, "cate2_04.png:도시락"
+				, "cate2_01.png:간식"
+				, "cate3_08.png:돼지고기"
+				, "cate2_09.png:영양식"
+				, "cate1_02.png:과자"
+				, "cate1_14.png:양념|소스|잼"
+				, "cate1_17.png:차|음료|술"
+				, "cate3_07.png:닭고기"
+				, "cate2_08.png:야식"
+				, "cate3_14.png:채소류"
+				, "cate4_06.png:볶음"
+				, "cate1_13.png:스프"
+				, "cate3_11.png:소고기"
+				, "cate3_16.png:해물류"
+				, "cate2_13.png:푸드스타일링"
+				, "cate3_13.png:육류"
+				, "cate3_06.png:달걀|유제품"
+				, "cate4_07.png:부침"
+				, "cate4_11.png:조림"
+				, "cate2_10.png:이유식"
+				, "cate4_05.png:무침"
+				, "cate2_14.png:해장"
+				, "cate2_06.png:명절"
+				, "cate3_10.png:버섯류"
+				, "cate3_01.png:가공식품류"
+				, "cate3_04.png:과일류"
+				, "cate4_13.png:튀김"
+				, "cate4_03.png:끓이기"
+				, "cate4_12.png:찜"
+				, "cate4_08.png:비빔"
+				, "cate3_01.png:밀가루"
+				, "cate3_02.png:건어물류"
+				, "cate4_10.png:절임"
+				, "cate4_01.png:굽기"
+				, "cate4_09.png:삶기"
+				, "cate4_14.png:회"
+				, "cate3_12.png:쌀"
+				, "cate3_15.png:콩|견과류"
+				, "cate3_03.png:곡류"
+				, "cate4_04.png:데치기"
+				, "cate1_18.png:퓨전"};
+		System.out.println(msg.length);
+
+	}
+
+}
