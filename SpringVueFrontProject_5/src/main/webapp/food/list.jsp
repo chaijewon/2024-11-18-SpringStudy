@@ -30,21 +30,21 @@ p{
    <div class="container">
      <div class="row">
       <div class="text-center">
-       <input type="button" value="명소" class="btn-lg btn-success" @click="seoul(1)">
-       <input type="button" value="자연" class="btn-lg btn-info" @click="seoul(2)">
-       <input type="button" value="쇼핑" class="btn-lg btn-warning" @click="seoul(3)">
-       <input type="button" value="음식" class="btn-lg btn-danger" @click="seoul(4)">
+       <input type="button" value="한식" class="btn-lg btn-success" @click="food(1)">
+       <input type="button" value="중식" class="btn-lg btn-info" @click="food(2)">
+       <input type="button" value="양식" class="btn-lg btn-warning" @click="food(3)">
+       <input type="button" value="중식" class="btn-lg btn-danger" @click="food(4)">
       </div>
      </div>
      <div style="height: 10px"></div>
      <div class="row">
        <h3 class="text-center">{{title}}</h3>
-       <div class="col-md-3" v-for="vo in seoul_list">
+       <div class="col-md-3" v-for="vo in food_list">
 	    <div class="thumbnail">
-	      <a :href="'../seoul/detail.do?no='+vo.no+'&type='+type">
-	        <img :src="vo.poster" style="width:230px;height: 180px">
+	      <a :href="'../food/detail.do?no='+vo.fno">
+	        <img :src="'https://www.menupan.com'+vo.poster" style="width:230px;height: 180px">
 	        <div class="caption">
-	          <p>{{vo.title}}</p>
+	          <p>{{vo.name}}</p>
 	        </div>
 	      </a>
 	    </div>

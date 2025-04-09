@@ -38,4 +38,8 @@ public class SeoulDAO {
 	{
 		return mapper.seoulTotalPage(map);
 	}
+	public SeoulVO seoulDetailData(Map map)
+	{
+		return mapper.seoulDetailData(map);
+	}
 }

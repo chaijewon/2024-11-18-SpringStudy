@@ -1,5 +1,6 @@
 package com.sist.web;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,6 +63,22 @@ public class SeoulRestController {
 	   
 	   ObjectMapper mapper=new ObjectMapper();
 	   String json=mapper.writeValueAsString(map);
+	   
+	   return json;
+   }
+   
+   @GetMapping(value="seoul/detail_vue.do",
+		   produces ="text/plain;charset=UTF-8")
+   public String seoul_detail(int no,int type)
+   throws Exception
+   {
+	   Map map=new HashMap();
+	   map.put("no", no);
+	   map.put("table_name", tables[type]);
+	   SeoulVO vo=dao.seoulDetailData(map);
+	   
+	   ObjectMapper mapper=new ObjectMapper();
+	   String json=mapper.writeValueAsString(vo);
 	   
 	   return json;
    }
