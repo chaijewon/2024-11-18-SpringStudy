@@ -36,6 +36,16 @@ p{
      <div style="height: 10px"></div>
      <div class="row">
        <h3 class="text-center">{{title}}</h3>
+       <div class="col-md-3" v-for="vo in seoul_list">
+	    <div class="thumbnail">
+	      <a :href="'../seoul/detail.do?no='+vo.no">
+	        <img :src="vo.poster" style="width:230px;height: 180px">
+	        <div class="caption">
+	          <p>{{vo.title}}</p>
+	        </div>
+	      </a>
+	    </div>
+	  </div>
      </div>
      <div style="height: 10px"></div>
      <div class="row">
