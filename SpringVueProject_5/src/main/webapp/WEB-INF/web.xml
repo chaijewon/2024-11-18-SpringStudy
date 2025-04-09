@@ -16,7 +16,7 @@
       <init-param>
         <param-name>contextClass</param-name>
         <param-value>
-          org.springframework.context.annotation.AnnotationConfigApplicationContext
+          org.springframework.web.context.support.AnnotationConfigWebApplicationContext
         </param-value>
       </init-param>
       <init-param>
