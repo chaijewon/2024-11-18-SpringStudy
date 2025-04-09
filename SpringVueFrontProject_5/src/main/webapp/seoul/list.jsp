@@ -21,6 +21,9 @@ p{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+.page-btn:hover{
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -49,52 +52,15 @@ p{
      </div>
      <div style="height: 10px"></div>
      <div class="row">
-      
+       <div class="text-center">
+         <ul class="pagination">
+          <li v-if="startPage>1"><a class="page-btn" @click="prev()">&lt;</a></li>
+          <li v-for="i in range(startPage,endPage)" :class="i===curpage?'active':''"><a class="page-btn" @click="pageChange(i)">{{i}}</a></li>
+          <li v-if="endPage<totalpage"><a class="page-btn" @click="next()">&gt;</a></li>
+         </ul>
+       </div>
      </div>
    </div>
-   <script>
-     let listApp=Vue.createApp({
-    	 data(){
-    		 return {
-    			 seoul_list:[],
-    			 curpage:1,
-    			 totalpage:0,
-    			 startPage:0,
-    			 endPage:0,
-    			 type:1,
-    			 title:'서울 명소'
-    		 }
-    	 },
-    	 mounted(){
-    		 // 시작과 동시에 한페이지 읽기
-    		 this.dataRecv()
-    	 },
-    	 // updated
-    	 // Vue의 멤버함수 
-    	 methods:{
-    		seoul(type){
-    			this.type=type
-    			this.curpage=1
-    			this.dataRecv()
-    		},
-    		dataRecv(){
-    			//let _this=this
-    			axios.get("http://localhost:8080/web/seoul/list_vue.do",{
-    				params:{
-    					page:this.curpage,
-    					type:this.type
-    				}
-    			}).then(response=>{
-    				console.log(response.data)
-    				this.seoul_list=response.data.list;
-    				this.title=response.data.title
-    			}).catch(function(error){
-    				console.log(error.response)
-    			})
-    		}
-    	 }
-    	 // watch / computed / components
-     }).mount(".container")
-   </script>
+   <script src="page.js"></script>
 </body>
 </html>
