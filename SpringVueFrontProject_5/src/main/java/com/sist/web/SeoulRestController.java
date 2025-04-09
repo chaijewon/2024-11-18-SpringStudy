@@ -76,9 +76,13 @@ public class SeoulRestController {
 	   map.put("no", no);
 	   map.put("table_name", tables[type]);
 	   SeoulVO vo=dao.seoulDetailData(map);
-	   
+	   String address=vo.getAddress();
+	   address=address.substring(address.indexOf(" ")+1);
+	   map=new HashMap();
+	   map.put("vo", vo);
+	   map.put("address",address.trim());
 	   ObjectMapper mapper=new ObjectMapper();
-	   String json=mapper.writeValueAsString(vo);
+	   String json=mapper.writeValueAsString(map);
 	   
 	   return json;
    }

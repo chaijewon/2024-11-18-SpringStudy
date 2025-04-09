@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -54,11 +55,13 @@
     		axios.get('http://localhost:8080/web/seoul/detail_vue.do',{
     			params:{
     				no:this.no,
-    				type:this.type
+    				type:this.type,
+    				address:''
     			}
     		}).then(response=>{
     			console.log(response.data)
-    			this.detail_vo=response.data
+    			this.detail_vo=response.data.vo
+    			this.address=response.data.address
     			if(window.kakao && window.kakao.maps)
     			{
     				console.log("initMap()")
@@ -95,7 +98,7 @@
     		var geocoder = new kakao.maps.services.Geocoder();
 
     		// 주소로 좌표를 검색합니다
-    		geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+    		geocoder.addressSearch(this.address, function(result, status) {
 
     		    // 정상적으로 검색이 완료됐으면 
     		     if (status === kakao.maps.services.Status.OK) {
@@ -110,7 +113,7 @@
 
     		        // 인포윈도우로 장소에 대한 설명을 표시합니다
     		        var infowindow = new kakao.maps.InfoWindow({
-    		            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+    		            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+$('#name').text()+'</div>'
     		        });
     		        infowindow.open(map, marker);
 
