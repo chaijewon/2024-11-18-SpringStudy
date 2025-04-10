@@ -20,7 +20,7 @@
 </head>
 <body>
   <div class="container">
-   <div class="row">
+   <div class="row" id="detailApp">
      <h3 class="text-center">내용보기</h3>
      <table class="table">
        <tr>
@@ -62,6 +62,9 @@
        </tr>
      </table>
    </div>
+   <div class="row" id="replyApp">
+    
+   </div>
   </div>
   <script>
    let detailApp=Vue.createApp({
@@ -91,7 +94,11 @@
 			   console.log(error.response)
 		   })
 	   }
-   }).mount(".container")
+   }).mount("#detailApp")
+   
+   let replyApp=Vue.createApp({
+	   
+   }).mount("#detailApp")
   </script>
 </body>
 </html>
