@@ -68,15 +68,20 @@
     <table class="table">
       <tr>
         <td>
+          
         </td>
       </tr>
     </table>
     <c:if test="${sessionScope.id!=null }">
     <table class="table">
       <tr >
-       <td><textarea rows="4" cols="65" style="float: left"></textarea>
+       <td><textarea rows="4" cols="65" style="float: left"
+          v-model="msg" ref="msg"
+       ></textarea>
         <input type=button value="댓글쓰기" class="btn-primary"
-          style="float: left;height: 92px">
+          style="float: left;height: 92px"
+           @click="replyInsert()"
+          >
        </td>
       </tr>
     </table>
@@ -121,6 +126,27 @@
 			   msg:'',
 			   sessionId:'${sessionId}'
 			     
+		   }
+	   },
+	   methods:{
+		   replyInsert(){
+			   if(this.msg==="")
+			   {
+				   this.$refs.msg.focus()
+				   return
+			   }
+			   axios.post('../reply/insert_vue.do',null,{
+				   params:{
+					   bno:this.bno,
+					   msg:this.msg
+				   }
+			   }).then(response=>{
+				   console.log(response.data)
+				   this.reply_list=response.data
+				   this.msg=''
+			   })
+			   
+			   
 		   }
 	   }
    }).mount("#replyApp")
