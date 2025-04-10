@@ -70,7 +70,14 @@
         <td>
           <table class="table" v-for="rvo in reply_list">
             <tr>
-             <td class="text-left">◑{{rvo.name}}&nbsp;({{rvo.dbday}})</td>
+             <td class="text-left">
+              <span v-if="rvo.group_tab>0">
+               <span v-for="i in range(rvo.group_tab)">
+                &nbsp;&nbsp;
+               </span>
+               <img src="../databoard/re_icon.png">
+              </span>
+             ◑{{rvo.name}}&nbsp;({{rvo.dbday}})</td>
              <td class="text-right">
                <span v-if="rvo.id===sessionId">
                 <button class="btn-xs btn-success">수정</button>
@@ -83,7 +90,8 @@
             </tr>
             <tr>
               <td class="text-left" colspan="2">
-               <pre style="white-space: pre-wrap;">{{rvo.msg}}</pre>
+               
+               <pre :style="'white-space: pre-wrap;background-color: white;border: none;margin-left:'+px">{{rvo.msg}}</pre>
               </td>
             </tr>
           </table>
@@ -142,7 +150,8 @@
 			   bno:${no},
 			   reply_list:[],
 			   msg:'',
-			   sessionId:'${sessionId}'
+			   sessionId:'${sessionId}',
+			   px:'0px'
 			     
 		   }
 	   },
@@ -172,9 +181,17 @@
 				   console.log(response.data)
 				   this.reply_list=response.data
 				   this.msg=''
+				   this.px=response.data.group_tab*3+'px'
 			   })
 			   
-			   
+		   },
+		   range(tab){
+			   let arr=[]
+			   for(let i=0;i<tab;i++)
+			   {
+				   arr[i]=i
+			   }
+			   return arr
 		   }
 	   }
    }).mount("#replyApp")
