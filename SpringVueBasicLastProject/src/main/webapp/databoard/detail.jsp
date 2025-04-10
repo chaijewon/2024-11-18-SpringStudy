@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,8 +63,24 @@
        </tr>
      </table>
    </div>
+   <div style="height: 10px"></div>
    <div class="row" id="replyApp">
-    
+    <table class="table">
+      <tr>
+        <td>
+        </td>
+      </tr>
+    </table>
+    <c:if test="${sessionScope.id!=null }">
+    <table class="table">
+      <tr >
+       <td><textarea rows="4" cols="65" style="float: left"></textarea>
+        <input type=button value="댓글쓰기" class="btn-primary"
+          style="float: left;height: 92px">
+       </td>
+      </tr>
+    </table>
+    </c:if>
    </div>
   </div>
   <script>
@@ -97,7 +114,15 @@
    }).mount("#detailApp")
    
    let replyApp=Vue.createApp({
-	   
+	   data(){
+		   return {
+			   bno:${no},
+			   reply_list:[],
+			   msg:'',
+			   sessionId:'${sessionId}'
+			     
+		   }
+	   }
    }).mount("#replyApp")
   </script>
 </body>

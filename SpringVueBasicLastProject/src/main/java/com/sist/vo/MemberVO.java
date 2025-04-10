@@ -1,5 +1,12 @@
 package com.sist.vo;
 
-public class MemberVO {
+import lombok.Data;
 
+@Data
+public class MemberVO {
+   private String id;
+   private String name;
+   private String sex;
+   private String msg;
+   private String pwd;
 }
