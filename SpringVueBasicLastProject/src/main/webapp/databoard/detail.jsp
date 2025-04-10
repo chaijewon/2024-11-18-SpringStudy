@@ -70,14 +70,9 @@
         <td>
           <table class="table" v-for="rvo in reply_list">
             <tr>
-             <td class="text-left">
-              <span v-if="rvo.group_tab>0">
-               <span v-for="i in range(rvo.group_tab)">
-                &nbsp;&nbsp;
-               </span>
-               <img src="../databoard/re_icon.png">
-              </span>
-             ◑{{rvo.name}}&nbsp;({{rvo.dbday}})</td>
+             <td class="text-left" :style="'padding-left:'+rvo.group_tab*20+'px'">
+              <img src="../databoard/re_icon.png" v-if="rvo.group_tab>0">
+              ◑{{rvo.name}}&nbsp;({{rvo.dbday}})</td>
              <td class="text-right">
                <span v-if="rvo.id===sessionId">
                 <button class="btn-xs btn-success">수정</button>
@@ -91,7 +86,7 @@
             <tr>
               <td class="text-left" colspan="2">
                
-               <pre :style="'white-space: pre-wrap;background-color: white;border: none;margin-left:'+px">{{rvo.msg}}</pre>
+               <pre :style="'white-space: pre-wrap;background-color: white;border: none;padding-left:'+rvo.group_tab*20+'px'">{{rvo.msg}}</pre>
               </td>
             </tr>
           </table>
