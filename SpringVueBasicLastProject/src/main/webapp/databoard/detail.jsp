@@ -68,7 +68,25 @@
     <table class="table">
       <tr>
         <td>
-          
+          <table class="table" v-for="rvo in reply_list">
+            <tr>
+             <td class="text-left">◑{{rvo.name}}&nbsp;({{rvo.dbday}})</td>
+             <td class="text-right">
+               <span v-if="rvo.id===sessionId">
+                <button class="btn-xs btn-success">수정</button>
+                <button class="btn-xs btn-info">삭제</button>
+               </span>
+               <button class="btn-xs btn-danger"
+                v-if="sessionId!==''"
+               >댓글</button>
+             </td>
+            </tr>
+            <tr>
+              <td class="text-left" colspan="2">
+               <pre style="white-space: pre-wrap;">{{rvo.msg}}</pre>
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
     </table>
@@ -127,6 +145,16 @@
 			   sessionId:'${sessionId}'
 			     
 		   }
+	   },
+	   mounted(){
+		 axios.get('../reply/list_vue.do',{
+			 params:{
+				 bno:this.bno
+			 }
+		 }).then(res=>{
+			 this.reply_list=res.data
+		 })
+		 
 	   },
 	   methods:{
 		   replyInsert(){

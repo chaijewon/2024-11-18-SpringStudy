@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.SelectKey;
 
 import com.sist.vo.*;
 public interface ReplyMapper {
-  @Select("SELECT no,bno,id,name,msg,group_tab "
+  @Select("SELECT no,bno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,group_tab "
 		 +"FROM vueReply "
 		 +"WHERE bno=#{bno} "
 		 +"ORDER BY group_id DESC,group_step ASC")
