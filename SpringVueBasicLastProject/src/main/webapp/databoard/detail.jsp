@@ -98,7 +98,7 @@
    
    let replyApp=Vue.createApp({
 	   
-   }).mount("#detailApp")
+   }).mount("#replyApp")
   </script>
 </body>
 </html>
