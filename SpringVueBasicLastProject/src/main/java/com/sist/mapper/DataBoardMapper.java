@@ -3,6 +3,8 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import com.sist.vo.*;
 
 import lombok.EqualsAndHashCode.Include;
@@ -25,4 +27,15 @@ public interface DataBoardMapper {
 		  +"#{filecount},0)")
    public void dataBoardInsert(DataBoardVO vo);
    
+   @Update("UPDATE vueDataBoard SET "
+		  +"hit=hit+1 "
+		  +"WHERE no=#{no}")
+   public void hitIncrement(int no);
+   
+   @Select("SELECT no,name,subject,content,hit, "
+		  +"TO_CHAR(regdate,'yyyy-MM-dd') as dbday, "
+		  +"filename,filesize,filecount "
+		  +"FROM vueDataBoard "
+		  +"WHERE no=#{no}")
+   public DataBoardVO databoardDetailData(int no);
 }

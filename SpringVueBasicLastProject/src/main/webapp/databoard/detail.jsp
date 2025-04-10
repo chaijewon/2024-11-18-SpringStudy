@@ -25,24 +25,34 @@
      <table class="table">
        <tr>
         <th width=20% class="text-center">번호</th>
-        <td width=30% class="text-center"></td>
+        <td width=30% class="text-center">{{vo.no}}</td>
         <th width=20% class="text-center">작성일</th>
-        <td width=30% class="text-center"></td>
+        <td width=30% class="text-center">{{vo.dbday}}</td>
        </tr>
        <tr>
         <th width=20% class="text-center">이름</th>
-        <td width=30% class="text-center"></td>
+        <td width=30% class="text-center">{{vo.name}}</td>
         <th width=20% class="text-center">조회수</th>
-        <td width=30% class="text-center"></td>
+        <td width=30% class="text-center">{{vo.hit}}</td>
        </tr>
        <tr>
         <th width=20% class="text-center">제목</th>
-        <td colspan="3"></td>
+        <td colspan="3">{{vo.subject}}</td>
+       </tr>
+       <tr v-if="vo.filecount>0">
+        <th width=20% class="text-center">첨부파일</th>
+        <td colspan="3">
+          <ul>
+            <li v-for="(fn,index) in filename">
+              <a :href="'download.do?fn='+fn">{{fn}}</a>({{filesize[index]}}Bytes)
+            </li>
+          </ul>
+        </td>
        </tr>
        <tr>
          <td colspan="4" valign="top" class="text-left"
           height="200">
-           <pre style="white-space: pre-wrap;"></pre>
+           <pre style="white-space: pre-wrap;">{{vo.content}}</pre>
          </td>
        </tr>
        <tr>
@@ -53,5 +63,35 @@
      </table>
    </div>
   </div>
+  <script>
+   let detailApp=Vue.createApp({
+	   data(){
+		   return {
+			   no:${param.no},
+			   vo:{},
+			   filename:[],
+			   filesize:[]
+		   }
+	   },
+	   mounted(){
+		   axios.get('detail_vue.do',{
+			   params:{
+				   no:this.no
+			   }
+		   }).then(response=>{
+			   console.log(response.data)
+			   this.vo=response.data
+			   let count=response.data.filecount
+			   if(count>0)
+			   {
+				   this.filename=response.data.filename.split(",")
+				   this.filesize=response.data.filesize.split(",")
+			   }
+		   }).catch(error=>{
+			   console.log(error.response)
+		   })
+	   }
+   }).mount(".container")
+  </script>
 </body>
 </html>

@@ -16,4 +16,9 @@ public class DataBoardController {
    {
 	   return "databoard/insert";
    }
+   @GetMapping("databoard/detail.do")
+   public String databoard_detail()
+   {
+	   return "databoard/detail";
+   }
 }

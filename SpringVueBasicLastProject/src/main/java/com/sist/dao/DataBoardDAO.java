@@ -2,6 +2,7 @@ package com.sist.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.*;
@@ -42,5 +43,23 @@ public class DataBoardDAO {
    public void dataBoardInsert(DataBoardVO vo)
    {
 	   mapper.dataBoardInsert(vo);
+   }
+   /*
+    *   @Update("UPDATE vueDataBoard SET "
+		  +"hit=hit+1 "
+		  +"WHERE no=#{no}")
+	   public void hitIncrement(int no);
+	   
+	   @Select("SELECT no,name,subject,content,hit, "
+			  +"TO_CHAR(regdate,'yyyy-MM-dd') as dbday, "
+			  +"filename,filesize,filecount "
+			  +"FROM vueDataBoard "
+			  +"WHERE no=#{no}")
+	   public DataBoardVO databoardDetailData(int no);
+    */
+   public DataBoardVO databoardDetailData(int no)
+   {
+	   mapper.hitIncrement(no);
+	   return mapper.databoardDetailData(no);
    }
 }
