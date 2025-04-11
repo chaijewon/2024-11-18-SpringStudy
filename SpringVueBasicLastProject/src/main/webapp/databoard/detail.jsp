@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .container{
@@ -75,7 +76,7 @@
               ◑{{rvo.name}}&nbsp;({{rvo.dbday}})</td>
              <td class="text-right">
                <span v-if="rvo.id===sessionId">
-                <button class="btn-xs btn-success">수정</button>
+                <button class="btn-xs btn-success upbtn" :id="'up'+rvo.no" @click="replyUpdateForm(rvo.no)">수정</button>
                 <button class="btn-xs btn-info">삭제</button>
                </span>
                <button class="btn-xs btn-danger"
@@ -89,13 +90,34 @@
                <pre :style="'white-space: pre-wrap;background-color: white;border: none;padding-left:'+rvo.group_tab*20+'px'">{{rvo.msg}}</pre>
               </td>
             </tr>
+            
+             <tr :id="'u'+rvo.no" class="update">
+		       <td><textarea rows="4" cols="65" style="float: left"
+		          :id="'umsg'+rvo.no"
+		       >{{rvo.msg}}</textarea>
+		        <input type=button value="댓글수정" class="btn-primary"
+		          style="float: left;height: 92px"
+		           @click="replyUpdate(rvo.no)"
+		          >
+		       </td>
+		      </tr>
+		      <tr :id="'m'+rvo.no" class="insert">
+		       <td><textarea rows="4" cols="65" style="float: left"
+		            :id="'imsg'+rvo.no"
+		       ></textarea>
+		        <input type=button value="댓글쓰기" class="btn-primary"
+		          style="float: left;height: 92px"
+		           @click="replyInsert()"
+		          >
+		       </td>
+		      </tr>
           </table>
         </td>
       </tr>
     </table>
     <c:if test="${sessionScope.id!=null }">
     <table class="table">
-      <tr >
+      <tr>
        <td><textarea rows="4" cols="65" style="float: left"
           v-model="msg" ref="msg"
        ></textarea>
@@ -116,7 +138,8 @@
 			   no:${param.no},
 			   vo:{},
 			   filename:[],
-			   filesize:[]
+			   filesize:[],
+			   upReply:false
 		   }
 	   },
 	   mounted(){
@@ -136,9 +159,11 @@
 		   }).catch(error=>{
 			   console.log(error.response)
 		   })
+		   $('.update').hide()
+		   $('.insert').hide()
 	   }
    }).mount("#detailApp")
-   
+   //
    let replyApp=Vue.createApp({
 	   data(){
 		   return {
@@ -158,9 +183,39 @@
 		 }).then(res=>{
 			 this.reply_list=res.data
 		 })
-		 
+		 // 다른 JS 연결 => $(function(){})
+		
 	   },
 	   methods:{
+		   replyUpdate(no){
+			   let msg=$('#umsg'+no).text()
+			   axios.get('../reply/update_vue.do',{
+				   no:no,
+				   msg:msg,
+				   bno:this.bno
+			   }).then(res=>{
+				   this.reply_list=res.data
+				   $('#u'+no).hide()
+			   })
+		   },
+		   replyUpdateForm(no){
+			   //alert("no:"+no)
+			   $('.update').hide()
+			   $('.insert').hide()
+			   $('.upbtn').text("수정")
+			   if(this.upReply===false)
+			   {
+				   this.upReply=true
+				   $('#u'+no).show()
+				   $('#up'+no).text("취소")
+			   }
+			   else
+			   {
+				   this.upReply=false
+				   $('#u'+no).hide()
+				   $('#up'+no).text("수정")
+			   }
+		   },
 		   replyInsert(){
 			   if(this.msg==="")
 			   {
