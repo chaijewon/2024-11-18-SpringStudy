@@ -22,10 +22,9 @@
 <body>
   <div class="container-fluid">
    <div class="row">
-    <input type="checkbox" value="name">업체명
-    <input type="checkbox" value="address">주소
-    <input type="checkbox" value="type">음식종류
-    <input type="checkbox" value="theme">테마 
+    <input type="checkbox" value="N" v-model="ss">업체명
+    <input type="checkbox" value="A" v-model="ss">주소
+    <input type="checkbox" value="T" v-model="ss">음식종류
     <input type=text size=15 class="input-sm"
       ref="fd" v-model="fd">
     <input type="button" class="btn-sm btn-primary"
@@ -57,7 +56,8 @@
 			   curpage:1,
 			   startPage:0,
 			   endPage:0,
-			   totalpage:0
+			   totalpage:0,
+			   ss:[]
 		   }
 	   },
 	   mounted(){
