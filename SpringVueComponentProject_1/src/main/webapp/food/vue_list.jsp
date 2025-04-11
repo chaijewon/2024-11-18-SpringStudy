@@ -26,14 +26,23 @@
     <input type="checkbox" value="A" v-model="ss">주소
     <input type="checkbox" value="T" v-model="ss">음식종류
     <input type=text size=15 class="input-sm"
-      ref="fd" v-model="fd">
+      ref="fd" v-model="fd" @keyup.enter="find()">
     <input type="button" class="btn-sm btn-primary"
      value="검색" @click=find()>
    </div> 
    <div style="height:10px"></div>
    <div class="row">
      <div class="col-sm-8">
-      
+      <div class="col-md-3" v-for="vo in food_list">
+		    <div class="thumbnail">
+		      <a href="#">
+		        <img :src="'http://www.menupan.com'+vo.poster" style="width:230px;height: 180px">
+		        <div class="caption">
+		          <p>{{vo.name}}</p>
+		        </div>
+		      </a>
+		    </div>
+		  </div>
      </div>
      <div class="col-sm-4">
        
