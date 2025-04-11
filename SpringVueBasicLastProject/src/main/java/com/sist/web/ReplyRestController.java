@@ -53,4 +53,26 @@ public class ReplyRestController {
 	   dao.replyUpdate(vo);
 	   return replyListData(vo.getBno());
    }
+   
+   @GetMapping("reply/delete_vue.do")
+   public List<ReplyVO> replyDelete(int no,int bno)
+   {
+	   dao.replyDelete(no);
+	   return replyListData(bno);
+   }
+   @GetMapping("reply/reply_reply_insert.do")
+   public List<ReplyVO> replyReplyInsert(int pno,int bno,
+		   String msg,HttpSession session)
+   {
+	   String id=(String)session.getAttribute("id");
+	   String name=(String)session.getAttribute("name");
+	   ReplyVO vo=new ReplyVO();
+	   vo.setBno(bno);
+	   vo.setMsg(msg);
+	   vo.setId(id);
+	   vo.setName(name);
+	   dao.replyReplyInsert(pno, vo);
+	   return replyListData(bno);
+   }
+   
 }

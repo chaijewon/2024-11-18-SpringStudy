@@ -77,16 +77,19 @@
              <td class="text-right">
                <span v-if="rvo.id===sessionId">
                 <button class="btn-xs btn-success upbtn" :id="'up'+rvo.no" @click="replyUpdateForm(rvo.no)">수정</button>
-                <button class="btn-xs btn-info">삭제</button>
+                <button class="btn-xs btn-info" @click="replyDelete(rvo.no)">삭제</button>
                </span>
                <button class="btn-xs btn-danger"
-                v-if="sessionId!==''"
+                v-if="sessionId!==''" @click="replyReplyForm(rvo.no)"
                >댓글</button>
              </td>
             </tr>
             <tr>
               <td class="text-left" colspan="2">
-               
+               <%--
+                   v-bind:
+                   :
+                --%>
                <pre :style="'white-space: pre-wrap;background-color: white;border: none;padding-left:'+rvo.group_tab*20+'px'">{{rvo.msg}}</pre>
               </td>
             </tr>
@@ -107,7 +110,7 @@
 		       ></textarea>
 		        <input type=button value="댓글쓰기" class="btn-primary"
 		          style="float: left;height: 92px"
-		           @click="replyInsert()"
+		           @click="replyReplyInsert(rvo.no)"
 		          >
 		       </td>
 		      </tr>
@@ -138,8 +141,8 @@
 			   no:${param.no},
 			   vo:{},
 			   filename:[],
-			   filesize:[],
-			   upReply:false
+			   filesize:[]
+			  
 		   }
 	   },
 	   mounted(){
@@ -171,7 +174,9 @@
 			   reply_list:[],
 			   msg:'',
 			   sessionId:'${sessionId}',
-			   px:'0px'
+			   px:'0px',
+			   upReply:false,
+			   inReply:false
 			     
 		   }
 	   },
@@ -184,9 +189,52 @@
 			 this.reply_list=res.data
 		 })
 		 // 다른 JS 연결 => $(function(){})
-		
 	   },
 	   methods:{
+		   replyReplyForm(no){
+			   $('.update').hide()
+			   $('.insert').hide()
+			   if(this.inReply===false)
+			   {
+				   this.inReply=true
+				   $('#m'+no).show()
+				   
+			   }
+			   else
+			   {
+				   this.inReply=false
+				   $('#m'+no).hide()
+				  
+			   }
+		   },
+		   replyReplyInsert(no){
+			   let msg=$('#imsg'+no).val()
+			   if(msg==="")
+			   {
+				   $('#imsg'+no).focus()
+				   return 
+			   }
+			   axios.get('../reply/reply_reply_insert.do',{
+				   params:{
+					   bno:this.bno,
+					   pno:no,
+					   msg:msg
+				   }
+			   }).then(res=>{
+				   this.reply_list=res.data
+				   $('#m'+no).hide()
+			   })
+		   },
+		   replyDelete(no){
+			 axios.get('../reply/delete_vue.do',{
+				 params:{
+					 no:no,
+					 bno:this.bno
+				 }
+			 }).then(res=>{
+				 this.reply_list=res.data
+			 })
+		   },
 		   replyUpdate(no){
 			   let msg=$('#umsg'+no).val()
 			   axios.get('../reply/update_vue.do',{
