@@ -43,4 +43,14 @@ public class ReplyRestController {
 	   
 	   return replyListData(vo.getBno());
    }
+   @GetMapping("reply/update_vue.do")
+   public List<ReplyVO> replyUpdate(ReplyVO vo,
+		   HttpSession session)
+   {
+	   System.out.println("no:"+vo.getNo());
+	   System.out.println("msg:"+vo.getMsg());
+	   System.out.println("bno:"+vo.getBno());
+	   dao.replyUpdate(vo);
+	   return replyListData(vo.getBno());
+   }
 }

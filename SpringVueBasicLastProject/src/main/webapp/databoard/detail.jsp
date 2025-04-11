@@ -188,14 +188,19 @@
 	   },
 	   methods:{
 		   replyUpdate(no){
-			   let msg=$('#umsg'+no).text()
+			   let msg=$('#umsg'+no).val()
 			   axios.get('../reply/update_vue.do',{
-				   no:no,
-				   msg:msg,
-				   bno:this.bno
+				 params:{
+					  no:no,
+				      msg:msg,
+				      bno:this.bno
+				 }
+				  
 			   }).then(res=>{
+				   console.log(res.data)
 				   this.reply_list=res.data
 				   $('#u'+no).hide()
+				   $('.upbtn').text("수정")
 			   })
 		   },
 		   replyUpdateForm(no){

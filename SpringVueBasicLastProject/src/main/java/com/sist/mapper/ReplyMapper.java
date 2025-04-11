@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 public interface ReplyMapper {
@@ -21,4 +22,8 @@ public interface ReplyMapper {
 		  +"(SELECT NVL(MAX(group_id)+1,1) FROM vueReply))")
   public void replyInsert(ReplyVO vo);
   
+  @Update("UPDATE vueReply SET "
+		 +"msg=#{msg} "
+		 +"WHERE no=#{no}")
+  public void replyUpdate(ReplyVO vo);
 }
