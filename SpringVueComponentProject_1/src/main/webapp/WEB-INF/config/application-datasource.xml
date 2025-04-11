@@ -35,11 +35,11 @@
        id="ssf"
        class="org.mybatis.spring.SqlSessionFactoryBean"
        p:dataSource-ref="ds"
-       p:configLocation="/WEB-INF/config/Config.xml"
     />
     <!-- SqlSessionFactoryBean을 이용해서 Mapper구현 
          모든 Mapper를 한번에 처리 <mybatis-spring>
          Mapper를 한개씩 처리 <bean..>
+         p:configLocation="/WEB-INF/config/Config.xml"
      -->
     <mybatis-spring:scan base-package="com.sist.mapper"
       factory-ref="ssf"
