@@ -42,4 +42,24 @@ public class VueDAO {
 	   return mapper.foodDetailData(fno);
    }
    
+   /*
+    *   @Select("SELECT no,goods_name,goods_poster,num "
+		  +"FROM (SELECT no,goods_name,goods_poster,rownum as num "
+		  +"FROM (SELECT no,goods_name,goods_poster "
+		  +"FROM goods_all ORDER BY no ASC)) "
+		  +"WHERE num BETWEEN #{start} AND #{end}")
+		   public List<GoodVO> goodsListData(Map map);
+			   
+		   @Select("SELECT CEIL(COUNT(*)/12.0) FROM goods_all")
+		   public int goodsTotalPage();
+    */
+   public List<GoodVO> goodsListData(Map map)
+   {
+	   return mapper.goodsListData(map);
+   }
+   public int goodsTotalPage()
+   {
+	   return mapper.goodsTotalPage();
+   }
+   
 }

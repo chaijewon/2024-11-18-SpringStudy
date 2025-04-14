@@ -25,5 +25,15 @@ public interface VueMapper {
 		  +"WHERE fno=#{fno}")
    public FoodVO foodDetailData(int fno);
    // Goods => computed 
+   
+   @Select("SELECT no,goods_name,goods_poster,num "
+		  +"FROM (SELECT no,goods_name,goods_poster,rownum as num "
+		  +"FROM (SELECT no,goods_name,goods_poster "
+		  +"FROM goods_all ORDER BY no ASC)) "
+		  +"WHERE num BETWEEN #{start} AND #{end}")
+   public List<GoodVO> goodsListData(Map map);
+	   
+   @Select("SELECT CEIL(COUNT(*)/12.0) FROM goods_all")
+   public int goodsTotalPage();
    // Recipe => component : pagination => js
 }
