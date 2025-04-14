@@ -42,4 +42,10 @@ public class VueRestController {
 	  return map;
 	  
   }
+  @GetMapping("food/detail_vue.do")
+  public FoodVO food_detail(int fno)
+  {
+	  FoodVO vo=dao.foodDetailData(fno);
+	  return vo;
+  }
 }

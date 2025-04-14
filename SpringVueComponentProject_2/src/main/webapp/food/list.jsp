@@ -49,7 +49,7 @@ p{
            <page-card></page-card>
          </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4" v-show="isShow">
         <%-- 상세보기:component --%>
         <food-detail v-bind:detail="detail"></food-detail>
       </div>
@@ -58,15 +58,45 @@ p{
    <script>
      // <template></template>
      const food_detail={
+        // 태그의 속성 => props / state(data(){})
+        // 데이터의 변경 => 감지 : 상태 관리 
+        // Vue / React => cdn
     	props:['detail'],
     	template:
     		 `
     		    <table class="table">
+                 <tbody>
                  <tr>
-                   <td class="text-center">
-                    {{detail.name}}
+                   <td class="text-center" width=30% rowspan="7">
+                    <img :src="'https://www.menupan.com'+detail.poster" style="width:100%">
                    </td>
+                   <td colspan="2"><h3>{{detail.name}}</h3></td>
                  </tr>
+                 <tr>
+                   <td width="20%">주소</td>
+                   <td width="50%">{{detail.address}}</td>
+                 </tr>
+                 <tr>
+                   <td width="20%">전화</td>
+                   <td width="50%">{{detail.phone}}</td>
+                 </tr>
+                 <tr>
+                   <td width="20%">음식종류</td>
+                   <td width="50%">{{detail.type}}</td>
+                 </tr>
+                 <tr>
+                  <td width="20%">영업시간</td>
+                  <td width="50%">{{detail.time}}</td>
+                 </tr>
+                 <tr>
+                  <td width="20%">주차</td>
+                  <td width="50%">{{detail.parking}}</td>
+                </tr>
+                <tr>
+                 <td width="20%">테마</td>
+                 <td width="50%">{{detail.theme}}</td>
+                </tr>
+                </tbody>
                 </table>
     		 `
      }
@@ -78,7 +108,8 @@ p{
     			totalpage:0,
     			startPage:0,
     			endPage:0,
-    			detail:{}
+    			detail:{},
+    			isShow:false
     		}
     	},
     	mounted(){
@@ -87,7 +118,17 @@ p{
     	methods:{
     		//상세보기 
     		detailData(fno){
-    			
+    			this.isShow=true
+    			// ?fno=1
+    			axios.get('../food/detail_vue.do',{
+    				params:{
+    					fno:fno
+    				}
+    			}).then(res=>{
+    				this.detail=res.data
+    			}).catch(error=>{
+    				console.log(error.response)
+    			})
     		},
     		// 이전 
     		prev(){
