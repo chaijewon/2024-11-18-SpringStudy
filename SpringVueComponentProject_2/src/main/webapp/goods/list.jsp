@@ -8,6 +8,7 @@
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .container{
@@ -30,7 +31,10 @@ p{
     <div class="row">
       <div class="col-md-3" v-for="vo in list">
 		    <div class="thumbnail">
-		      <a href="#">
+		     <%--
+		       <a href={"../goods/detail.do?no="+vo.no}>
+		      --%>
+		      <a :href="'../goods/detail.do?no='+vo.no">
 		        <img :src="vo.goods_poster" style="width:230px;height: 130px">
 		        <div class="caption">
 		          <p>{{vo.goods_name}}</p>

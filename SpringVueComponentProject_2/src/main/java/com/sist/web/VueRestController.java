@@ -79,4 +79,17 @@ public class VueRestController {
 	  return map;
 	  
   }
+  @GetMapping("goods/detail_vue.do")
+  public Map goods_detail(int no)
+  {
+	  Map map=new HashMap();
+	  GoodVO vo=dao.goodsDetailData(no);
+	  String temp=vo.getGoods_price();
+	  // 10000
+	  temp=temp.replaceAll("[^0-9]", "");
+	  int price=Integer.parseInt(temp);
+	  map.put("detail", vo);
+	  map.put("price", price);
+	  return map;
+  }
 }

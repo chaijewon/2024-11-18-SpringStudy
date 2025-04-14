@@ -35,5 +35,11 @@ public interface VueMapper {
 	   
    @Select("SELECT CEIL(COUNT(*)/12.0) FROM goods_all")
    public int goodsTotalPage();
+   
+   @Select("SELECT * FROM goods_all "
+		  +"WHERE no=#{no}")
+   public GoodVO goodsDetailData(int no);
    // Recipe => component : pagination => js
+   
+   
 }

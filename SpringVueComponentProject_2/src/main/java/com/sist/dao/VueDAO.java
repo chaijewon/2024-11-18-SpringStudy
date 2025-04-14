@@ -61,5 +61,14 @@ public class VueDAO {
    {
 	   return mapper.goodsTotalPage();
    }
+   /*
+    *   @Select("SELECT * FROM goods_all "
+		  +"WHERE no=#{no}")
+        public GoodVO goodsDetailData(int no);
+    */
+   public GoodVO goodsDetailData(int no)
+   {
+	   return mapper.goodsDetailData(no);
+   }
    
 }
