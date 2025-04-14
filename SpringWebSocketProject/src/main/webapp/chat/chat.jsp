@@ -45,7 +45,24 @@ function onOpen(event)
 // 채팅 메세지가 들어 온 경우
 function onMessage(event)
 {
-	
+	// 스프링에서 보내준 데이터를 받는다 
+	let data=event.data // 채팅 메세지를 가지고 온다 
+	/*
+	     채팅 문장열 => 'msg' 
+	     채팅방 만들기 => 'makeroom'
+	     일대일 채팅 => 'mantoman'
+	*/
+	if(data.substring(0,4)==='msg:')
+	{
+		appendMessage(data.substring(4))
+	}
+}
+function appendMessage(msg)
+{
+	 $('#recvMsg').append(msg+"<br>")
+	 let ch=$('#chatArea').height()
+	 let m=$('#recvMsg').height()-ch
+	 $('#chatArea').scrollTop(m)
 }
 // 종료 
 function onClose(event)
@@ -56,12 +73,30 @@ function disConnection(){
 	websocket.close()
 	
 }
+function send(){
+	let name=$('#name').val()
+	let msg=$('#sendMsg').val()
+	websocket.send('msg:['+name+']:'+msg)
+	$('#sendMsg').val("")
+}
 $(function(){
 	$('#startBtn').click(function(){
+		let name=$('#name').val()
+		if(name.trim()==="")
+		{
+			$('#name').focus()
+			return 
+		}
 		connection()
 	})
 	$('#endBtn').click(function(){
 		disConnection()
+	})
+	$('#sendMsg').keydown(function(key){
+		if(key.keyCode===13)
+		{
+			send()
+		}
 	})
 })
 </script>
