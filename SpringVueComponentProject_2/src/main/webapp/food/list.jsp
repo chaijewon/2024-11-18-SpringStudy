@@ -17,17 +17,37 @@
   margin: 0px auto;
   width: 100%;
 }
+p{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+nav-link:hover{
+  cursor:pointer;
+}
 </style>
+<script src="../js/page-card.js"></script>
 </head>
 <body>
    <div class="container-fluid">
     <div class="row">
       <div class="col-sm-8">
-        <%-- --%> 
+        <div class="col-md-3" v-for="vo in list">
+		    <div class="thumbnail">
+		      <a href="#">
+		        <img :src="'http://www.menupan.com'+vo.poster" style="width:230px;height: 130px">
+		        <div class="caption">
+		          <p>{{vo.name}}</p>
+		        </div>
+		      </a>
+		    </div>
+		  </div>
+       
         <div style="height: 10px"></div>
         <div class="text-center">
          <%-- 페이지 출력 --%>
-        </div>
+           <page-card></page-card>
+         </div>
       </div>
       <div class="col-sm-4">
         <%-- 상세보기:component --%>
@@ -47,9 +67,20 @@
     		}
     	},
     	mounted(){
-    		
+    		this.dataRecv()
     	},
     	methods:{
+    		// 블럭별 페이지 나누기 
+    		range(start,end){
+    			let arr=[]
+    			let len=end-start
+    			for(let i=0;i<=len;i++)
+    		    {
+    			   arr[i]=start
+    			   start++
+    		    }
+    			return arr
+    		},
     		// 공통사용 
     		dataRecv(){
               axios.get("../food/list_vue.do",{
@@ -68,6 +99,9 @@
             	  console.log(error.response)
               })  			
     		}
+    	},
+    	components:{
+    		'page-card':page_card
     	}
      }).mount(".container-fluid")
    </script>
