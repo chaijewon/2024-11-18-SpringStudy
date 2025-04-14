@@ -22,7 +22,7 @@ p{
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-nav-link:hover{
+.nav-link:hover{
   cursor:pointer;
 }
 </style>
@@ -34,7 +34,7 @@ nav-link:hover{
       <div class="col-sm-8">
         <div class="col-md-3" v-for="vo in list">
 		    <div class="thumbnail">
-		      <a href="#">
+		      <a class="nav-link" @click="detailData(vo.fno)">
 		        <img :src="'http://www.menupan.com'+vo.poster" style="width:230px;height: 130px">
 		        <div class="caption">
 		          <p>{{vo.name}}</p>
@@ -51,10 +51,25 @@ nav-link:hover{
       </div>
       <div class="col-sm-4">
         <%-- 상세보기:component --%>
+        <food-detail v-bind:detail="detail"></food-detail>
       </div>
     </div>
    </div>
    <script>
+     // <template></template>
+     const food_detail={
+    	props:['detail'],
+    	template:
+    		 `
+    		    <table class="table">
+                 <tr>
+                   <td class="text-center">
+                    {{detail.name}}
+                   </td>
+                 </tr>
+                </table>
+    		 `
+     }
      let foodApp=Vue.createApp({
     	data(){
     		return {
@@ -70,6 +85,25 @@ nav-link:hover{
     		this.dataRecv()
     	},
     	methods:{
+    		//상세보기 
+    		detailData(fno){
+    			
+    		},
+    		// 이전 
+    		prev(){
+    			this.curpage=this.startPage-1
+    			this.dataRecv()
+    		},
+    		// 다음 
+    		next(){
+    		   this.curpage=this.endPage+1
+    		   this.dataRecv()
+    		},
+    		// 1 2 3 4 => 페이지 클릭 
+    		pageChange(page){
+    			this.curpage=page
+    			this.dataRecv()
+    		},
     		// 블럭별 페이지 나누기 
     		range(start,end){
     			let arr=[]
@@ -101,7 +135,8 @@ nav-link:hover{
     		}
     	},
     	components:{
-    		'page-card':page_card
+    		'page-card':page_card,
+    		'food-detail':food_detail
     	}
      }).mount(".container-fluid")
    </script>
