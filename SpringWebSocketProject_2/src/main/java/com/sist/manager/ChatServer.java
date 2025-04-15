@@ -1,5 +1,58 @@
 package com.sist.manager;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.EndpointConfig;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
+// 접속자 저장 
+import java.util.*;
+import com.sist.vo.*;
+@ServerEndpoint(value="/site/chat/chat-ws",
+   configurator = WebSockekSessionConfigurator.class)
 public class ChatServer {
-
+   private static Map<Session,MemberVO> users
+       =Collections.synchronizedMap(new HashMap<Session,MemberVO>());
+   // 접속시 처리 
+   @OnOpen
+   public void onOpen(Session session,EndpointConfig config)
+   throws Exception
+   {
+	   MemberVO vo=new MemberVO();
+	   HttpSession hs=
+			   (HttpSession)config.getUserProperties()
+			             .get(HttpSession.class.getName());
+	   vo=(MemberVO)hs.getAttribute("vo");
+	   System.out.println("1.접속:"+vo.getName());
+	   // 접속자 목록에 저장 
+	   users.put(session, vo);
+	   // 입장 메세지 전송 
+	   Iterator<Session> it=users.keySet().iterator();
+	   while(it.hasNext())
+	   {
+		   Session ss=it.next();
+		   // 본인이 아닌 모든 접속자에게 
+		   if(ss.getId()!=session.getId())
+		   {
+			   ss.getBasicRemote().sendText("msg:[알림 ☞]"+vo.getName()+"님이 입장하셨습니다");
+		   }
+	   }
+	   System.out.println("클라이언트 접속:"+vo.getName()+","
+			   +session.getId());
+   }
+   // 채팅 메세지 
+   @OnMessage
+   public void onMessage(String message,Session session)
+   throws Exception
+   {
+	   
+   }
+   // 종료 
+   @OnClose
+   public void onClose(Session session)throws Exception
+   {
+	   
+   }
 }

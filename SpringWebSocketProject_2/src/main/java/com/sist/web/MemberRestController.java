@@ -19,9 +19,7 @@ public class MemberRestController {
 	  MemberVO vo=dao.memberLogin(id, pwd);
 	  if(vo.getMsg().equals("OK"))
 	  {
-		  session.setAttribute("id", vo.getId());
-		  session.setAttribute("name", vo.getName());
-		  session.setAttribute("sex", vo.getSex());
+		 session.setAttribute("vo", vo);
 	  }
 	  
 	  return vo.getMsg();
