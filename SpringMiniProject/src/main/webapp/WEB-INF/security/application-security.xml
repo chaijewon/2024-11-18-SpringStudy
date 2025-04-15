@@ -25,12 +25,61 @@
     <!-- 페이지별 접근 권한 
          hasRole('ROLE_ADMIN') ('ROLE_USER')
          permitAll
-         hasAnyRole('','')
+         hasAnyRole('','') => SpringEL
      -->
+     <http auto-config="true" use-expressions="true">
+       <csrf disabled="true"/><!-- 해킹방지 : 사이트 위도 방지(파밍) -->
+       <!-- 사용자의 의도와 관계 없이 행해지는 공격 기법 -->
+       <intercept-url pattern="/member/**" access="permitAll"/>
+       <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+       <intercept-url pattern="/**" access="permitAll"/>
+       <intercept-url pattern="/member/login.do" access="permitAll"/>
+       
+       <form-login login-page="/member/login.do"
+         login-processing-url="/member/login.do"
+         username-parameter="userid"
+         password-parameter="userpwd"
+         always-use-default-target="false"
+         authentication-failure-handler-ref="loginFailureHandler"
+         authentication-success-handler-ref="loginSuccessHandler"
+       />
+       <!-- 
+             session.invalidate()
+             return "redirect:../main/main.do"
+        -->
+       <!--  자동 로그인 : 유지 시간 = 24시간 -->
+       <remember-me data-source-ref="ds" token-validity-seconds="86400"/>
+       <logout
+          logout-url="/member/logout.do"
+          invalidate-session="true"
+          logout-success-url="/main/main.do"
+          delete-cookies="remember-me,JSESSIONID"
+       />
+     </http>
      <!-- login처리 -->
      <!-- 자동 로그인  : cookie-->
+     <beans:bean id="loginSuccessHandler"
+       class="com.sist.security.LoginSuccessHandler"
+     >
+       <beans:property name="defaultUrl" value="/main/main.do"/>
+     </beans:bean>
+     <beans:bean id="loginFailureHandler"
+       class="com.sist.security.LoginFailureHandler"
+     >
+       <beans:property name="defaultFailureUrl" value="/member/login.do?login_error"/>
+     </beans:bean>
      <!-- 데이터베이스 연결후 데이터 읽기 : session-->
+     <jdbc-user-service data-source-ref="ds"
+       id="userService"
+       users-by-username-query="SELECT userid as username,userpwd as password,enable FROM projectMember WHERE userid=?"
+       authorities-by-username-query="SELECT userid as username,authority FROM authority WHERE userid=?"
+     />
      <!-- 인증관리자에 전송 : 비밀번호 암호화  -->
+     <authentication-manager>
+       <authentication-provider user-service-ref="userService">
+         <password-encoder ref="bcryptEncoder"/>
+       </authentication-provider>
+     </authentication-manager>
      <beans:bean
        id="bcryptEncoder"
        class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"
