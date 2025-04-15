@@ -11,6 +11,23 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd">
-
-
+    <!-- 
+        1. 요청 .do
+        2. DispatcherServlet : 요청 받기 
+             web.xml
+        3. HandlerMapping : @Controller 찾기 
+             => 자동 설정 
+        ***4. @Controller / @RestController : 요청 처리
+        5. ViewResolver : 처리된 결과를 JSP로 전송 
+             => 경로명 / 확장자 
+        ***6. View (JSP) : 전송받은 데이터 출력 
+     -->
+    <aop:aspectj-autoproxy/>
+    <context:component-scan base-package="com.sist.*"/>
+    <mvc:annotation-driven/>
+    <bean id="viewResolver"
+      class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+      p:prefix="/"
+      p:suffix=".jsp"
+    />
 </beans>

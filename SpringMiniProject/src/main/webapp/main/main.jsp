@@ -25,9 +25,22 @@
 </head>
 
 <body>
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="yummy-load"></div>
+    </div>
+
+    <!-- Background Pattern Swither -->
+    <div id="pattern-switcher">
+        Bg Pattern
+    </div>
+    <div id="patter-close">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    
     <jsp:include page="header.jsp"></jsp:include>
 
-    <jsp:include page="home.jsp"></jsp:include>
+    <jsp:include page="${main_jsp }"></jsp:include>
     
     <jsp:include page="footer.jsp"></jsp:include>
 
