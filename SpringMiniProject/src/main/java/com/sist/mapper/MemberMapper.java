@@ -7,10 +7,10 @@ import com.sist.vo.*;
 public interface MemberMapper {
 
   @Insert("INSERT INTO projectMember(userid,username,userpwd,"
-		 +"sex,birthday,email,post,addr1,addr2,phone,content) "
+		 +"sex,birthday,email,post,addr1,addr2,phone,content,enable) "
 		 +"VALUES(#{userid},#{username},#{userpwd},"
 		 +"#{sex},#{birthday},#{email},#{post},#{addr1},"
-		 +"#{addr2},#{phone},#{content})")
+		 +"#{addr2},#{phone},#{content},1)")
   public void memberInsert(MemberVO vo);
   
   @Insert("INSERT INTO authority VALUES("
