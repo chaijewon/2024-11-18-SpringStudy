@@ -9,6 +9,60 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
-
+    <util:properties id="db" location="/WEB-INF/config/db.properties"/>
+    <!-- 데이터베이스 정보 수집 : BasicDataSource -->
+    <bean  id="ds" class="org.apache.commons.dbcp.BasicDataSource"
+       p:driverClassName="#{db['driver']}"
+       p:url="#{db['url']}"
+       p:username="#{db['username']}"
+       p:password="#{db['password']}"
+    />
+    <!-- 
+       maxActive 8
+       maxIdle   8
+       maxWait   10000
+     -->
+    <bean id="transactionManager"
+      class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+      p:dataSource-ref="ds"
+    />
+    <!-- 
+          DQL(SELECT) = commit (트랜잭션 대상이 아니다)
+          DML(INSERT,UPDATE,DELETE) 
+              => 저장 (COMMIT) , 취소 (ROLLBACK)
+          => 일괄처리 
+             여러개의 SQL문장이 있는 경우에만 사용 
+             예) 입고 / 재고 
+                출고 / 재고 
+                카드결재 / 포인트 추가 
+           @Around => try
+             setAutoCommit(false)
+             SQL
+             SQL
+             commit()
+           @AfterThrowing => catch
+             rollback()
+           @After => finally
+            setAutoCommit(true)
+          === 메소드 위에 @Transactional => AOP기반 , 보안
+     -->
+    <tx:annotation-driven/>
+    <!-- 
+         @Transactional => AOP를 이용해서 처리
+     -->
+    
+    <!-- MyBatis로 전송 : SqlSessionFactoryBean -->
+    <bean 
+       id="ssf"
+       class="org.mybatis.spring.SqlSessionFactoryBean"
+       p:dataSource-ref="ds"
+    />
+    <!-- SqlSessionFactoryBean을 이용해서 Mapper구현 
+         모든 Mapper를 한번에 처리 <mybatis-spring>
+         Mapper를 한개씩 처리 <bean..>
+     -->
+    <mybatis-spring:scan base-package="com.sist.mapper"
+      factory-ref="ssf"
+    />
 
 </beans>

@@ -24,6 +24,6 @@ public class MemberVO {
    private int enable; // 1(활성),0(휴먼)
    private String userid,username,userpwd,sex,
            birthday,email,post,addr1,addr2,phone,
-           content,authority,msg;
+           content,authority,msg,phone1,phone2;
    
 }
