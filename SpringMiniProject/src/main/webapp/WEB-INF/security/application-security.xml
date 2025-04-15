@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:oauth2="http://www.springframework.org/schema/security/oauth2"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/security/oauth2 https://www.springframework.org/schema/security/spring-security-oauth2.xsd
-		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.1.xsd">
-
-
-</beans>
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+<!-- 
+      
+      /member/login.do                  permitAll
+                                      => 403(접근거부)
+     클라이언트 (로그인 요청)====> security필터  ======= 서블릿 ============= HandlerMapping ====== ViewResolver ===> JSP
+           |                    |web.xml        DispatcherServlet
+           |                FilterChain
+           |                    |
+           ======================
+                403 접근 거부 
+     
+ -->
+    <context:component-scan base-package="com.sist.*"/>
+    <!-- 페이지별 접근 권한 
+         hasRole('ROLE_ADMIN') ('ROLE_USER')
+         permitAll
+         hasAnyRole('','')
+     -->
+     <!-- login처리 -->
+     <!-- 자동 로그인  : cookie-->
+     <!-- 데이터베이스 연결후 데이터 읽기 : session-->
+     <!-- 인증관리자에 전송 : 비밀번호 암호화  -->
+</beans:beans>
