@@ -11,10 +11,12 @@ import javax.websocket.server.ServerEndpoint;
 import java.util.*;
 import com.sist.vo.*;
 @ServerEndpoint(value="/site/chat/chat-ws",
-   configurator = WebSockekSessionConfigurator.class)
+   configurator = WebSocketSessionConfigurator.class)
 public class ChatServer {
    private static Map<Session,MemberVO> users
        =Collections.synchronizedMap(new HashMap<Session,MemberVO>());
+   // => 방저장 => user
+   
    // 접속시 처리 
    @OnOpen
    public void onOpen(Session session,EndpointConfig config)
@@ -44,6 +46,7 @@ public class ChatServer {
 	   System.out.println("클라이언트 접속:"+vo.getName()+","
 			   +session.getId());
    }
+   // => 전체 메세지 / 개인 메세지 => 메소드 => switch 
    // 채팅 메세지 
    @OnMessage
    public void onMessage(String message,Session session)
