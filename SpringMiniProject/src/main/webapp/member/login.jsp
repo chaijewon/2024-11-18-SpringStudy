@@ -58,7 +58,7 @@
                   </tr>
                   <tr>
                     <td colspan="2" class="text-center">
-                      <input type=button value="로그인"
+                      <input type=submit value="로그인"
                        class="btn-sm btn-primary">
                       <input type=button value="취소"
                        class="btn-sm btn-primary"

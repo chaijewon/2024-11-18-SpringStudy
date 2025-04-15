@@ -61,7 +61,7 @@
      <beans:bean id="loginSuccessHandler"
        class="com.sist.security.LoginSuccessHandler"
      >
-       <beans:property name="defaultUrl" value="/main/main.do"/>
+       <beans:property name="defaultUrl" value="../main/main.do"/>
      </beans:bean>
      <beans:bean id="loginFailureHandler"
        class="com.sist.security.LoginFailureHandler"

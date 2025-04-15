@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.dao.MemberDAO;
 import com.sist.vo.MemberVO;
@@ -25,7 +26,7 @@ public class MemberController {
 			        "../member/join.jsp");
 	   return "main/main";
    }
-   @GetMapping("member/login.do")
+   @RequestMapping("member/login.do")
    public String member_login(Model model)
    {
 	   model.addAttribute("main_jsp", 
