@@ -35,14 +35,14 @@
                    <th width=20% class="text-center">ID</th>
                    <td width=80%>
                      <input type=text name="userid" ref="userid"
-                      v-model="userid">
+                      v-model="userid" class="form-control-sm">
                    </td>
                   </tr>
                   <tr>
                    <th width=20% class="text-center">PW</th>
                    <td width=80%>
                      <input type=password name="userpwd" ref="userpwd"
-                      v-model="userpwd">
+                      v-model="userpwd" class="form-control-sm">
                    </td>
                   </tr>
                   <tr>
