@@ -9,7 +9,7 @@
 		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
-    <util:properties id="db" location="/WEB-INF/config/db.properties"/>
+    <util:properties id="db" location="/WEB-INF/datasource/db.properties"/>
     <!-- 데이터베이스 정보 수집 : BasicDataSource -->
     <bean  id="ds" class="org.apache.commons.dbcp.BasicDataSource"
        p:driverClassName="#{db['driver']}"

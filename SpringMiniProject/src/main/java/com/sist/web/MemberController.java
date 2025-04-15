@@ -40,7 +40,7 @@ public class MemberController {
 	   String enPwd=encoder.encode(vo.getUserpwd());
 	   vo.setUserpwd(enPwd);
 	   dao.memberInsert(vo);
-	   dao.memberAuthorityInsert(vo.getUserid());
+	   
 	   return "redirect:../main/main.do";
    }
 }

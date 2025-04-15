@@ -2,17 +2,20 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-     <!-- 
-      보안 => DispatcherServlet 읽기전에 등록 
+      <!-- 
+      보안 => DispatcherServlet 읽기전에 등록 -->
 	  <context-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>/WEB-INF/config/application-*.xml</param-value>
+			<param-value>
+			 /WEB-INF/datasource/application-datasource.xml
+			 /WEB-INF/security/application-security.xml
+			</param-value>
       </context-param>
     
 	  <listener>
 	   <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
       </listener>
-     -->
+     
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

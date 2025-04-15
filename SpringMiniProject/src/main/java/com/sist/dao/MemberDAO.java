@@ -2,6 +2,7 @@ package com.sist.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.mapper.*;
 import com.sist.vo.*;
@@ -22,12 +23,10 @@ public class MemberDAO {
 		 +"#{userid},'ROLE_USER')")
        public void memberAuthorityInsert(String id);
    */
+  @Transactional
   public void memberInsert(MemberVO vo)
   {
 	  mapper.memberInsert(vo);
-  }
-  public void memberAuthorityInsert(String id)
-  {
-	  mapper.memberAuthorityInsert(id);
+	  mapper.memberAuthorityInsert(vo.getUserid());
   }
 }
