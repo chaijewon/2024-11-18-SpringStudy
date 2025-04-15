@@ -54,16 +54,13 @@ function onMessage(event)
 	*/
 	if(data.substring(0,4)==='msg:')
 	{
-		appendMessage(data.substring(4))
+		$('#recvMsg').append(data.substring(4)+"<br>")
 	}
-}
-function appendMessage(msg)
-{
-	 $('#recvMsg').append(msg+"<br>")
 	 let ch=$('#chatArea').height()
 	 let m=$('#recvMsg').height()-ch
 	 $('#chatArea').scrollTop(m)
 }
+
 // 종료 
 function onClose(event)
 {

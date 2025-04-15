@@ -25,6 +25,8 @@ public class ChatServer {
 			   (HttpSession)config.getUserProperties()
 			             .get(HttpSession.class.getName());
 	   vo=(MemberVO)hs.getAttribute("vo");
+	   vo.setSession(session);
+	   
 	   System.out.println("1.접속:"+vo.getName());
 	   // 접속자 목록에 저장 
 	   users.put(session, vo);
@@ -47,12 +49,31 @@ public class ChatServer {
    public void onMessage(String message,Session session)
    throws Exception
    {
-	   
+	   System.out.println("수신 메세지:"+message+"===보낸사람:"+users.get(session).getName());
+	   Iterator<Session> it=users.keySet().iterator();
+	   while(it.hasNext())
+	   {
+		   Session ss=it.next();
+		   MemberVO vo=users.get(session);
+		   ss.getBasicRemote().sendText("msg:["+vo.getName()+"]"+message);
+	   }
    }
    // 종료 
    @OnClose
    public void onClose(Session session)throws Exception
    {
-	   
+	   Iterator<Session> it=users.keySet().iterator();
+	   while(it.hasNext())
+	   {
+		   Session ss=it.next();
+		   MemberVO vo=users.get(session);
+		   
+		   if(ss.getId()!=session.getId())
+		   {
+			   ss.getBasicRemote().sendText("msg:[알림 ☞]"+vo.getName()+"님이 퇴장하셨습니다");
+		   }
+	   }
+	   System.out.println("클라이언트 퇴장:"+users.get(session).getName());
+	   users.remove(session);
    }
 }
