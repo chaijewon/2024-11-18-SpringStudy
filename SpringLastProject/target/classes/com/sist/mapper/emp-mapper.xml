@@ -5,7 +5,7 @@
    {
        CALL
         DECLARE
-        BEING
+        BEGIN
           DELETE FROM emp_1 WHERE empno=#{empno};
           DELETE FROM emp_2 WHERE empno=#{empno};
           DELETE FROM emp_3 WHERE empno=#{empno};

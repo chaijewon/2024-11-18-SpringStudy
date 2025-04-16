@@ -26,6 +26,7 @@
        id="ssf"
        class="org.mybatis.spring.SqlSessionFactoryBean"
        p:dataSource-ref="ds"
+       p:configLocation="/WEB-INF/datasource/Config.xml"
     />
     <mybatis-spring:scan base-package="com.sist.mapper"
       factory-ref="ssf"

@@ -34,7 +34,8 @@ public class MusicAspect {
 	          // PageContext
 	   MusicVO vo=dao.musicTop();
 	   System.out.println("title:"+vo.getTitle());
-	   youtubeGetKey(vo.getTitle());
+	   String key=youtubeGetKey(vo.getTitle());
+	   request.setAttribute("key", key);
 	   
    }
    // https://www.youtube.com/results?search_query=%09+%EB%AA%A8%EB%A5%B4%EC%8B%9C%EB%82%98%EC%9A%94+(Prod.+by+%EB%A1%9C%EC%BD%94%EB%B2%A0%EB%A6%AC)
@@ -54,7 +55,8 @@ public class MusicAspect {
 		   {
 			   String s=m.group();
 			   System.out.println(s);
-			   //s=s.substring(s.indexOf("=")+1,s.indexOf("\""));
+			   key=s.substring(s.indexOf("=")+1,s.indexOf("\""));
+			   break;
 		   }
 	   }catch(Exception ex) {}
 	   return key;

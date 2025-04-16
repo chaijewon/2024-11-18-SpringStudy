@@ -108,7 +108,7 @@
                                     <a class="nav-link" href="archive.html">Archive</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">About</a>
+                                    <a class="nav-link" href="../main/delete.do">About</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contact</a>

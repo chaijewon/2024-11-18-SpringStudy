@@ -549,9 +549,7 @@
                                 <div class="add-text">
                                     <div class="yummy-table">
                                         <div class="yummy-table-cell">
-                                            <h2>Cooking Book</h2>
-                                            <p>Buy Book Online Now!</p>
-                                            <a href="#" class="add-btn">Buy Now</a>
+                                          <iframe src="http://www.youtube.com/embed/${key }"></iframe>
                                         </div>
                                     </div>
                                 </div>
