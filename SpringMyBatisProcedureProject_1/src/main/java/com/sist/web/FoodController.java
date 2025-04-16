@@ -16,6 +16,15 @@ public class FoodController {
     @GetMapping("food/list.do")
     public String food_list(String page,Model model)
     {
+    	if(page==null)
+    		page="1";
+    	int curpage=Integer.parseInt(page);
+    	List<FoodVO> list=dao.foodListData(curpage);
+    	int totalpage=dao.foodTotalPage();
+    	// JSP로 전송 
+    	model.addAttribute("list", list);
+    	model.addAttribute("curpage", curpage);
+    	model.addAttribute("totalpage", totalpage);
     	
     	return "food/list";
     }
