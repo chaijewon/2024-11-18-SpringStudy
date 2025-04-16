@@ -2,6 +2,7 @@ package com.sist.mapper;
 import java.util.*;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 
 import com.sist.vo.*;
 public interface MemberMapper {
@@ -17,5 +18,10 @@ public interface MemberMapper {
 		 +"#{userid},'ROLE_USER')")
   public void memberAuthorityInsert(String id);
   
+  @Select("SELECT userid,username,sex,email,phone,post,"
+  		 +"addr1,addr2 "
+		 +"FROM projectMember "
+		 +"WHERE userid=#{userid}")
+  public MemberVO memberSessionData(String userid);
   
 }

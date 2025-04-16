@@ -1,5 +1,6 @@
 package com.sist.dao;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,5 +29,17 @@ public class MemberDAO {
   {
 	  mapper.memberInsert(vo);
 	  mapper.memberAuthorityInsert(vo.getUserid());
+  }
+  /*
+   *   @Select("SELECT userid,username,sex,email,phone,post,"
+  		 +"addr1,addr2 "
+		 +"FROM projectMember "
+		 +"WHERE userid=#{userid}")
+       public MemberVO memberSessionData(String userid);
+   */
+  // => login_ok
+  public MemberVO memberSessionData(String userid)
+  {
+	  return mapper.memberSessionData(userid);
   }
 }
