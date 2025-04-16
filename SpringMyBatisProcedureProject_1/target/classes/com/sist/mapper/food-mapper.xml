@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.FoodMapper">
+  <resultMap type="com.sist.vo.FoodVO" id="foodMap">
+    <result property="fno" column="fno"/>
+    <result property="poster" column="poster"/>
+    <result property="name" column="name"/>
+  </resultMap>
+  <select id="foodTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/12.0) FROM project_food
+  </select>
+</mapper>
