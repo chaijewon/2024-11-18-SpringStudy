@@ -28,7 +28,7 @@ p{
     <div class="row">
      <div class="col-sm-3" v-for="vo in list">
        <div class="thumbnail">
-        <a href="#">
+        <a :href="'../recipe/detail.do?no='+vo.no">
          <img :src="vo.poster" style="width:230px;height:130px">
          <p>{{vo.title}}</p>
         </a>
@@ -78,7 +78,7 @@ p{
        },
       methods:{
          async dataRecv(){
-            const res= await axiosClient.get('recipe/list.do',{
+            const res= await axiosClient.get('recipe/list_vue.do',{
                params:{
                   page:this.curpage
                }

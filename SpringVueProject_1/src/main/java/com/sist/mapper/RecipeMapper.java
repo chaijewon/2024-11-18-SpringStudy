@@ -18,4 +18,8 @@ public interface RecipeMapper {
 		  +"WHERE no IN(SELECT no FROM recipe "
 		  +"INTERSECT SELECT no FROM recipeDetail)")
    public int recipeTotalPage();
+   
+   @Select("SELECT * FROM recipedetail "
+		  +"WHERE no=#{no}")
+   public RecipeDetailVO recipeDetailData(int no);
 }

@@ -12,4 +12,11 @@ public class RouterController {
 	   model.addAttribute("main_jsp", "../recipe/list.jsp");
 	   return "main/main";
    }
+   @GetMapping("recipe/detail.do")
+   public String recipe_detail(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   model.addAttribute("main_jsp", "../recipe/detail.jsp");
+	   return "main/main";
+   }
 }

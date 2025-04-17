@@ -23,7 +23,7 @@ public class RecipeRestController {
     @Autowired
     private RecipeDAO rDao;
     
-    @GetMapping("recipe/list.do")
+    @GetMapping("recipe/list_vue.do")
     // params => 매개변수 => formData => VO
     public ResponseEntity<Map> recipe_list(int page)
     {
@@ -55,6 +55,44 @@ public class RecipeRestController {
     		// {}
     	}catch(Exception ex)
     	{
+    		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+    	}
+    	return new ResponseEntity<>(map,HttpStatus.OK);
+    }
+    /*
+     *    params:{
+                   no:this.no
+                 }
+     */
+    @GetMapping("recipe/detail_vue.do")
+    public ResponseEntity<Map> recipe_detail(int no)
+    {
+    	/*
+    	 *   예열한 팬에 또띠아 1장 놓고 누르면서 익히다가 피자치즈를 올리고 그 위에^이미지\n
+    	 */
+    	Map map=new HashMap();
+    	try
+    	{
+    		RecipeDetailVO vo=rDao.recipeDetailData(no);
+    		List<String> mlist=new ArrayList<String>();
+    		List<String> ilist=new ArrayList<String>();
+    		
+    		String[] datas=vo.getFoodmake().split("\n");
+    	    for(String s:datas)
+    	    {
+    	    	StringTokenizer st=
+    	    			new StringTokenizer(s,"^");
+    	    	mlist.add(st.nextToken());
+    	    	ilist.add(st.nextToken());
+    	    }
+    	    
+    	    map.put("vo", vo);
+    	    map.put("mlist", mlist);
+    	    map.put("ilist", ilist);
+    		
+    	}catch(Exception ex)
+    	{
+    		// 500
     		return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
     	}
     	return new ResponseEntity<>(map,HttpStatus.OK);
