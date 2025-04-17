@@ -56,6 +56,9 @@
      </table>
      <table class="table">
        <tr>
+         <td><h3>[조리순서]</h3></td>
+       </tr>
+       <tr>
         <td>
           <table class="table" v-for="(m,index) in mlist">
            <tr>
@@ -66,6 +69,20 @@
            </tr>
           </table>
         </td>
+       </tr>
+     </table>
+     <table class="table">
+       <tr>
+         <td colspan="2"><h3>[레시피 작성자]</h3></td>
+       </tr>
+       <tr>
+         <td width="30%" class="text-center">
+          <img :src="vo.chef_poster" style="width: 50px;height: 50px" class="img-circle">
+         </td>
+         <td width=70%>
+          {{vo.chef}}<br>
+          <sub>{{vo.chef_profile}}</sub>
+         </td>
        </tr>
      </table>
     </div>
