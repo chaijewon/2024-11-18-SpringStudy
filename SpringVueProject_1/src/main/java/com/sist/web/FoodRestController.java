@@ -49,4 +49,19 @@ public class FoodRestController {
    	}
    	return new ResponseEntity<>(map,HttpStatus.OK);
    }
+   
+   @GetMapping("food/detail_vue.do")
+   public ResponseEntity<FoodVO> food_detail(int fno)
+   {
+	   FoodVO vo=new FoodVO();
+	   try
+	   {
+		   vo=fDao.foodDetailData(fno);
+		   
+	   }catch(Exception ex) 
+	   {
+		   return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	   }
+	   return new ResponseEntity<>(vo,HttpStatus.OK);
+   }
 }

@@ -26,7 +26,7 @@ p{
     <div class="row">
      <div class="col-sm-3" v-for="vo in list">
        <div class="thumbnail">
-        <a :href="'../food/detail.do?no='+vo.no">
+        <a :href="'../food/detail.do?fno='+vo.fno">
          <img :src="'https://www.menupan.com'+vo.poster" style="width:230px;height:130px">
          <p>{{vo.name}}</p>
         </a>

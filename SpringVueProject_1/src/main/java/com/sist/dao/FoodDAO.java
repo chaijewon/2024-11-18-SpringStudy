@@ -32,4 +32,14 @@ public class FoodDAO {
    {
 	   return mapper.foodTotalPage();
    }
+   
+   /*
+    *   @Select("SELECT * FROM project_food "
+			  +"WHERE fno=#{fno}")
+	   public FoodVO foodDetailData(int fno);
+    */
+   public FoodVO foodDetailData(int fno)
+   {
+	   return mapper.foodDetailData(fno);
+   }
 }

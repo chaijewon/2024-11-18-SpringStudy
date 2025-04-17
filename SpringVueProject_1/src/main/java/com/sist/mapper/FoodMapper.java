@@ -15,4 +15,8 @@ public interface FoodMapper {
 			   @Param("end") int end);
 	   @Select("SELECT CEIL(COUNT(*)/12.0) FROM project_food")
 	   public int foodTotalPage();
+	   
+	   @Select("SELECT * FROM project_food "
+			  +"WHERE fno=#{fno}")
+	   public FoodVO foodDetailData(int fno);
 }
