@@ -1,0 +1,4 @@
+cd c:\vuedata
+c:\vuedata>vue create foodproject
+
+https://www.jetbrains.com/pycharm/download/?section=windows

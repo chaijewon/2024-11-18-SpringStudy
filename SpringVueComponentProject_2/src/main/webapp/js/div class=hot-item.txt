@@ -1,0 +1,35 @@
+<div class="hot-item">
+                            <div class="box actionImg3">
+                                <a href="/index.do?menuCd=DOM_000000201001001000&uc_seq=2275&lang_cd=ko&pagingParms=4ca15f3a76a21f554a6e515f5344f50c4f734814d27260977c0eb574b1e0019a33f5a8e2dd587a9efb82cc91cf112987488312a3bc08c3054da8c190c930f6592e7894a7ed3cf42438e40b16135015920aa608ee54ad79feb8b43e0becf2aedf306446a26175f37928b2e64d297ab48f8acfae3743ce2794ef15d99eb793341329c53a76d24a81ef72a11ca917970aac34400ec0365d93e364d7a859d58178e212648c28901350cb20330ec09b4e8c7ee5e2b8287a2a6536a889e832bf7d31f811c87cdb08416c849549c03d819d8091f8865d8cbe9170e711a8d44eef418bbbef6953db2681dc67b4702b9d3e0fb9d787d01c209bd09b6fd75537b39410af399cbcba9ee6702cb39537bf709fc893f16242d2505ff463a634757c4ad1fb5316c17e3c6c881b1202936a9591f574a9b458fe7ada378c8e24a939d38009efceb2f1d2f3d9fb0a84335999d70d74a175a02229fcd269f25ecae09cba47d7fa5b4ca79471889a1020e6226a199377b97ead69d777bcce27c101be7225c1ffeb0036367494277c22e6ec9cff0114e7cadf3a2d867367262d1b5f6a717ace24b4cae0734d3410c3de7cbbe8e8e2de4a08c9f7f2d71419b760deedc85bfd092d20cf83296e62049d974032c50fee7f8aa0e20719104acb04653baae653f6241ef307d9e996ca01c0f8bd824354a4dca0b19c94f48e3e97932cd0fc90715a78412bd254858a40b57b3ec8e0a4198e8979487a6d874a00c40d8a0c9b78c1e68a5b316d898854dd2ee18f16e536ac8c1113cb52963680de63b1ecd3527d5977f1be115b1d7625793d50b5c5826ff8b542602bf079c990e1d79101c00403fccdd8d0f971fdfaabfea64a12ae224bda45a84ac12ddec529db042b1af54b0e8d8fa690264dd7f528556d5991d238682cf605701f444b523f98263f27eb547d606cb13013f4684fb8e096d227c5175d8415beb6db12667590c88bf3612df221ded307eae24bddc823ef3f4706034fef77bd3f69379171" title="상세보기">
+                                    <img src="/uploadImgs/files/cntnts/20250207155656641_thumbL" alt="낙동강 강변뷰가 아름다운 섬 ‘중사도’에서 특별한 자연 여행">
+                                </a>
+<h5 class="tit_con">이용안내</h5>
+				<div class="cntInfoDetails">
+					<ul class="InfoD-List">
+						
+                        
+                            <li><p>주소</p><span>부산광역시 강서구 식만동 </span></li>
+                        
+                        
+                            <li><p>전화번호</p><span>051-970-4000(강서구청)</span></li>
+                        
+                        
+                        
+                        
+                        
+                        
+                            <li><p>교통정보</p><span>도시철도 부산김해선 불암역 1번 출구 → 불암동행정복지센터 정류장 버스환승 → 시만교 하차 도보 15분</span></li>
+                        
+                        
+                        
+                            
+                        
+				
+					</ul>
+					
+					
+					<ul class="facility">
+						
+						
+					</ul>
+				</div>
