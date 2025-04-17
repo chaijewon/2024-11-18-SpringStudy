@@ -32,4 +32,25 @@ public class RouterController {
 	   model.addAttribute("main_jsp", "../food/detail.jsp");
 	   return "main/main";
    }
+   
+   @GetMapping("seoul/location.do")
+   public String seoul_location(Model model)
+   {
+	   model.addAttribute("main_jsp", "../seoul/location.jsp");
+	   return "main/main";
+   }
+   @GetMapping("seoul/shop.do")
+   public String seoul_shop(Model model)
+   {
+	   model.addAttribute("main_jsp", "../seoul/shop.jsp");
+	   return "main/main";
+   }
+   
+   @GetMapping("seoul/location_detail.do")
+   public String seoul_loc_detail(int no,Model model)
+   {
+	   model.addAttribute("no", no);
+	   model.addAttribute("main_jsp", "../seoul/location_detail.jsp");
+	   return "main/main";
+   }
 }

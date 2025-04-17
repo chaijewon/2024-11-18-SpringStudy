@@ -26,8 +26,8 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">여행
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">명소</a></li>
-          <li><a href="#">쇼핑</a></li>
+          <li><a href="../seoul/location.do">명소</a></li>
+          <li><a href="../seoul/shop.do">쇼핑</a></li>
         </ul>
       </li>
     </ul>
