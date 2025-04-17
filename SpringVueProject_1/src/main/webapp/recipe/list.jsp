@@ -23,7 +23,7 @@ p{
 <body>
   <div class="container" id="app">
     <div class="row">
-      <h3>총 {{count}}개의 맛있는 레시피가 있습니다.</h3>
+      <h3>총 <span style="color:green">{{count_data}}</span>개의 맛있는 레시피가 있습니다.</h3>
     </div>
     <div class="row">
      <div class="col-sm-3" v-for="vo in list">
@@ -71,6 +71,11 @@ p{
       mounted(){
           this.dataRecv()
       },
+      computed:{
+           count_data(){
+              return this.count.toLocaleString()
+           }
+       },
       methods:{
          async dataRecv(){
             const res= await axiosClient.get('recipe/list.do',{
@@ -109,6 +114,7 @@ p{
             this.curpage=page
             this.dataRecv()
          }
+        
       }
    })
    app.mount("#app")
