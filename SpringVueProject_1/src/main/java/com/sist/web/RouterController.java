@@ -19,4 +19,10 @@ public class RouterController {
 	   model.addAttribute("main_jsp", "../recipe/detail.jsp");
 	   return "main/main";
    }
+   @GetMapping("food/list.do")
+   public String food_list(Model model)
+   {
+	   model.addAttribute("main_jsp", "../food/list.jsp");
+	   return "main/main";
+   }
 }

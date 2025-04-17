@@ -18,8 +18,8 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">맛집
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">맛집 목록</a></li>
-          <li><a href="#">맛집 찾기</a></li>
+          <li><a href="../food/list.do">맛집 목록</a></li>
+          <li><a href="../food/find.do">맛집 찾기</a></li>
         </ul>
       </li>
       <li class="dropdown">
