@@ -26,4 +26,7 @@ public interface SeoulMapper {
 		   +"WHERE rownum<=8")
 	public List<FoodVO> foodRecommandData(String address);
 	
+	@Select("SELECT * FROM seoul_location "
+		   +"WHERE no=#{no}")
+	public SeoulVO seoulLocationDetailData(int no);
 }

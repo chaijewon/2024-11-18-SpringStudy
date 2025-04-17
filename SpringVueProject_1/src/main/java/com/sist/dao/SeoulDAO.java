@@ -45,4 +45,13 @@ public class SeoulDAO {
   {
 	  return mapper.foodRecommandData(address);
   }
+  /*
+   *   @Select("SELECT * FROM seoul_location "
+		   +"WHERE no=#{no}")
+	   public SeoulVO seoulLocationDetailData(int no);
+   */
+  public SeoulVO seoulLocationDetailData(int no)
+  {
+	  return mapper.seoulLocationDetailData(no);
+  }
 }

@@ -95,6 +95,37 @@ public class SeoulRestController {
   	}
   	return new ResponseEntity<>(map,HttpStatus.OK);
   }
-  
+  @GetMapping("seoul/loc_detail_vue.do")
+  public ResponseEntity<Map> seoul_loc_detail(int no)
+  {
+	  Map map=new HashMap();
+	  try
+	  {
+		  SeoulVO vo=sDao.seoulLocationDetailData(no);
+		  String address=vo.getAddress();
+		  int index=address.indexOf("서울");
+		  if(index>=0)
+		  {
+			  String addr1=address.substring(index);
+			  String addr2=addr1.trim();
+			  addr2=addr2.substring(addr2.indexOf(" "));
+			  String addr3=addr2.trim();
+			  addr3=addr3.substring(0,addr3.indexOf(" "));
+			  System.out.println(addr3);
+			  List<FoodVO> list=sDao.foodRecommandData(addr3);
+			  map.put("list", list);
+			  map.put("count", list.size());
+		  }
+		  else
+		  {
+			  map.put("count", 0);
+		  }
+		  map.put("vo", vo);
+	  }catch(Exception ex)
+	  {
+		  return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	  }
+	  return new ResponseEntity<>(map,HttpStatus.OK);
+  }
   
 }
