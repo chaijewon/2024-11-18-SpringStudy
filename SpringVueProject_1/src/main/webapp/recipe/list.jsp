@@ -23,6 +23,9 @@ p{
 <body>
   <div class="container" id="app">
     <div class="row">
+      <h3>총 {{count}}개의 맛있는 레시피가 있습니다.</h3>
+    </div>
+    <div class="row">
      <div class="col-sm-3" v-for="vo in list">
        <div class="thumbnail">
         <a href="#">
@@ -61,7 +64,8 @@ p{
             curpage:1,
             totalpage:0,
             startPage:0,
-            endPage:0
+            endPage:0,
+            count:0
          }
       },
       mounted(){
@@ -81,6 +85,7 @@ p{
             this.totalpage=res.data.totalpage
             this.startPage=res.data.startPage
             this.endPage=res.data.endPage
+            this.count=res.data.count
          },
          range(start,end){
             let arr=[]

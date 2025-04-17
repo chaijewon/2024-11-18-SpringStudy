@@ -37,8 +37,8 @@ public class RecipeRestController {
     		
     		List<RecipeVO> list=
     				rDao.recipeListData(start, end);
-    		int totalpage=rDao.recipeTotalPage();
-    		
+    		int count=rDao.recipeTotalPage();
+    		int totalpage=(int)(Math.ceil(count/12.0));
     		final int BLOCK=10;
     		int startPage=((page-1)/BLOCK*BLOCK)+1;
     		int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
@@ -51,6 +51,7 @@ public class RecipeRestController {
     		map.put("totalpage", totalpage);
     		map.put("startPage", startPage);
     		map.put("endPage", endPage);
+    		map.put("count", count);
     		// {}
     	}catch(Exception ex)
     	{
