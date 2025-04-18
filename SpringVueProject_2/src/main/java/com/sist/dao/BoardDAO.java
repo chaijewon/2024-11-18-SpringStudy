@@ -77,4 +77,25 @@ public class BoardDAO {
   {
 	  return mapper.boardDetailData(no);
   }
+  /*
+   *   @Select("SELECT pwd FROM vueBoard "
+		 +"WHERE no=#{no}")
+  public String boardGetPassword(int no);
+  
+  @Update("UPDATE vueBoard SET "
+		 +"name=#{name},subject=#{subject},content=#{content} "
+		 +"WHERE no=#{no}")
+  public void boardUpdate(BoardVO vo);
+   */
+  public String boardUpdate(BoardVO vo)
+  {
+	  String result="no";
+	  String db_pwd=mapper.boardGetPassword(vo.getNo());
+	  if(db_pwd.equals(vo.getPwd()))
+	  {
+		  result="yes";
+		  mapper.boardUpdate(vo);
+	  }
+	  return result;
+  }
 }

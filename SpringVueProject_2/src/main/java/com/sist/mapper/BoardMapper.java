@@ -33,4 +33,13 @@ public interface BoardMapper {
 		 +"FROM vueBoard "
 		 +"WHERE no=#{no}")
   public BoardVO boardDetailData(int no);
+  
+  @Select("SELECT pwd FROM vueBoard "
+		 +"WHERE no=#{no}")
+  public String boardGetPassword(int no);
+  
+  @Update("UPDATE vueBoard SET "
+		 +"name=#{name},subject=#{subject},content=#{content} "
+		 +"WHERE no=#{no}")
+  public void boardUpdate(BoardVO vo);
 }

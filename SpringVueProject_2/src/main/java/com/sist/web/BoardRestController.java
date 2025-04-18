@@ -90,4 +90,19 @@ public class BoardRestController {
 	  }
 	  return new ResponseEntity<>(vo,HttpStatus.OK);
   }
+  @PostMapping("/board/update_ok_vue")
+  public ResponseEntity<Map> board_update_ok(@RequestBody BoardVO vo)
+  {
+	  Map map=new HashMap();
+	  try
+	  {
+		  String msg=dao.boardUpdate(vo);
+		  map.put("msg", msg);
+	  }catch(Exception ex)
+	  {
+		  return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	  }
+	  return new ResponseEntity<>(map,HttpStatus.OK);
+  }
+  
 }

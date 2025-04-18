@@ -59,7 +59,7 @@ h3{
      <tr>
        <td colspan="2" align=center>
          <input type=button value="수정" class="btn-sm btn-danger"
-           @click="insert()"
+           @click="update()"
          >
          <input type=button value="취소" class="btn-sm btn-primary"
           onclick="javascript:history.back()"
@@ -93,6 +93,25 @@ h3{
         this.dataRecv()
       },
       methods:{
+         async update(){
+            const res= await axios.post('/board/update_ok_vue',{
+                no:this.no,
+                name:this.name,
+                subject:this.subject,
+                content:this.content,
+                pwd:this.pwd
+            })
+            if(res.data.msg==='yes')
+            {
+               location.href="/board/detail/?no="+this.no
+            }
+            else
+            {
+               alert("비밀번호가 틀립니다")
+               this.pwd=''
+               this.$refs.pwd.focus()
+            }
+         },
          async dataRecv(){
             const res= await axios.get('/board/update_vue/'+this.no)
             this.name=res.data.name
