@@ -50,7 +50,7 @@ h3{
        </table>
      </div>
    </div>
-   <script type="importmap">
+  <script type="importmap">
   {
      "imports":{
        "vue":"https://unpkg.com/vue@3/dist/vue.esm-browser.js"
@@ -58,7 +58,7 @@ h3{
   }
   </script>
   <script type="module">
-   import {createApp} from "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+   import {createApp} from "vue"
    const app=createApp({
       data(){
          return {
@@ -74,9 +74,6 @@ h3{
       methods:{
          async dataRecv(){
             const res= await axios.get('/board/list_vue/'+this.curpage)
-                       .catch(error=>{
-                          console.log(error.response)
-                       })
             console.log(res)
             this.msg=res.data.msg
             
@@ -84,7 +81,7 @@ h3{
       }
    })
    app.mount(".container")
-   
+</script>  
 </body>
 </html>
 
