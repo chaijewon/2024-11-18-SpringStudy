@@ -4,6 +4,6 @@
  "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <mappers>
-    <mapper resource="com/sist/mapper/emp-mapper.xml"/>
+    <mapper resource="com/sist/mapper/food-mapper.xml"/>
   </mappers>
 </configuration>

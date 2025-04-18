@@ -73,7 +73,7 @@
                 <!-- Logo Area Start -->
                 <div class="col-12">
                     <div class="logo_area text-center">
-                        <a href="index.html" class="yummy-logo">Yummy Blog</a>
+                        <a href="index.html" class="yummy-logo">부산 여행</a>
                     </div>
                 </div>
             </div>
@@ -86,33 +86,64 @@
                         <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
                             <ul class="navbar-nav" id="yummy-nav">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">홈 <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link" href="index.html">홈<span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">부산에 가면</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">Home</a>
-                                        <a class="dropdown-item" href="archive.html">Archive</a>
-                                        <a class="dropdown-item" href="single.html">Single Blog</a>
-                                        <a class="dropdown-item" href="static.html">Static Page</a>
-                                        <a class="dropdown-item" href="contact.html">Contact</a>
+                                        <a class="dropdown-item" href="index.html">명소</a>
+                                        <a class="dropdown-item" href="archive.html">음식</a>
+                                        <a class="dropdown-item" href="single.html">숙박</a>
+                                        <a class="dropdown-item" href="static.html">쇼핑</a>
+                                        <a class="dropdown-item" href="contact.html">축제</a>
+                                    </div>
+                                </li>
+                                <%--
+                                추천여행
+
+일정여행 테마여행 미식투어 체험·해양
+                                --%>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">추천 여행</a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="index.html">일정 여행</a>
+                                        <a class="dropdown-item" href="archive.html">테마 여행</a>
+                                        <a class="dropdown-item" href="single.html">미식 투어</a>
+                                        <a class="dropdown-item" href="static.html">체험 해양</a>
+                                        
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">부산 맛집</a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="index.html">맛집 목록</a>
+                                        <a class="dropdown-item" href="archive.html">맛집 검색</a>
+                                        <a class="dropdown-item" href="single.html">맛집 추천</a>
+                                        <a class="dropdown-item" href="static.html">맛집 예약</a>
+                                        
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">레시피</a>
+                                    <div class="dropdown-menu" aria-labelledby="yummyDropdown">
+                                        <a class="dropdown-item" href="index.html">레시피 목록</a>
+                                        <a class="dropdown-item" href="archive.html">쉐프</a>
+                                      
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
+                                    <a class="nav-link" href="#">부산 특산물</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Categories</a>
+                                    <a class="nav-link" href="#">커뮤니티</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="archive.html">Archive</a>
+                                    <a class="nav-link" href="archive.html">마이페이지</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../main/delete.do">About</a>
+                                    <a class="nav-link" href="../main/delete.do">관리자페이지</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
-                                </li>
+                               
                             </ul>
                         </div>
                     </nav>
