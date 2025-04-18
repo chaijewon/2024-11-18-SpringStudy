@@ -47,6 +47,13 @@ h3{
           <td width=20% class="text-center">{{vo.dbday}}</td>
           <td width=10% class="text-center">{{vo.hit}}</td>
         </tr>
+        <tr>
+          <td colspan="5" class="text-center">
+            <button class="btn-sm btn-danger" @click="prev()">이전</button>
+             {{curpage}} page / {{totalpage}} pages
+            <button class="btn-sm btn-primary" v-on:click="next()">다음</button>
+          </td>
+        </tr>
        </table>
      </div>
    </div>
@@ -72,6 +79,14 @@ h3{
           this.dataRecv()
       },
       methods:{
+         prev(){
+           this.curpage=this.curpage>1?this.curpage-1:this.curpage
+           this.dataRecv()
+         },
+         next(){
+           this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
+           this.dataRecv()
+         },
          async dataRecv(){
             const res= await axios.get('/board/list_vue/'+this.curpage)
             console.log(res)
