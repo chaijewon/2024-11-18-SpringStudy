@@ -40,12 +40,12 @@ h3{
          <th width=20% class="text-center">작성일</th>
          <th width=10% class="text-center">조회수</th>
         </tr>
-        <tr>
-          <th width=10% class="text-center"></th>
-          <th width=45%></th>
-          <th width=15% class="text-center"></th>
-          <th width=20% class="text-center"></th>
-          <th width=10% class="text-center"></th>
+        <tr v-for="vo in list">
+          <td width=10% class="text-center">{{vo.no}}</td>
+          <td width=45%>{{vo.subject}}</td>
+          <td width=15% class="text-center">{{vo.name}}</td>
+          <td width=20% class="text-center">{{vo.dbday}}</td>
+          <td width=10% class="text-center">{{vo.hit}}</td>
         </tr>
        </table>
      </div>
@@ -76,7 +76,9 @@ h3{
             const res= await axios.get('/board/list_vue/'+this.curpage)
             console.log(res)
             this.msg=res.data.msg
-            
+            this.curpage=res.data.curpage
+            this.totalpage=res.data.totalpage
+            this.list=res.data.list
          }
       }
    })
