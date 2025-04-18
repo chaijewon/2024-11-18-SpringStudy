@@ -73,4 +73,8 @@ public class BoardDAO {
 	  mapper.hitIncrement(no);
 	  return mapper.boardDetailData(no);
   }
+  public BoardVO boardUpdateData(int no)
+  {
+	  return mapper.boardDetailData(no);
+  }
 }

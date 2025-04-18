@@ -76,4 +76,18 @@ public class BoardRestController {
 	  }
 	  return new ResponseEntity<>(vo,HttpStatus.OK);
   }
+  
+  @GetMapping("/board/update_vue/{no}")
+  public ResponseEntity<BoardVO> board_update(@PathVariable("no") int no)
+  {
+	  BoardVO vo=new BoardVO();
+	  try
+	  {
+		  vo=dao.boardUpdateData(no);
+	  }catch(Exception ex)
+	  {
+		  return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	  }
+	  return new ResponseEntity<>(vo,HttpStatus.OK);
+  }
 }

@@ -47,6 +47,13 @@ h3{
            <pre style="white-space: pre-wrap;">{{vo.content}}</pre>
           </td>
         </tr>
+        <tr>
+          <td colspan="4" class="text-right">
+           <a :href="'/board/update/?no='+vo.no" class="btn btn-xs btn-info">수정</a>
+           <a href="'/board/delete/?no='+vo.no" class="btn btn-xs btn-success">삭제</a>
+           <a href="javascript:history.back()" class="btn btn-xs btn-warning">목록</a>
+          </td>
+        </tr>
       </table>
     </div>
   </div>
