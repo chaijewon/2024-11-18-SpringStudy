@@ -31,6 +31,8 @@
       <servlet-name>dispatcher</servlet-name>
       <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+    
+    
     <!-- 한글 변환 -->
     <filter>
      <filter-name>encodingFilter</filter-name>

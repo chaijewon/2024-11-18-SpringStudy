@@ -53,4 +53,5 @@ public class RouterController {
 	   model.addAttribute("main_jsp", "../seoul/location_detail.jsp");
 	   return "main/main";
    }
+  
 }
