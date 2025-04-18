@@ -1,6 +1,7 @@
 package com.sist.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /*
@@ -29,6 +30,18 @@ public class BoardController {
    public String board_list()
    {
 	   return "board/list";
+   }
+   @GetMapping("/board/insert")
+   public String board_insert()
+   {
+	   return "board/insert";
+   }
+   @GetMapping("/board/detail")
+   public String board_detail(int no,Model model)
+   {
+	   System.out.println("no:"+no);
+	   model.addAttribute("no", no);
+	   return "board/detail";
    }
 }
 

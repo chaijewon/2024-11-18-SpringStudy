@@ -42,7 +42,7 @@ h3{
         </tr>
         <tr v-for="vo in list">
           <td width=10% class="text-center">{{vo.no}}</td>
-          <td width=45%>{{vo.subject}}</td>
+          <td width=45%><a :href="'/board/detail/?no='+vo.no">{{vo.subject}}</a></td>
           <td width=15% class="text-center">{{vo.name}}</td>
           <td width=20% class="text-center">{{vo.dbday}}</td>
           <td width=10% class="text-center">{{vo.hit}}</td>
