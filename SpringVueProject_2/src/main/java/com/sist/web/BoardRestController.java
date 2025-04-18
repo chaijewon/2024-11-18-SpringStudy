@@ -1,12 +1,15 @@
 package com.sist.web;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -90,7 +93,7 @@ public class BoardRestController {
 	  }
 	  return new ResponseEntity<>(vo,HttpStatus.OK);
   }
-  @PostMapping("/board/update_ok_vue")
+  @PutMapping("/board/update_ok_vue")
   public ResponseEntity<Map> board_update_ok(@RequestBody BoardVO vo)
   {
 	  Map map=new HashMap();
@@ -104,5 +107,24 @@ public class BoardRestController {
 	  }
 	  return new ResponseEntity<>(map,HttpStatus.OK);
   }
+  
+  @DeleteMapping("/board/delete_vue/{no}/{pwd}")
+  public ResponseEntity<Map> board_delete(
+	@PathVariable("no") int no, 
+	@PathVariable("pwd") String pwd	 
+  )
+  {
+	  Map map=new HashMap();
+	  try
+	  {
+		  String msg=dao.boardDelete(no, pwd);
+		  map.put("msg", msg);
+	  }catch(Exception ex)
+	  {
+		  return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+	  }
+	  return new ResponseEntity<>(map,HttpStatus.OK);
+  }
+ 
   
 }

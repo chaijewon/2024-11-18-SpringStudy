@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href='https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.11.3/main.css' rel='stylesheet' />
+<script src="
+https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js
+"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -50,11 +54,14 @@ h3{
         <tr>
           <td colspan="4" class="text-right">
            <a :href="'/board/update/?no='+vo.no" class="btn btn-xs btn-info">수정</a>
-           <a href="'/board/delete/?no='+vo.no" class="btn btn-xs btn-success">삭제</a>
-           <a href="javascript:history.back()" class="btn btn-xs btn-warning">목록</a>
+           <a :href="'/board/delete/?no='+vo.no" class="btn btn-xs btn-success">삭제</a>
+           <a href="/board/list" class="btn btn-xs btn-warning">목록</a>
           </td>
         </tr>
       </table>
+    </div>
+    <div class="row">
+      <div id="calendar"></div>
     </div>
   </div>
    <script type="importmap">
@@ -75,6 +82,7 @@ h3{
       },
       mounted(){
          this.dataRecv()
+         
       },
       methods:{
          

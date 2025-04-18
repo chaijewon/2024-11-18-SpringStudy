@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -42,4 +43,8 @@ public interface BoardMapper {
 		 +"name=#{name},subject=#{subject},content=#{content} "
 		 +"WHERE no=#{no}")
   public void boardUpdate(BoardVO vo);
+  
+  @Delete("DELETE FROM vueBoard "
+		 +"WHERE no=#{no}")
+  public void boardDelete(int no);
 }

@@ -1,6 +1,7 @@
 package com.sist.dao;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -95,6 +96,22 @@ public class BoardDAO {
 	  {
 		  result="yes";
 		  mapper.boardUpdate(vo);
+	  }
+	  return result;
+  }
+  /*
+   *   @Delete("DELETE FROM vueBoard "
+		 +"WHERE no=#{no}")
+       public void boardDelete(int no);
+   */
+  public String boardDelete(int no,String pwd)
+  {
+	  String result="no";
+	  String db_pwd=mapper.boardGetPassword(no);
+	  if(db_pwd.equals(pwd))
+	  {
+		  result="yes";
+		  mapper.boardDelete(no);
 	  }
 	  return result;
   }

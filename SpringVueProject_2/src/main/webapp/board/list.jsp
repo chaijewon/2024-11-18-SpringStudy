@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%--
+    RestFul 
+      SELECT => GET  ==> @GetMapping
+      INSERT => POST ==> @PostMapping
+      UPDATE => PUT  ==> @PutMapping
+      DELETE => DELETE ==> @DeleteMapping 
+      ----------------------------------- @RequestMapping
+ --%>
 <!DOCTYPE html>
 <html>
 <head>

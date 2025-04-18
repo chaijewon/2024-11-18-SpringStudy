@@ -94,7 +94,7 @@ h3{
       },
       methods:{
          async update(){
-            const res= await axios.post('/board/update_ok_vue',{
+            const res= await axios.put('/board/update_ok_vue',{
                 no:this.no,
                 name:this.name,
                 subject:this.subject,

@@ -49,6 +49,12 @@ public class BoardController {
 	   model.addAttribute("no", no);
 	   return "board/update";
    }
+   @GetMapping("/board/delete")
+   public String board_delete(int no,Model model)
+   {
+	    model.addAttribute("no", no);
+	    return "board/delete";
+   }
 }
 
 
