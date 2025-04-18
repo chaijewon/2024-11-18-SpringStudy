@@ -1,4 +1,8 @@
 package com.sist.web;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 /*
      CREATE TABLE vueBoard(
    no NUMBER,
@@ -19,6 +23,14 @@ INSERT INTO vueBoard VALUES(vue_no_seq.nextval,'홍길동',
 '게시판 만들기','게시판 만들기','1234',SYSDATE,0);
 COMMIT;  
  */
+@Controller
 public class BoardController {
-
+   @GetMapping("/board/list")
+   public String board_list()
+   {
+	   return "board/list";
+   }
 }
+
+
+
