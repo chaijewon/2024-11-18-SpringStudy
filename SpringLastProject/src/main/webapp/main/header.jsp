@@ -91,10 +91,10 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">부산에 가면</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
-                                        <a class="dropdown-item" href="index.html">명소</a>
-                                        <a class="dropdown-item" href="archive.html">음식</a>
+                                        <a class="dropdown-item" href="../busan/info.do?cno=1">명소</a>
+                                        <a class="dropdown-item" href="../busan/info.do?cno=2">음식</a>
                                         <a class="dropdown-item" href="single.html">숙박</a>
-                                        <a class="dropdown-item" href="static.html">쇼핑</a>
+                                        <a class="dropdown-item" href="../busan/info.do?cno=3">쇼핑</a>
                                         <a class="dropdown-item" href="contact.html">축제</a>
                                     </div>
                                 </li>
