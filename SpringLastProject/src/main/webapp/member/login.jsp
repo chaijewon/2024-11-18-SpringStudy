@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
 <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
@@ -32,6 +33,15 @@
             </div>
         </div>
     </div>
+    <%--
+      1. 페이징 : 목록 
+      2. 상세보기 = Map / 댓글 
+      3. 로그인 / 로그아웃 (security) 
+      4. 검색 = Vue
+      5. 예약 / 결재 / 추천
+      ========================== 
+      6. websocket 
+     --%>
     <section class="single_blog_area section_padding_80" id="loginApp">
         <div class="container">
             <div class="row justify-content-center ">
@@ -64,8 +74,8 @@
                </tr>
                <tr>
                  <td colspan="2">
-                   <input type=button value="로그인" class="btn-sm btn-danger">
-                   <input type=button value="취소" class="btn-sm btn-success">
+                   <input type=button value="로그인" class="btn-sm btn-danger" @click="login()">
+                   <input type=button value="취소" class="btn-sm btn-success" @click="cancel()">
                  </td>
                </tr>
              </table>
@@ -74,5 +84,34 @@
         </div>
         
     </section> 
+    <script>
+    let loginApp=Vue.createApp({
+    	data(){
+    		return {
+    			userid:'',
+    			userpwd:''
+    		}
+    	},
+    	methods:{
+    		login(){
+    			if(this.userid==="")
+    			{
+    				this.$refs.userid.focus()
+    				return
+    			}
+    			if(this.userpwd==="")
+    			{
+    				this.$refs.userpwd.focus()
+    				return
+    			}
+    			
+    			$('#frm').submit()
+    		},
+    		cancel(){
+    			history.back();
+    		}
+    	}
+    }).mount('#loginApp')
+    </script>
 </body>
 </html>
