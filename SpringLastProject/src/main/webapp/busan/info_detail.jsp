@@ -77,7 +77,7 @@
     </div>
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은 APP KEY를 사용하세요&libraries=services"></script>
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=72fa81817487692b6dc093004af97650&libraries=services&libraries=services"></script>
 <script>
 // 마커를 담을 배열입니다
 var markers = [];
@@ -296,12 +296,96 @@ function removeAllChildNods(el) {
     }
 }
 </script>
-            </div>
+         </div>
             <div style="height: 10px"></div>
             <div class="row" id="replyApp">
               <%-- 댓글 : Vue --%>
-            </div>
-        </div>
+              <!-- Comment Area Start -->
+                            <div class="comment_area section_padding_50 clearfix">
+                                <h4 class="mb-30">2 Comments</h4>
+
+                                <ol>
+                                    <!-- Single Comment Area -->
+                                    <li class="single_comment_area">
+                                        <div class="comment-wrapper d-flex">
+                                            <!-- Comment Meta -->
+                                            <div class="comment-author">
+                                                <img src="img/blog-img/17.jpg" alt="">
+                                            </div>
+                                            <!-- Comment Content -->
+                                            <div class="comment-content">
+                                                <span class="comment-date text-muted">27 Aug 2018</span>
+                                                <h5>Brandon Kelley</h5>
+                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
+                                                <a href="#">Like</a>
+                                                <a class="active" href="#">Reply</a>
+                                            </div>
+                                        </div>
+                                        <ol class="children">
+                                            <li class="single_comment_area">
+                                                <div class="comment-wrapper d-flex">
+                                                    <!-- Comment Meta -->
+                                                    <div class="comment-author">
+                                                        <img src="img/blog-img/18.jpg" alt="">
+                                                    </div>
+                                                    <!-- Comment Content -->
+                                                    <div class="comment-content">
+                                                        <span class="comment-date text-muted">27 Aug 2018</span>
+                                                        <h5>Brandon Kelley</h5>
+                                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
+                                                        <a href="#">Like</a>
+                                                        <a class="active" href="#">Reply</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li class="single_comment_area">
+                                        <div class="comment-wrapper d-flex">
+                                            <!-- Comment Meta -->
+                                            <div class="comment-author">
+                                                <img src="img/blog-img/19.jpg" alt="">
+                                            </div>
+                                            <!-- Comment Content -->
+                                            <div class="comment-content">
+                                                <span class="comment-date text-muted">27 Aug 2018</span>
+                                                <h5>Brandon Kelley</h5>
+                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
+                                                <a href="#">Like</a>
+                                                <a class="active" href="#">Reply</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <!-- Leave A Comment -->
+                            <div class="leave-comment-area section_padding_50 clearfix">
+                                <div class="comment-form">
+                                    <h4 class="mb-30">Leave A Comment</h4>
+
+                                    <!-- Comment Form -->
+                                    <form action="#" method="post">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="contact-name" placeholder="Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="contact-email" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="contact-website" placeholder="Website">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn contact-btn">Post Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                
     </section>
 </body>
 </html>
