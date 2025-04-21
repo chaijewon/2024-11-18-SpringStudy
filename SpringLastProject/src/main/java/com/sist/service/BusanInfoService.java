@@ -8,4 +8,5 @@ import com.sist.vo.BusanInfoVO;
 public interface BusanInfoService {
 	public List<BusanInfoVO> busanInfoListData(Map map);
 	public int busanInfoTotalPage(int cno);
+	public BusanInfoVO busanInfoDetailData(int no);
 }

@@ -15,4 +15,8 @@ public interface BusanInfoMapper {
   @Select("SELECT CEIL(COUNT(*)/12.0) FROM busan_info "
 		 +"WHERE cno=#{cno}")
   public int busanInfoTotalPage(int cno);
+  // 상세보기 
+  @Select("SELECT * FROM busan_info "
+		 +"WHERE no=#{no}")
+  public BusanInfoVO busanInfoDetailData(int no);
 }

@@ -27,6 +27,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.sist.service.BusanInfoService;
+import com.sist.vo.BusanInfoVO;
 @Controller
 public class BusanInfoController {
   // @Autowired => 전역에서 설정이 가능 
@@ -43,6 +44,23 @@ public class BusanInfoController {
 	  model.addAttribute("cno", cno);
 	  model.addAttribute("titles", titles[cno]);
 	  model.addAttribute("main_jsp", "../busan/info_list.jsp");
+	  return "main/main";
+  }
+  // 웹 => 사용자가 보내는 값 <a> <form> params(Vue,React) / data(Ajax)
+  // 출력할때 받아서 JSP에서 출력변수 => model.addAttribute() , data(){}
+  // 주고 받기 
+  // => useState(React)
+  @GetMapping("busan/detail.do")
+  public String busan_detail(int no,Model model)
+  {
+	  BusanInfoVO vo=service.busanInfoDetailData(no);
+	  String addr1=vo.getAddress();
+	  addr1=addr1.substring(addr1.indexOf(" "));
+	  String addr2=addr1.trim();
+	  addr2=addr2.substring(0,addr2.indexOf(" "));
+	  model.addAttribute("vo", vo);
+	  model.addAttribute("addr", addr2);
+	  model.addAttribute("main_jsp", "../busan/info_detail.jsp");
 	  return "main/main";
   }
 }

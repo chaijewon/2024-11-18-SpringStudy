@@ -71,4 +71,14 @@ public class BusanInfoDAO {
 	  {
 		  return mapper.busanInfoTotalPage(cno);
 	  }
+	  
+	  /*
+	   *   @Select("SELECT * FROM busan_info "
+		 +"WHERE no=#{no}")
+          public BusanInfoVO busanInfoDetailData(int no);
+	   */
+	  public BusanInfoVO busanInfoDetailData(int no)
+	  {
+		  return mapper.busanInfoDetailData(no);
+	  }
 }

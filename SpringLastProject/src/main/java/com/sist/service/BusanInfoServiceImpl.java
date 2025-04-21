@@ -22,6 +22,12 @@ public class BusanInfoServiceImpl implements BusanInfoService{
 		// TODO Auto-generated method stub
 		return bDao.busanInfoTotalPage(cno);
 	}
+
+	@Override
+	public BusanInfoVO busanInfoDetailData(int no) {
+		// TODO Auto-generated method stub
+		return bDao.busanInfoDetailData(no);
+	}
   
   
 }
