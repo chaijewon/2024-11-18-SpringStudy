@@ -32,23 +32,24 @@
             </div>
         </div>
     </div>
-    <section class="archive-area section_padding_80" id="loginApp">
+    <section class="single_blog_area section_padding_80" id="loginApp">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center ">
+            
              <form method="post" action="../member/login.do" id="frm">
-             <table class="table">
+             <table class="table text-center">
                <tr>
                  <th width="20%">ID</th>
                  <td width="80%">
                   <input type=text name="userid" 
-                  ref="userid" v-model="userid" class="input-sm">
+                  ref="userid" v-model="userid" class="form-control-sm">
                  </td>
                </tr>
                <tr>
                  <th width="20%">PW</th>
                  <td width="80%">
                   <input type=password name="userpwd"
-                  ref="userpwd" v-model="userpwd" class="input-sm">
+                  ref="userpwd" v-model="userpwd" class="form-control-sm">
                  </td>
                </tr>
                <tr>
@@ -66,6 +67,7 @@
              </form>
             </div>
         </div>
+        
     </section> 
 </body>
 </html>
