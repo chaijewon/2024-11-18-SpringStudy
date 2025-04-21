@@ -77,13 +77,13 @@
                     <div class="pagination-area d-sm-flex mt-15">
                         <nav aria-label="#">
                             <ul class="pagination">
-                                <li class="page-item active">
-                                    <a class="page-link">1 <span class="sr-only">(current)</span></a>
+                                <li class="page-item" v-if="startPage>1">
+                                    <a class="page-link">이전 <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
                                 </li>
-                                <li class="page-item"><a class="page-link">2</a></li>
-                                <li class="page-item"><a class="page-link">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                <li :class="i==curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)"><a class="page-link">{{i}}</a></li>
+                                
+                                <li class="page-item" v-if="endPage<totalpage">
+                                    <a class="page-link">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                 </li>
                             </ul>
                         </nav>
@@ -117,25 +117,37 @@
     		// jquery/angularjs => 연동시에 주로 사용 
     		// $(function(){})
     		// useEffect()
-    		axios.get('http://localhost:8080/web/busan/info_vue.do',{
-    			params:{
-    				page:this.curpage,
-    				cno:this.cno
-    			}
-    		}).then(res=>{
-    			console.log(res.date)
-    			this.list=res.data.list
-    			this.curpage=res.data.curpage
-    			this.totalpage=res.data.totalpage
-    			this.startPage=res.data.startPage
-    			this.endPage=res.data.endPage
-    		}).catch(error=>{
-    			console.log(error.response)
-    		})
+    		this.dataRecv()
     	},
     	// 사용자 정의 함수 정의 => 이벤트 
     	methods:{
-    		
+    		range(start,end){
+    			let arr=[]
+    			let len=end-start
+    			for(let i=0;i<=len;i++)
+    			{
+    				arr[i]=start
+    				start++
+    			}
+    			return arr
+    		},
+    		dataRecv(){
+    			axios.get('http://localhost:8080/web/busan/info_vue.do',{
+        			params:{
+        				page:this.curpage,
+        				cno:this.cno
+        			}
+        		}).then(res=>{
+        			console.log(res.date)
+        			this.list=res.data.list
+        			this.curpage=res.data.curpage
+        			this.totalpage=res.data.totalpage
+        			this.startPage=res.data.startPage
+        			this.endPage=res.data.endPage
+        		}).catch(error=>{
+        			console.log(error.response)
+        		})
+    		}
     	}
     	/*,
     	components:{
