@@ -64,7 +64,7 @@
                                 </div>
                                 
                             </div>
-                            <a :href="'../food/detail.do?no='+vo.fno">
+                            <a :href="'../food/detail.do?fno='+vo.fno">
                                 <h4 class="post-headline">{{vo.name}}</h4>
                             </a>
                         </div>
