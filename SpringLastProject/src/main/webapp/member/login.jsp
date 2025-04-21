@@ -58,6 +58,11 @@
                  </td>
                </tr>
                <tr>
+                 <td colspan="2" class="text-center">
+                   <span style="color:red">${message }</span>
+                 </td>
+               </tr>
+               <tr>
                  <td colspan="2">
                    <input type=button value="로그인" class="btn-sm btn-danger">
                    <input type=button value="취소" class="btn-sm btn-success">
