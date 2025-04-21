@@ -78,12 +78,12 @@
                         <nav aria-label="#">
                             <ul class="pagination">
                                 <li class="page-item" v-if="startPage>1">
-                                    <a class="page-link">이전 <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                                    <a class="page-link" @click="prev()">이전 <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
                                 </li>
-                                <li :class="i==curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)"><a class="page-link">{{i}}</a></li>
+                                <li :class="i==curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)"><a class="page-link" @click="pageChange(i)">{{i}}</a></li>
                                 
                                 <li class="page-item" v-if="endPage<totalpage">
-                                    <a class="page-link">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                    <a class="page-link" @click="next()">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                 </li>
                             </ul>
                         </nav>
@@ -121,6 +121,18 @@
     	},
     	// 사용자 정의 함수 정의 => 이벤트 
     	methods:{
+    		prev(){
+    			this.curpage=this.startPage-1
+    			this.dataRecv()
+    		},
+    		next(){
+    			this.curpage=this.endPage+1
+    			this.dataRecv()
+    		},
+    		pageChange(page){
+    			this.curpage=page
+    			this.dataRecv()
+    		},
     		range(start,end){
     			let arr=[]
     			let len=end-start
