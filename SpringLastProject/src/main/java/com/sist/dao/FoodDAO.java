@@ -33,4 +33,14 @@ public class FoodDAO {
    {
 	   return mapper.busanFoodTotalPage();
    }
+   /*
+    *   @Select("SELECT * FROM busan_food "
+		  +"WHERE fno=#{fno}")
+   public FoodVO busanFoodDetailData(int fno);
+   
+    */
+   public FoodVO busanFoodDetailData(int fno)
+   {
+	   return mapper.busanFoodDetailData(fno);
+   }
 }

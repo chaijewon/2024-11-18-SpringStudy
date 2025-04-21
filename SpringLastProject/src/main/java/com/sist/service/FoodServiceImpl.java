@@ -16,6 +16,22 @@ import com.sist.dao.*;
  *   @RestController, 
  *   @ControllerAdvice, 
      @Configuration
+     
+     => JSP Header 
+            ------- 요청 (메뉴)
+            목록에서 링크 
+              |
+           Mapper : SQL 
+              |
+             DAO
+              |
+            Service
+              |
+           ServiceImpl
+              |
+           Controller / RestController
+              |
+             JSP 화면 출력 
  */
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -33,6 +49,12 @@ public class FoodServiceImpl implements FoodService {
 	public int busanFoodTotalPage() {
 		// TODO Auto-generated method stub
 		return fDao.busanFoodTotalPage();
+	}
+
+	@Override
+	public FoodVO busanFoodDetailData(int fno) {
+		// TODO Auto-generated method stub
+		return fDao.busanFoodDetailData(fno);
 	}
 
 }

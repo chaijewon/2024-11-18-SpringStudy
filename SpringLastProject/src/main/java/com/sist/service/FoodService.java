@@ -8,4 +8,5 @@ import com.sist.vo.*;
 public interface FoodService {
 	public List<FoodVO> busanFoodListData(int start,int end);
 	public int busanFoodTotalPage();
+	public FoodVO busanFoodDetailData(int fno);
 }
