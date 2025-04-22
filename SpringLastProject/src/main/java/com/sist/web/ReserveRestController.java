@@ -20,7 +20,24 @@ public class ReserveRestController {
 	   List<FoodVO> list=service.busanFoodReserveData();
 	   map.put("list", list);
 	   // => 시간 
+	   List<String> tList=new ArrayList<String>();
+	   tList.add("17:00");
+	   tList.add("18:00");
+	   tList.add("19:00");
+	   tList.add("20:00");
+	   tList.add("21:00");
+	   tList.add("22:00");
+	   tList.add("23:00");
+	   tList.add("24:00");
+	   map.put("time", tList);
 	   // => 인원 
+	   List<String> iList=new ArrayList<String>();
+	   for(int i=1;i<=10;i++)
+	   {
+		   iList.add(String.valueOf(i));
+	   }
+	   iList.add("단체");
+	   map.put("inwon", iList);
 	   return map;
    }
 }

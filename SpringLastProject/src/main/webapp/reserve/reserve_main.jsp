@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.11.3/main.css' rel='stylesheet' />
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+<style type="text/css">
+.food-click{
+  cursor: pointer;
+}
+</style>
 </head>
 <body>
 <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
@@ -50,7 +55,9 @@
                       <th class="text-center"></th>
                       <th class="text-center">업체명</th>
                      </tr>
-                     <tr v-for="vo in food_list" class="food-click">
+                     <tr v-for="vo in food_list" class="food-click"
+                       @click="foodSelect(vo.fno,vo.poster,vo.name)"
+                     >
                        <td class="text-center">
                         <img :src="'https://www.menupan.com'+vo.poster"
                             style="width: 35px;height: 35px">
@@ -61,7 +68,7 @@
                  </div>
                 </td>
               
-                <td width="50%" height="500">
+                <td width="45%" height="500">
                  <table class="table">
                    <tr>
                     <td>
@@ -76,12 +83,25 @@
                  </table>
                 </td>
             
-                <td width="30%" height="500" rowspan="2">
+                <td width="35%" height="500" rowspan="2">
                  <table class="table">
                    <tr>
                     <td colspan="2">
                       <h4>예약 정보</h4>
                     </td>
+                   </tr>
+                   <tr>
+                     <td colspan="2" class="text-center">
+                      <img :src="image" style="width: 200px;height: 150px">
+                     </td>
+                   </tr>
+                   <tr>
+                     <th width="40%" class="text-center">업체명</th>
+                     <td width="60%">{{name}}</td>
+                   </tr>
+                   <tr>
+                     <th width="40%" class="text-center">예약일</th>
+                     <td width="60%">{{day}}</td>
                    </tr>
                  </table>
                 </td>
@@ -93,6 +113,13 @@
                     <td colspan="2">
                       <h4>시간 정보</h4>
                     </td>
+                   </tr>
+                   <tr v-show="isTime">
+                     <td class="text-center">
+                      <span class="btn btn-xs btn-success"
+                       v-for="t in time_list" style="margin: 2px"
+                      >{{t}}</span>
+                     </td>
                    </tr>
                  </table>
                 </td>
@@ -164,7 +191,9 @@
 				  dropable:true,
 				  // 이벤트 => 날짜 클릭 
 				  dateClick:((info)=>{
-					  alert("Click Date:"+info.dateStr)
+					  //alert("Click Date:"+info.dateStr)
+					  _this.day=info.dateStr
+					  _this.isTime=true
 				  })
 			  })
 			  calendar.render()
@@ -172,10 +201,19 @@
 		  
 	  },
 	  methods:{
+		  foodSelect(fno,poster,name)
+		  {
+			 this.fno=fno
+			 this.image='https://www.menupan.com'+poster
+			 this.name=name
+			 this.isDate=true
+		  },
 		  dataRecv(){
 			  axios.get('../reserve/main_vue.do')
 			  .then(res=>{
 				  this.food_list=res.data.list  
+				  this.time_list=res.data.time
+				  this.inwon_list=res.data.inwon
 			  })
 			  .catch(error=>{
 				  console.log(error.response)
