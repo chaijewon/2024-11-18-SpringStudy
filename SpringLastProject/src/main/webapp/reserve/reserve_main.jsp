@@ -103,6 +103,19 @@
                      <th width="40%" class="text-center">예약일</th>
                      <td width="60%">{{day}}</td>
                    </tr>
+                   <tr>
+                     <th width="40%" class="text-center">시간</th>
+                     <td width="60%">{{time}}</td>
+                   </tr>
+                   <tr>
+                     <th width="40%" class="text-center">인원</th>
+                     <td width="60%">{{inwon}}</td>
+                   </tr>
+                   <tr v-show="isReserveBtn">
+                     <td colspan="2" class="text-center">
+                      <button class="btn-lg btn-primary">예약</button>
+                     </td>
+                   </tr>
                  </table>
                 </td>
               </tr>
@@ -118,6 +131,7 @@
                      <td class="text-center">
                       <span class="btn btn-xs btn-success"
                        v-for="t in time_list" style="margin: 2px"
+                       @click="timeSelect(t)"
                       >{{t}}</span>
                      </td>
                    </tr>
@@ -128,6 +142,16 @@
                    <tr>
                     <td colspan="2">
                       <h4>인원 정보</h4>
+                    </td>
+                   </tr>
+                   <tr v-show="isInwon">
+                    <td class="text-center">
+                     <span class="btn btn-xs btn-danger"
+                       v-for="i in inwon_list" style="margin-left: 2px"
+                       @click="inwonSelect(i)"
+                     >
+                     {{i}}
+                     </span>
                     </td>
                    </tr>
                  </table>
@@ -201,6 +225,14 @@
 		  
 	  },
 	  methods:{
+		  inwonSelect(inwon){
+			 this.inwon=inwon
+			 this.isReserveBtn=true
+		  },
+		  timeSelect(time){
+			this.time=time
+			this.isInwon=true
+		  },
 		  foodSelect(fno,poster,name)
 		  {
 			 this.fno=fno
