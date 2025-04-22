@@ -136,7 +136,7 @@
                                     <a class="nav-link" href="#">부산 특산물</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">커뮤니티</a>
+                                    <a class="nav-link" href="../reserve/main.do">빠른 예약</a>
                                 </li>
                                 
                                     <sec:authorize access="hasRole('ROLE_USER')">
