@@ -113,7 +113,9 @@
                    </tr>
                    <tr v-show="isReserveBtn">
                      <td colspan="2" class="text-center">
-                      <button class="btn-lg btn-primary">예약</button>
+                      <button class="btn-lg btn-primary"
+                       @click="reserve()"
+                      >예약</button>
                      </td>
                    </tr>
                  </table>
@@ -225,6 +227,29 @@
 		  
 	  },
 	  methods:{
+		  reserve(){
+			axios.post('../reserve/reserve_vue_ok.do',null,{
+				params:{
+					fno:this.fno,
+					rday:this.day,
+					rtime:this.time,
+					rinwon:this.inwon
+				}
+			}).then(res=>{ // onSuccess
+				if(res.data==='yes')
+				{
+					// 마이페이지 이동 
+					location.href="../mypage/reserve_list.do"
+				}
+				else
+				{
+				    // 에러메세지 전송 	
+				    alert(res.data)
+				}
+			}).catch(error=>{ // onError
+				console.log(error.response)
+			})
+		  },
 		  inwonSelect(inwon){
 			 this.inwon=inwon
 			 this.isReserveBtn=true

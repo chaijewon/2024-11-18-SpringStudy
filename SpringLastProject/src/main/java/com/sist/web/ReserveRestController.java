@@ -1,8 +1,11 @@
 package com.sist.web;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.service.*;
@@ -39,5 +42,24 @@ public class ReserveRestController {
 	   iList.add("단체");
 	   map.put("inwon", iList);
 	   return map;
+   }
+   
+   @PostMapping("reserve/reserve_vue_ok.do")
+   public String reserve_vue_ok(ReserveVO vo,
+		   HttpSession session)
+   {
+	   System.out.println("접근");
+	   String result="";
+	   try
+	   {
+		   String userid=(String)session.getAttribute("userid");
+		   vo.setUserid(userid);
+		   service.reserveInsert(vo);
+		   result="yes";
+	   }catch(Exception ex)
+	   {
+		   result=ex.getMessage();   
+	   }
+	   return result;
    }
 }

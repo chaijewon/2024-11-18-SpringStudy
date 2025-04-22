@@ -4,8 +4,8 @@ import java.util.*;
 import lombok.Data;
 @Data
 public class ReserveVO {
-  private int rno,isreserve;
-  private String userid,rday,rtime,rinwon;
+  private int rno,isReserve,fno;
+  private String userid,rday,rtime,rinwon,dbday;
   private Date regdate;
   private FoodVO fvo=new FoodVO();
   private MemberVO mvo=new MemberVO();
