@@ -20,5 +20,127 @@
             </div>
         </div>
  </div>
+ <div class="breadcumb-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    
+                </div>
+            </div>
+        </div>
+ </div>
+ <section class="single_blog_area section_padding_80" id="reserveApp">
+    <div class="container">
+      <div class="row justify-content-center ">
+        <div class="col-12 col-lg-12">
+           <div class="row no-gutters">
+             <table class="table">
+              <tr>
+                <td width="20%" height="500">
+                 <table class="table">
+                   <tr>
+                    <td colspan="2">
+                      <h4>맛집 정보</h4>
+                    </td>
+                   </tr>
+                 </table>
+                </td>
+              
+                <td width="50%" height="500">
+                 <table class="table">
+                   <tr>
+                    <td>
+                      <h4>예약일 정보</h4>
+                    </td>
+                   </tr>
+                   <tr>
+                     <td>
+                      <div id="calendar" v-show="isDate"></div>
+                     </td>
+                   </tr>
+                 </table>
+                </td>
+            
+                <td width="30%" height="500" rowspan="2">
+                 <table class="table">
+                   <tr>
+                    <td colspan="2">
+                      <h4>예약 정보</h4>
+                    </td>
+                   </tr>
+                 </table>
+                </td>
+              </tr>
+              <tr>
+                <td width="30%" height="150">
+                 <table class="table">
+                   <tr>
+                    <td colspan="2">
+                      <h4>시간 정보</h4>
+                    </td>
+                   </tr>
+                 </table>
+                </td>
+                <td width="35%" height="150">
+                 <table class="table">
+                   <tr>
+                    <td colspan="2">
+                      <h4>인원 정보</h4>
+                    </td>
+                   </tr>
+                 </table>
+                </td>
+              </tr>
+             </table>
+           </div>
+        </div>
+      </div>
+    </div>
+ </section>
+ <script>
+  /*
+      FullCalendar.Calendar(
+         _this
+      )
+  */
+  let reserveApp=Vue.createApp({
+	  data(){
+		  return {
+			  isDate:true
+		  }
+	  },
+	  mounted(){
+		  // 코딩 테스트 : 자바스크립트 
+		  let date=new Date();
+		  let year=date.getFullYear()
+		  let month=("0"+(1+date.getMonth())).slice(-2)
+		  // 012 => 12 ==> month => 0
+		  let day=("0"+date.getDate()).slice(-2)
+		  // 022 => 22
+		  /*console.log("year:"+year)
+		  console.log("month:"+month)
+		  console.log("day:"+day)*/
+		  let _this=this
+		  // 달력 
+		  document.addEventListener('DOMContentLoaded',function(){
+			  let calendarEl=document.getElementById("calendar")
+			  let calendar=new FullCalendar.Calendar(calendarEl,{
+				  initialView:'dayGridMonth',
+				  height:450,
+				  width:360,
+				  validRange:{
+					 start:year+"-"+month+"-"+day  
+				  },
+				  themeSystem:'bootstrap',
+				  editable:true,
+				  dropable:true
+				  // 이벤트 => 날짜 클릭 
+			  })
+			  calendar.render()
+		  })
+		  
+	  }
+  }).mount("#reserveApp")
+ </script>
 </body>
 </html>
