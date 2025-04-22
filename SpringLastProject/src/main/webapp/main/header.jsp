@@ -135,6 +135,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">부산 특산물</a>
                                 </li>
+                                <%--
+                                      v-if="id===${sessionScope.userid}"
+                                      
+                                      no:${no}
+                                 --%>
                                 <c:if test="${sessionScope.userid!=null }">
                                   <li class="nav-item">
                                     <a class="nav-link" href="../reserve/main.do">빠른 예약</a>

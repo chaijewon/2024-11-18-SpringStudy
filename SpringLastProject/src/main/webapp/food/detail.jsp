@@ -113,60 +113,47 @@
               <%-- 댓글 : Vue --%>
               <!-- Comment Area Start -->
                             <div class="comment_area section_padding_50 clearfix">
-                                <h4 class="mb-30">2 Comments</h4>
+                                <h4 class="mb-30">댓글</h4>
 
                                 <ol>
                                     <!-- Single Comment Area -->
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-flex">
+                                    <li class="single_comment_area" v-for="vo in reply_list">
+                                        <div class="comment-wrapper d-flex" v-if="vo.group_step===0">
                                             <!-- Comment Meta -->
                                             <div class="comment-author">
-                                                <img src="img/blog-img/17.jpg" alt="">
+                                                <img :src="vo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
                                             </div>
                                             <!-- Comment Content -->
                                             <div class="comment-content">
-                                                <span class="comment-date text-muted">27 Aug 2018</span>
-                                                <h5>Brandon Kelley</h5>
-                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                <a href="#">Like</a>
+                                                <span class="comment-date text-muted">{{vo.dbday}}</span>
+                                                <h5>{{vo.username}}</h5>
+                                                <p>{{vo.msg}}</p>
+                                                <a href="#">Update</a>
+                                                <a href="#">Delete</a>
                                                 <a class="active" href="#">Reply</a>
                                             </div>
                                         </div>
-                                        <ol class="children">
+                                        <ol class="children" v-if="vo.group_step===1">
                                             <li class="single_comment_area">
                                                 <div class="comment-wrapper d-flex">
                                                     <!-- Comment Meta -->
                                                     <div class="comment-author">
-                                                        <img src="img/blog-img/18.jpg" alt="">
-                                                    </div>
-                                                    <!-- Comment Content -->
-                                                    <div class="comment-content">
-                                                        <span class="comment-date text-muted">27 Aug 2018</span>
-                                                        <h5>Brandon Kelley</h5>
-                                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                        <a href="#">Like</a>
-                                                        <a class="active" href="#">Reply</a>
-                                                    </div>
+		                                                <img :src="vo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
+		                                            </div>
+		                                            <!-- Comment Content -->
+		                                            <div class="comment-content">
+		                                                <span class="comment-date text-muted">{{vo.dbday}}</span>
+		                                                <h5>{{vo.username}}</h5>
+		                                                <p>{{vo.msg}}</p>
+		                                                <a href="#">Update</a>
+		                                                <a href="#">Delete</a>
+		                                                <a class="active" href="#">Reply</a>
+		                                            </div>
                                                 </div>
                                             </li>
                                         </ol>
                                     </li>
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-flex">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img src="img/blog-img/19.jpg" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <span class="comment-date text-muted">27 Aug 2018</span>
-                                                <h5>Brandon Kelley</h5>
-                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                <a href="#">Like</a>
-                                                <a class="active" href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    
                                 </ol>
                             </div>
 
@@ -197,5 +184,49 @@
                         </div>
                     </div>
     </section>
+    <script>
+     let replyApp=Vue.createApp({
+    	 data(){
+    		 return {
+    			 reply_list:[],
+    			 cno:${vo.fno},
+    			 type:1,
+    			 curpage:1,
+    			 sessionId:'${sessionId}',
+    			 totalpage:0,
+    			 startPage:0,
+    			 endPage:0
+    		 }
+    	 },
+    	 mounted(){
+    		 this.dataRecv()
+    	 },
+    	 methods:{
+    		 replyInsert(){
+    			 
+    		 },
+    		 dataRecv(){
+    			 axios.get("../comment/list_vue.do",{
+    				 params:{
+    					page:this.curpage,
+    					cno:this.cno,
+    					type:this.type
+    				 }
+    			 }).then(res=>{
+    				 console.log(res.data)
+    				 // res.data=Map {list=[],curpage:1....}
+    				 this.reply_list=res.data.list
+    				 this.curpage=res.data.curpage
+    				 this.totalpage=res.data.totalpage
+    				 this.startPage=res.data.startPage
+    				 this.endPage=res.data.endPage
+    				 
+    			 }).catch(error=>{
+    				 console.log(error.response)
+    			 })
+    		 }
+    	 }
+     }).mount("#replyApp")
+    </script>
 </body>
 </html>
