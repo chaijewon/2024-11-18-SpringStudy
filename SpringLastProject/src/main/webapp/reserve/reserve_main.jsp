@@ -44,6 +44,21 @@
                     </td>
                    </tr>
                  </table>
+                 <div style="overflow-y:auto;height: 500px">
+                   <table class="table">
+                     <tr>
+                      <th class="text-center"></th>
+                      <th class="text-center">업체명</th>
+                     </tr>
+                     <tr v-for="vo in food_list" class="food-click">
+                       <td class="text-center">
+                        <img :src="'https://www.menupan.com'+vo.poster"
+                            style="width: 35px;height: 35px">
+                       </td>
+                       <td>{{vo.name}}</td>
+                     </tr>
+                   </table>
+                 </div>
                 </td>
               
                 <td width="50%" height="500">
@@ -106,10 +121,23 @@
   let reserveApp=Vue.createApp({
 	  data(){
 		  return {
-			  isDate:true
+			  food_list:[],
+			  image:'../img/noimage.jpeg',
+			  fno:0,
+			  name:'',
+			  isDate:false,
+			  day:'',
+			  time:'',
+			  inwon:'',
+			  time_list:[],
+			  inwon_list:[],
+			  isTime:false,
+			  isInwon:false,
+			  isReserveBtn:false
 		  }
 	  },
 	  mounted(){
+		  this.dataRecv()
 		  // 코딩 테스트 : 자바스크립트 
 		  let date=new Date();
 		  let year=date.getFullYear()
@@ -133,12 +161,26 @@
 				  },
 				  themeSystem:'bootstrap',
 				  editable:true,
-				  dropable:true
+				  dropable:true,
 				  // 이벤트 => 날짜 클릭 
+				  dateClick:((info)=>{
+					  alert("Click Date:"+info.dateStr)
+				  })
 			  })
 			  calendar.render()
 		  })
 		  
+	  },
+	  methods:{
+		  dataRecv(){
+			  axios.get('../reserve/main_vue.do')
+			  .then(res=>{
+				  this.food_list=res.data.list  
+			  })
+			  .catch(error=>{
+				  console.log(error.response)
+			  })
+		  }
 	  }
   }).mount("#reserveApp")
  </script>
