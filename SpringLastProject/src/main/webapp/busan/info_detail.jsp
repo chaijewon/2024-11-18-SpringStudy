@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/map.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
 <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
@@ -76,7 +77,7 @@
         <ul id="placesList"></ul>
         <div id="pagination"></div>
     </div>
-</div>
+  </div>
 
 <script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=72fa81817487692b6dc093004af97650&libraries=services&libraries=services"></script>
 <script>
@@ -299,42 +300,55 @@ function removeAllChildNods(el) {
 </script>
           <%--  댓글 위치 --%>
         <div style="height: 10px"></div>
-            <div class="row" id="replyApp">
+            <div id="replyApp">
               <%-- 댓글 : Vue --%>
               <!-- Comment Area Start -->
                             <div class="comment_area section_padding_50 clearfix">
-                                <h4 class="mb-30">댓글</h4>
+                                
 
                                 <ol>
                                     <!-- Single Comment Area -->
-                                    <li class="single_comment_area" v-for="vo in reply_list">
-                                        <div class="comment-wrapper d-flex" v-if="vo.group_step===0">
+                                    <li class="single_comment_area" v-for="rvo in reply_list">
+                                        <div class="comment-wrapper d-flex" v-if="rvo.group_step===0">
                                             <!-- Comment Meta -->
                                             <div class="comment-author">
-                                                <img :src="vo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
+                                                <img :src="rvo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
                                             </div>
                                             <!-- Comment Content -->
                                             <div class="comment-content">
-                                                <span class="comment-date text-muted">{{vo.dbday}}</span>
-                                                <h5>{{vo.username}}</h5>
-                                                <p>{{vo.msg}}</p>
-                                                <a href="#">Update</a>
-                                                <a href="#">Delete</a>
-                                                <a class="active" href="#">Reply</a>
+                                                <span class="comment-date text-muted">{{rvo.dbday}}</span>
+                                                <h5>{{rvo.username}}</h5>
+                                                <p>{{rvo.msg}}</p>
+                                                <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.no" @click="replyUpdateForm(rvo.no)">Update</button>
+                                                <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px">Delete</button>
+                                                <button v-if="sessionId!==''" class="btn-xs btn-success" style="margin-left: 2px">Reply</button>
+                                                <%-- 수정창 --%>
+                                                <table class="table ups" style="display:none" :id="'up'+rvo.no">
+			                                     <tr>
+			                                      <td>
+			                                       <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.no">{{rvo.msg}}</textarea>
+			                                       <input type="button" value="수정"
+			                                        style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
+			                                         @click="replyUpdate(rvo.no)"
+			                                        >
+			                                      </td>
+			                                     </tr>
+			                                    </table>
+                                                <%-- 대댓글창 --%>
                                             </div>
                                         </div>
-                                        <ol class="children" v-if="vo.group_step===1">
+                                        <ol class="children" v-if="rvo.group_step===1">
                                             <li class="single_comment_area">
                                                 <div class="comment-wrapper d-flex">
                                                     <!-- Comment Meta -->
                                                     <div class="comment-author">
-		                                                <img :src="vo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
+		                                                <img :src="rvo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
 		                                            </div>
 		                                            <!-- Comment Content -->
 		                                            <div class="comment-content">
-		                                                <span class="comment-date text-muted">{{vo.dbday}}</span>
-		                                                <h5>{{vo.username}}</h5>
-		                                                <p>{{vo.msg}}</p>
+		                                                <span class="comment-date text-muted">{{rvo.dbday}}</span>
+		                                                <h5>{{rvo.username}}</h5>
+		                                                <p>{{rvo.msg}}</p>
 		                                                <a href="#">Update</a>
 		                                                <a href="#">Delete</a>
 		                                                <a class="active" href="#">Reply</a>
@@ -357,7 +371,9 @@ function removeAllChildNods(el) {
                                       <td>
                                        <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
                                        <input type="button" value="댓글"
-                                        style="float: left;background-color: blue;color:white;width: 80px;height: 94px">
+                                        style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
+                                         @click="replyInsert()"
+                                        >
                                       </td>
                                      </tr>
                                     </table>
@@ -366,7 +382,9 @@ function removeAllChildNods(el) {
                             </c:if>
 
             </div>
+           
     </section>
+   
     <script>
      let replyApp=Vue.createApp({
     	 data(){
@@ -378,15 +396,63 @@ function removeAllChildNods(el) {
     			 sessionId:'${sessionId}',
     			 totalpage:0,
     			 startPage:0,
-    			 endPage:0
+    			 endPage:0,
+    			 msg:'',
+    			 upReply:false
     		 }
     	 },
     	 mounted(){
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyUpdateForm(rno){
+    			 $('.ups').hide()
+    			 $('.update').text("Update")
+    			 if(this.upReply===false)
+    			 {
+    				 this.upReply=true
+    				 $('#up'+rno).show()
+    				 $('#u'+rno).text("Cancel")
+    			 }
+    			 else
+    			 {
+    				 this.upReply=false
+    				 $('#up'+rno).hide()
+    				 $('#u'+rno).text("Update")
+    			 }
+    		 },
     		 replyInsert(){
-    			 
+    			 /*
+    			    데이터 읽기 쓰기 => data()안 있는 변수 
+    			                => v-model
+    			    해당 태그 제어 
+    			     => ref
+    			     => $refs.ref명...
+    			 */
+    			 if(this.msg==='')
+    			 {
+    				 this.$refs.msg.focus()
+    				 return
+    			 }
+    			 // 데이터를 서버로 전송 
+    			 axios.post('../comment/insert_vue.do',null,{
+    				 params:{
+    					 cno:this.cno,
+    					 type:this.type,
+    					 msg:this.msg
+    				 }
+    			 }).then(res=>{
+    				 console.log(res.data)
+    				 // res.data=Map {list=[],curpage:1....}
+    				 this.reply_list=res.data.list
+    				 this.curpage=res.data.curpage
+    				 this.totalpage=res.data.totalpage
+    				 this.startPage=res.data.startPage
+    				 this.endPage=res.data.endPage
+    				 this.msg=''
+    			 }).catch(error=>{
+    				 console.log(error.response)
+    			 })
     		 },
     		 dataRecv(){
     			 axios.get("../comment/list_vue.do",{
