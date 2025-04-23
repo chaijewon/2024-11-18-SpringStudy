@@ -1,6 +1,7 @@
 package com.sist.dao;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -91,5 +92,30 @@ public class CommentDAO {
 	  mapper.commentGroupStepIncrement(pvo);
 	  mapper.commentReplyReplyInsert(vo);
   }
-  
+  /*
+   *   @Delete({"<script>"
+	  +"DELETE FROM busanReply "  
+	  +"WHERE "
+	  +"<if test=\"group_step==0\">"
+	  +"group_id=#{group_id}"
+	  +"</if>"
+	  +"<if test=\"group_step!=0\">"
+	  +"no=#{no}"
+	  +"</if>"
+	  +"</script>"
+	  })
+	  public void commentDelete(Map map);
+   */
+  public void commentDelete(int no)
+  {
+	  CommentVO vo=mapper.commentParentInfoData(no);
+	  System.out.println(vo.getGroup_id());
+	  System.out.println(vo.getGroup_step());
+	  Map map=new HashMap();
+	  map.put("no", no);
+	  map.put("group_id", vo.getGroup_id());
+	  map.put("group_step", vo.getGroup_step());
+	  
+	  mapper.commentDelete(map);
+  }
 }

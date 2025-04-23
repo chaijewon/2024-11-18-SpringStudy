@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -37,6 +38,20 @@ public interface CommentMapper {
   public void commentUpdate(@Param("msg") String msg,
 		  @Param("no") int no);
   // 삭제 => group_id
+  @Delete({"<script>"
+	  +"DELETE FROM busanReply "  
+	  +"WHERE "
+	  +"<if test=\"group_step==0\">"
+	  +"group_id=#{group_id}"
+	  +"</if>"
+	  +"<if test=\"group_step!=0\">"
+	  +"no=#{no}"
+	  +"</if>"
+	  +"</script>"
+  })
+  public void commentDelete(Map map);
+  
+  
   // 대댓글
   /*
    *                group_id  group_step

@@ -91,5 +91,12 @@ public class CommentRestController {
 	   
 	   return commonsListData(1, vo.getCno(), vo.getType());
    }
+   @GetMapping("comment/delete_vue.do")
+   public Map comment_delete(CommentVO vo)
+   {
+	   System.out.println("no:"+vo.getNo());
+	   service.commentDelete(vo.getNo());
+	   return commonsListData(1, vo.getCno(), vo.getType());
+   }
    
 }

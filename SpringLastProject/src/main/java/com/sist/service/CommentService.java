@@ -11,4 +11,5 @@ public interface CommentService {
 	public void commenInsert(CommentVO vo);
 	public void commentUpdate(String msg,int no);
 	public void commentReplyReplyInsert(int pno,CommentVO vo);
+	public void commentDelete(int no);
 }

@@ -320,7 +320,7 @@ function removeAllChildNods(el) {
                                                 <h5>{{rvo.username}}</h5>
                                                 <p>{{rvo.msg}}</p>
                                                 <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.no" @click="replyUpdateForm(rvo.no)">Update</button>
-                                                <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px">Delete</button>
+                                                <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.no)">Delete</button>
                                                 <button v-if="sessionId!==''" class="btn-xs btn-success insert" style="margin-left: 2px" :id="'i'+rvo.no" @click="replyReplyInsertForm(rvo.no)">Reply</button>
                                                 <%-- 수정창 --%>
                                                 <table class="table ups" style="display:none" :id="'up'+rvo.no">
@@ -360,9 +360,19 @@ function removeAllChildNods(el) {
 		                                                <span class="comment-date text-muted">{{rvo.dbday}}</span>
 		                                                <h5>{{rvo.username}}</h5>
 		                                                <p>{{rvo.msg}}</p>
-		                                                <a href="#">Update</a>
-		                                                <a href="#">Delete</a>
-		                                                
+		                                                <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.no" @click="replyUpdateForm(rvo.no)">Update</button>
+                                                        <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(rvo.no)">Delete</button>
+		                                                <table class="table ups" style="display:none" :id="'up'+rvo.no">
+					                                     <tr>
+					                                      <td>
+					                                       <textarea rows="4" cols="45" style="float: left" :id="'umsg'+rvo.no">{{rvo.msg}}</textarea>
+					                                       <input type="button" value="수정"
+					                                        style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
+					                                         @click="replyUpdate(rvo.no)"
+					                                        >
+					                                      </td>
+					                                     </tr>
+					                                    </table>
 		                                            </div>
                                                 </div>
                                             </li>
@@ -417,6 +427,27 @@ function removeAllChildNods(el) {
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyDelete(no){
+    			 //alert("no:"+no)
+    			 axios.get('../comment/delete_vue.do',{
+    				 params:{
+    					 no:no,
+    					 cno:this.cno,
+    					 type:this.type
+    				 }
+    			 }).then(res=>{
+    				 console.log(res.data)
+    				 // res.data=Map {list=[],curpage:1....}
+    				 this.reply_list=res.data.list
+    				 this.curpage=res.data.curpage
+    				 this.totalpage=res.data.totalpage
+    				 this.startPage=res.data.startPage
+    				 this.endPage=res.data.endPage
+    				 
+    			 }).catch(error=>{
+    				 console.log(error.response)
+    			 })
+    		 },
     		 replyReplyInsertForm(no){
     			 $('.ins').hide()
     			 $('.insert').text("Reply")
