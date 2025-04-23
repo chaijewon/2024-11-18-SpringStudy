@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -347,28 +348,22 @@ function removeAllChildNods(el) {
                             </div>
 
                             <!-- Leave A Comment -->
-                            <div class="leave-comment-area section_padding_50 clearfix">
+                            
+                            <c:if test="${sessionScope.userid!=null }">
+                             <div class="leave-comment-area section_padding_50 clearfix">
                                 <div class="comment-form">
-                                    <h4 class="mb-30">Leave A Comment</h4>
-
-                                    <!-- Comment Form -->
-                                    <form action="#" method="post">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="contact-name" placeholder="Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" id="contact-email" placeholder="Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="contact-website" placeholder="Website">
-                                        </div>
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn contact-btn">Post Comment</button>
-                                    </form>
+                                    <table class="table">
+                                     <tr>
+                                      <td>
+                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
+                                       <input type="button" value="댓글"
+                                        style="float: left;background-color: blue;color:white;width: 80px;height: 94px">
+                                      </td>
+                                     </tr>
+                                    </table>
                                 </div>
-                            </div>
+                             </div>
+                            </c:if>
 
             </div>
     </section>
