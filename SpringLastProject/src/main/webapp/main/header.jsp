@@ -133,7 +133,7 @@
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">부산 특산물</a>
+                                    <a class="nav-link" href="../goods/list.do">부산 특산물</a>
                                 </li>
                                 <%--
                                       v-if="id===${sessionScope.userid}"
