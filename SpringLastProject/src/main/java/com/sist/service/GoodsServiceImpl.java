@@ -2,6 +2,7 @@ package com.sist.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.sist.dao.GoodsDAO;
 import com.sist.service.*;
@@ -11,6 +12,7 @@ import com.sist.vo.*;
  *     응답 = Service = DAO = 오라클 
  *                    ----------- 유지보수시에 클라이언트에 오류가 없게 ...
  */
+@Service
 public class GoodsServiceImpl implements GoodsService{
     @Autowired
     private GoodsDAO gDao;

@@ -18,7 +18,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>부산 맛집 목록</h2>
+                        <h2>부산 특산물</h2>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                            <img :src="'https://www.menupan.com'+vo.poster" alt="">
+                            <img :src="vo.goods_poster" alt="">
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
@@ -58,14 +58,14 @@
                                 <div class="post-author-date-area d-flex">
                                     <!-- Post Author -->
                                     <div class="post-author">
-                                        <a href="#">{{vo.address}}</a>
+                                        <a href="#">{{vo.goods_price}}</a>
                                     </div>
                                     
                                 </div>
                                 
                             </div>
-                            <a :href="'../food/detail.do?fno='+vo.fno">
-                                <h4 class="post-headline">{{vo.name}}</h4>
+                            <a :href="'../goods/detail.do?no='+vo.no">
+                                <h4 class="post-headline">{{vo.goods_name}}</h4>
                             </a>
                         </div>
                     </div>
@@ -143,7 +143,7 @@
     			return arr
     		},
     		dataRecv(){
-    			axios.get('http://localhost:8080/web/food/list_vue.do',{
+    			axios.get('http://localhost:8080/web/goods/list_vue.do',{
         			params:{
         				page:this.curpage,
         				cno:this.cno
