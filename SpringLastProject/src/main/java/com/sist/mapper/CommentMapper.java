@@ -38,6 +38,33 @@ public interface CommentMapper {
 		  @Param("no") int no);
   // 삭제 => group_id
   // 대댓글
+  /*
+   *                group_id  group_step
+   *   AAAAA           1         0   
+   *     = KKKKK       1         1
+   *     = BBBBB       1         2
+   *     = CCCCC       1         3
+   *     = DDDDD       1         4
+   *  
+   */
+  @Select("SELECT group_id,group_step "
+		 +"FROM busanReply "
+		 +"WHERE no=#{no}")
+  public CommentVO commentParentInfoData(int no);
+  
+  @Update("UPDATE busanReply SET "
+		 +"group_step=group_step+1 "
+		 +"WHERE group_id=#{group_id} AND group_step>#{group_step}")
+  public void commentGroupStepIncrement(CommentVO vo);
+  
+  @Insert("INSERT INTO busanReply(no,cno,type,userid,username,sex,msg,group_id,group_step) "
+		  +"VALUES((SELECT NVL(MAX(no)+1,1) FROM busanReply),"
+		  +"#{cno},#{type},#{userid},#{username},"
+		  +"#{sex},#{msg},#{group_id},"
+		  +"#{group_step})")
+  public void commentReplyReplyInsert(CommentVO vo);
+  
+  
 }
 
 

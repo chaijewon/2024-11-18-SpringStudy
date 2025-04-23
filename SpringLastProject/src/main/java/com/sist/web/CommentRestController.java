@@ -77,5 +77,19 @@ public class CommentRestController {
    }
    // 삭제 
    // 대댓글 
+   @PostMapping("comment/reply_insert_vue.do")
+   public Map comment_reply_insert(int pno,CommentVO vo,HttpSession session)
+   {
+	   String userid=(String)session.getAttribute("userid");
+	   String username=(String)session.getAttribute("username");
+	   String sex=(String)session.getAttribute("sex");
+	   vo.setUserid(userid);
+	   vo.setUsername(username);
+	   vo.setSex(sex);
+	   
+	   service.commentReplyReplyInsert(pno, vo);
+	   
+	   return commonsListData(1, vo.getCno(), vo.getType());
+   }
    
 }

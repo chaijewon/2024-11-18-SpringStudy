@@ -321,7 +321,7 @@ function removeAllChildNods(el) {
                                                 <p>{{rvo.msg}}</p>
                                                 <button v-if="sessionId===rvo.userid" class="btn-xs btn-danger update" style="margin-left: 2px" :id="'u'+rvo.no" @click="replyUpdateForm(rvo.no)">Update</button>
                                                 <button v-if="sessionId===rvo.userid" class="btn-xs btn-info" style="margin-left: 2px">Delete</button>
-                                                <button v-if="sessionId!==''" class="btn-xs btn-success" style="margin-left: 2px">Reply</button>
+                                                <button v-if="sessionId!==''" class="btn-xs btn-success insert" style="margin-left: 2px" :id="'i'+rvo.no" @click="replyReplyInsertForm(rvo.no)">Reply</button>
                                                 <%-- 수정창 --%>
                                                 <table class="table ups" style="display:none" :id="'up'+rvo.no">
 			                                     <tr>
@@ -335,9 +335,20 @@ function removeAllChildNods(el) {
 			                                     </tr>
 			                                    </table>
                                                 <%-- 대댓글창 --%>
+                                                <table class="table ins" style="display:none" :id="'in'+rvo.no">
+			                                     <tr>
+			                                      <td>
+			                                       <textarea rows="4" cols="45" style="float: left" :id="'imsg'+rvo.no"></textarea>
+			                                       <input type="button" value="댓글"
+			                                        style="float: left;background-color: blue;color:white;width: 80px;height: 94px"
+			                                         @click="replyReplyInsert(rvo.no)"
+			                                        >
+			                                      </td>
+			                                     </tr>
+			                                    </table>
                                             </div>
                                         </div>
-                                        <ol class="children" v-if="rvo.group_step===1">
+                                        <ol class="children" v-if="rvo.group_step>0">
                                             <li class="single_comment_area">
                                                 <div class="comment-wrapper d-flex">
                                                     <!-- Comment Meta -->
@@ -351,7 +362,7 @@ function removeAllChildNods(el) {
 		                                                <p>{{rvo.msg}}</p>
 		                                                <a href="#">Update</a>
 		                                                <a href="#">Delete</a>
-		                                                <a class="active" href="#">Reply</a>
+		                                                
 		                                            </div>
                                                 </div>
                                             </li>
@@ -398,13 +409,64 @@ function removeAllChildNods(el) {
     			 startPage:0,
     			 endPage:0,
     			 msg:'',
-    			 upReply:false
+    			 upReply:false,
+    			 inReply:false
     		 }
     	 },
     	 mounted(){
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyReplyInsertForm(no){
+    			 $('.ins').hide()
+    			 $('.insert').text("Reply")
+    			 $('.ups').hide()
+    			 $('.update').text("Update")
+    			 if(this.inReply===false)
+    			 {
+    				 this.inReply=true
+    				 $('#in'+no).show()
+    				 $('#i'+no).text("Cancel")
+    			 }
+    			 else
+    			 {
+    				 this.inReply=false
+    				 $('#in'+no).hide()
+    				 $('#i'+no).text("Reply")
+    			 }
+    		 },
+    		 replyReplyInsert(no){
+    			 let msg=$('#imsg'+no).val()
+    			 if(msg.trim()==="")
+    			 {
+    				 $('#imsg'+no).focus()
+    				 return
+    			 }
+    			 axios.post('../comment/reply_insert_vue.do',null,{
+    				 params:{
+    					 pno:no,
+    					 cno:this.cno,
+    					 type:this.type,
+    					 msg:msg
+    				 }
+    			 }).then(res=>{
+    				 console.log(res.data)
+    				 // res.data=Map {list=[],curpage:1....}
+    				 this.reply_list=res.data.list
+    				 this.curpage=res.data.curpage
+    				 this.totalpage=res.data.totalpage
+    				 this.startPage=res.data.startPage
+    				 this.endPage=res.data.endPage
+    				 $('#imsg'+no).val("")
+    				 // textarea
+    				 $('#in'+no).hide()
+    				 // table
+    				 $('#i'+no).text("Reply")
+    				 // Button
+    			 }).catch(error=>{
+    				 console.log(error.response)
+    			 })
+    		 },
     		 replyUpdate(no){
     			 let msg=$('#umsg'+no).val()
     			 if(msg.trim()==="")
@@ -439,6 +501,8 @@ function removeAllChildNods(el) {
     			 })
     		 },
     		 replyUpdateForm(rno){
+    			 $('.ins').hide()
+    			 $('.insert').text("Reply")
     			 $('.ups').hide()
     			 $('.update').text("Update")
     			 if(this.upReply===false)

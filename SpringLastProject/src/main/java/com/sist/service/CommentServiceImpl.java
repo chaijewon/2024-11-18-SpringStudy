@@ -50,5 +50,11 @@ public class CommentServiceImpl implements CommentService{
 		// TODO Auto-generated method stub
 		cDao.commentUpdate(msg, no);
 	}
+
+	@Override
+	public void commentReplyReplyInsert(int pno, CommentVO vo) {
+		// TODO Auto-generated method stub
+		cDao.commentReplyReplyInsert(pno, vo);
+	}
  
 }
