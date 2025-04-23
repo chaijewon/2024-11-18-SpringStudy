@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<srcipt src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.20/fetch.min.js"></srcipt>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .container{

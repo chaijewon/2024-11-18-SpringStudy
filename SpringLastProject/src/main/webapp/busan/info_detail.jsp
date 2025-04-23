@@ -296,78 +296,48 @@ function removeAllChildNods(el) {
     }
 }
 </script>
-           <div id="replyApp">
+          <%--  댓글 위치 --%>
+        <div style="height: 10px"></div>
+            <div class="row" id="replyApp">
+              <%-- 댓글 : Vue --%>
+              <!-- Comment Area Start -->
                             <div class="comment_area section_padding_50 clearfix">
                                 <h4 class="mb-30">댓글</h4>
 
                                 <ol>
                                     <!-- Single Comment Area -->
                                     <li class="single_comment_area" v-for="vo in reply_list">
-                                        <div class="comment-wrapper d-flex" v-if="vo.group_tab===0">
+                                        <div class="comment-wrapper d-flex" v-if="vo.group_step===0">
                                             <!-- Comment Meta -->
                                             <div class="comment-author">
-                                                <img :src="vo.sex==='남자'?'../img/icon/man.png':'../img/icon/woman.png'" alt="">
+                                                <img :src="vo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
                                             </div>
                                             <!-- Comment Content -->
                                             <div class="comment-content">
                                                 <span class="comment-date text-muted">{{vo.dbday}}</span>
-                                                <h5>{{vo.name}}</h5>
+                                                <h5>{{vo.username}}</h5>
                                                 <p>{{vo.msg}}</p>
-                                                <button v-if="sessionId===vo.id" class="btn-xs btn-danger update" style="margin-left: 2px" @click="replyUpdateForm(vo.cno)" :id="'u'+vo.cno">Update</button>
-                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(vo.cno)">Delete</button>
-                                                <button class="active insert" v-if="sessionId!=''" style="margin-left: 2px"  @click="replyForm(vo.cno)" :id="'i'+vo.cno">Reply</button>
-                                                <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left: 2px">Like</button>
-                                                <table class="table ins" style="display: none" :id="'in'+vo.cno">
-			                                     <tr>
-			                                      <td>
-			                                       <textarea rows="4" cols="60" style="float: left" :id="'msg'+vo.cno" ></textarea>
-			                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
-			                                         @click="replyReplyInsert(vo.cno)"
-			                                       >
-			                                       </td>
-			                                    </tr>
-			                                   </table>
-			                                   <table class="table ups" style="display: none" :id="'up'+vo.cno">
-			                                     <tr>
-			                                      <td>
-			                                       <textarea rows="4" cols="60" style="float: left" :id="'umsg'+vo.cno" >{{vo.msg}}</textarea>
-			                                       <input type=button value="수정" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
-			                                         @click="replyUpdate(vo.cno)"
-			                                       >
-			                                       </td>
-			                                    </tr>
-			                                   </table>
-			                               
+                                                <a href="#">Update</a>
+                                                <a href="#">Delete</a>
+                                                <a class="active" href="#">Reply</a>
                                             </div>
-                                 
                                         </div>
-                                        
-                                        <ol class="children" v-if="vo.group_tab===1">
+                                        <ol class="children" v-if="vo.group_step===1">
                                             <li class="single_comment_area">
                                                 <div class="comment-wrapper d-flex">
                                                     <!-- Comment Meta -->
                                                     <div class="comment-author">
-                                                        <img :src="vo.sex==='남자'?'../img/icon/man.png':'../img/icon/woman.png'" alt="">
-                                                    </div>
-                                                    <!-- Comment Content -->
-                                                    <div class="comment-content">
-                                                        <span class="comment-date text-muted">{{vo.dbday}}</span>
-                                                        <h5>{{vo.name}}</h5>
-                                                        <p>{{vo.msg}}</p>
-                                                        <button v-if="sessionId===vo.id" class="btn-xs btn-danger" style="margin-left: 2px" @click="replyUpdateForm(vo.cno)" :id="'u'+vo.cno">Update</button>
-                                                        <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left: 2px" @click="replyDelete(vo.cno)">Delete</button>
-                                                        <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left: 2px">Like</button>
-		                                               <table class="table ups" style="display:none " :id="'up'+vo.cno">
-					                                     <tr>
-					                                      <td>
-					                                       <textarea rows="4" cols="45" style="float: left" :id="'umsg'+vo.cno" >{{vo.msg}}</textarea>
-					                                       <input type=button value="수정" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
-					                                         @click="replyUpdate(vo.cno)"
-					                                       >
-					                                       </td>
-					                                    </tr>
-					                                   </table>
-                                                    </div>
+		                                                <img :src="vo.sex==='남자'?'../img/man.png':'../img/woman.png'" alt="">
+		                                            </div>
+		                                            <!-- Comment Content -->
+		                                            <div class="comment-content">
+		                                                <span class="comment-date text-muted">{{vo.dbday}}</span>
+		                                                <h5>{{vo.username}}</h5>
+		                                                <p>{{vo.msg}}</p>
+		                                                <a href="#">Update</a>
+		                                                <a href="#">Delete</a>
+		                                                <a class="active" href="#">Reply</a>
+		                                            </div>
                                                 </div>
                                             </li>
                                         </ol>
@@ -375,31 +345,76 @@ function removeAllChildNods(el) {
                                     
                                 </ol>
                             </div>
-                            <!--  페이지  -->
+
                             <!-- Leave A Comment -->
-                            <c:if test="${sessionScope.userId!=null }">
-	                            <div class="leave-comment-area section_padding_50 clearfix">
-	                                <div class="comment-form">
-	                                   <table class="table">
-	                                    <tr>
-	                                      <td>
-	                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
-	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
-	                                         @click="replyInsert()"
-	                                       >
-	                                       
-	                                      </td>
-	                                    </tr>
-	                                   </table>
-	                                </div>
-	                            </div>
-                            </c:if>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-          </div>
-      </div>
+                            <div class="leave-comment-area section_padding_50 clearfix">
+                                <div class="comment-form">
+                                    <h4 class="mb-30">Leave A Comment</h4>
+
+                                    <!-- Comment Form -->
+                                    <form action="#" method="post">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="contact-name" placeholder="Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" id="contact-email" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="contact-website" placeholder="Website">
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn contact-btn">Post Comment</button>
+                                    </form>
+                                </div>
+                            </div>
+
+            </div>
     </section>
+    <script>
+     let replyApp=Vue.createApp({
+    	 data(){
+    		 return {
+    			 reply_list:[],
+    			 cno:${vo.no},
+    			 type:1,
+    			 curpage:1,
+    			 sessionId:'${sessionId}',
+    			 totalpage:0,
+    			 startPage:0,
+    			 endPage:0
+    		 }
+    	 },
+    	 mounted(){
+    		 this.dataRecv()
+    	 },
+    	 methods:{
+    		 replyInsert(){
+    			 
+    		 },
+    		 dataRecv(){
+    			 axios.get("../comment/list_vue.do",{
+    				 params:{
+    					page:this.curpage,
+    					cno:this.cno,
+    					type:this.type
+    				 }
+    			 }).then(res=>{
+    				 console.log(res.data)
+    				 // res.data=Map {list=[],curpage:1....}
+    				 this.reply_list=res.data.list
+    				 this.curpage=res.data.curpage
+    				 this.totalpage=res.data.totalpage
+    				 this.startPage=res.data.startPage
+    				 this.endPage=res.data.endPage
+    				 
+    			 }).catch(error=>{
+    				 console.log(error.response)
+    			 })
+    		 }
+    	 }
+     }).mount("#replyApp")
+    </script>
 </body>
 </html>

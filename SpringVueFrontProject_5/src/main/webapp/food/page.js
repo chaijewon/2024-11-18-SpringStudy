@@ -1,13 +1,13 @@
 let listApp=Vue.createApp({
     	 data(){
     		 return {
-    			 food_list:[],
+    			 seoul_list:[],
     			 curpage:1,
     			 totalpage:0,
     			 startPage:0,
     			 endPage:0,
     			 type:1,
-    			 title:'한식'
+    			 title:'서울 명소'
     		 }
     	 },
     	 mounted(){
@@ -39,21 +39,21 @@ let listApp=Vue.createApp({
     			}
     			return arr;
     		},
-    		food(type){
+    		seoul(type){
     			this.type=type
     			this.curpage=1
     			this.dataRecv()
     		},
     		dataRecv(){
     			//let _this=this
-    			axios.get("http://localhost:8080/web/food/list_vue.do",{
+    			axios.get("http://localhost:8080/web/seoul/list_vue.do",{
     				params:{
     					page:this.curpage,
     					type:this.type
     				}
     			}).then(response=>{
     				console.log(response.data)
-    				this.food_list=response.data.list
+    				this.seoul_list=response.data.list
     				this.title=response.data.title
     				this.curpage=response.data.curpage
     				this.totalpage=response.data.totalpage
