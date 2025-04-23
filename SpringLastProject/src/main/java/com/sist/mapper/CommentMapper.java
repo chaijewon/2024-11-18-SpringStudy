@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 public interface CommentMapper {
@@ -30,6 +31,11 @@ public interface CommentMapper {
 		 +"#{sex},#{msg},(SELECT NVL(MAX(group_id)+1,1) FROM busanReply))")
   public void commenInsert(CommentVO vo);
   // 수정 
+  @Update("UPDATE busanReply SET "
+		 +"msg=#{msg} "
+		 +"WHERE no=#{no}")
+  public void commentUpdate(@Param("msg") String msg,
+		  @Param("no") int no);
   // 삭제 => group_id
   // 대댓글
 }

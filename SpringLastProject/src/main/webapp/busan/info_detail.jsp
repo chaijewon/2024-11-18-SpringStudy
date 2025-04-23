@@ -405,6 +405,39 @@ function removeAllChildNods(el) {
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyUpdate(no){
+    			 let msg=$('#umsg'+no).val()
+    			 if(msg.trim()==="")
+    			 {
+    				 $('#umsg'+no).focus()
+    				 return
+    			 }
+    			 
+    			 axios.post('../comment/update_vue.do',null,{
+    				 params:{
+    					 no:no,
+    					 cno:this.cno,
+    					 type:this.type,
+    					 msg:msg
+    				 }
+    			 }).then(res=>{
+    				 console.log(res.data)
+    				 // res.data=Map {list=[],curpage:1....}
+    				 this.reply_list=res.data.list
+    				 this.curpage=res.data.curpage
+    				 this.totalpage=res.data.totalpage
+    				 this.startPage=res.data.startPage
+    				 this.endPage=res.data.endPage
+    				 $('#umsg'+no).val("")
+    				 // textarea
+    				 $('#up'+no).hide()
+    				 // table
+    				 $('#u'+no).text("Update")
+    				 // Button
+    			 }).catch(error=>{
+    				 console.log(error.response)
+    			 })
+    		 },
     		 replyUpdateForm(rno){
     			 $('.ups').hide()
     			 $('.update').text("Update")

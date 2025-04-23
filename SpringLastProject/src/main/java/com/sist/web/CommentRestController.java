@@ -68,6 +68,13 @@ public class CommentRestController {
 	   
    }
    // 수정 
+   @PostMapping("comment/update_vue.do")
+   public Map comment_update(CommentVO vo)
+   {
+	   service.commentUpdate(vo.getMsg(), vo.getNo());
+	   
+	   return commonsListData(1, vo.getCno(), vo.getType());
+   }
    // 삭제 
    // 대댓글 
    

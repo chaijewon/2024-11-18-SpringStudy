@@ -9,4 +9,5 @@ public interface CommentService {
 	public List<CommentVO> commentListData(Map map);
 	public int commentTotalPage(int cno,int type);
 	public void commenInsert(CommentVO vo);
+	public void commentUpdate(String msg,int no);
 }

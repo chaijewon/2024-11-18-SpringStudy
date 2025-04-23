@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -49,6 +50,17 @@ public class CommentDAO {
   public void commenInsert(CommentVO vo)
   {
 	  mapper.commenInsert(vo);
+  }
+  /*
+   *   @Update("UPDATE busanReply SET "
+		 +"msg=#{msg} "
+		 +"WHERE no=#{no}")
+       public void commentUpdate(@Param("msg") String msg,
+		  @Param("no") int no);
+   */
+  public void commentUpdate(String msg,int no)
+  {
+	  mapper.commentUpdate(msg, no);
   }
   
 }
