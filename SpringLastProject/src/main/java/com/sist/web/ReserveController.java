@@ -42,6 +42,16 @@ public class ReserveController {
 	  model.addAttribute("main_jsp", "../mypage/mypage_main.jsp");
 	  return "main/main";
   }
+  @GetMapping("mypage/buy_list.do")
+  public String buy_list(HttpSession session,Model model)
+  {
+	  String userid=(String)session.getAttribute("userid");
+	  List<CartVO> list=gService.goodsBuyListData(userid);
+	  model.addAttribute("list", list);
+	  model.addAttribute("mypage_jsp", "../mypage/buy_list.jsp");
+	  model.addAttribute("main_jsp", "../mypage/mypage_main.jsp");
+	  return "main/main";
+  }
   @GetMapping("reserve/main.do")
   public String reserve_main(Model model)
   {

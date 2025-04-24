@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body>
 <div class="breadcumb-nav">
-        <div class="container">
+        <div class="container" id="cartApp">
             <div class="row">
                 <div class="col-12">
                   <table class="table">
@@ -41,7 +42,7 @@
                      
                      <td class="text-center">
                       <input type=button value="구매" 
-                        class="btn-sm btn-success">
+                        class="btn-sm btn-success" @click="buy(${vo.cno },'${vo.gvo.goods_name}','${vo.gvo.goods_price}')">
                       <a href="../mypage/cart_delete.do?cno=${vo.cno }" class="btn-sm btn-info">취소</a>
                      </td>
                     </tr>
@@ -62,5 +63,60 @@
       </div>
     </div>
  </section>
+ <script>
+  var IMP = window.IMP; 
+  IMP.init("imp68206770"); 
+  let cartApp=Vue.createApp({
+	  data(){
+		return {
+			price:0,
+			name:'',
+			cno:0
+		}  
+	  },
+	  methods:{
+		  buy(cno,name,price){
+			  //console.log("name:"+name)
+			  //console.log("price:"+price)
+			  this.name=name;
+			  let temp=price.replace("원","")
+			  temp=temp.replace(",","")
+			  this.price=parseInt(temp)
+			  this.cno=cno
+			  axios.get("../goods/buy_vue.do",{
+				  params:{
+					  cno:this.cno
+				  }
+			  }).then(res=>{
+				  if(res.data==='yes')
+				  {
+					  this.requestPay(name,price)
+				  }
+				  else 
+				  {
+					  alert("구매 실패!!")
+				  }
+				  
+			  })
+		  },
+		  requestPay(name,price) {
+			    IMP.request_pay({
+			        pg: "html5_inicis",
+			        pay_method: "card",
+			        merchant_uid: "ORD20180131-0000011",   // 주문번호
+			        name: name,
+			        amount: price,         // 숫자 타입
+			        buyer_email: '',
+			        buyer_name: '',
+			        buyer_tel:'',
+			        buyer_addr: '',
+			        buyer_postcode: ''
+			    }, function (rsp) { // callback
+			    	location.href="../mypage/buy_list.do"
+			    });
+			}
+	  }
+  }).mount("#cartApp")
+ </script>
 </body>
 </html>

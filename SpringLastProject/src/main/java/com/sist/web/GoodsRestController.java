@@ -68,4 +68,18 @@ public class GoodsRestController {
 	  }
 	  return result;
   }
+  @GetMapping("goods/buy_vue.do")
+  public String goods_buy(int cno)
+  {
+	  String result="";
+	  try
+	  {
+		  result="yes";
+		  service.goodsBuyUpdate(cno);
+	  }catch(Exception ex)
+	  {
+		  result="no";  
+	  }
+	  return  result;
+  }
 }
