@@ -138,6 +138,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="../goods/list.do">부산 특산물</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="../movie/movie_list.do">OpenAPI</a>
+                                </li>
                                 <%--
                                       v-if="id===${sessionScope.userid}"
                                       
