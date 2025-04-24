@@ -40,7 +40,7 @@ public class YoutubeManager {
 	    	   }
 	    	   
 	    	   result=sb.toString();
-	    	   
+	    	   System.out.println(result);
 	    	   in.close();
 	    	   conn.disconnect();
 	       }
