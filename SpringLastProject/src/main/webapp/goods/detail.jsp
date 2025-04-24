@@ -67,16 +67,25 @@
                       </tr>
                       <tr>
                         <th width=25%>수량</th>
-                        <td width=45%></td>
+                        <td width=45%>
+                         <select class="form-control" v-model="account">
+                           <option v-for="i in 10" :value="i">{{i}}개</option>
+                         </select>
+                        </td>
                       </tr>
                       <tr>
                         <th width=25%>총금액</th>
-                        <td width=45%></td>
+                        <td width=45%>{{total}}</td>
                       </tr>
+                      <c:if test="${sessionScope.userid!=null }">
                       <tr>
-                        
-                        <td colspan="2"></td>
+          
+                        <td colspan="2" class="text-center">
+                           <button class="btn-lg btn-danger">장바구니</button> 
+                           <button class="btn-lg btn-primary">바로구매</button>              
+                        </td>
                       </tr>
+                      </c:if>
                     </table>
                     
                     </div>
@@ -196,6 +205,8 @@
    	 data(){
    		 return {
    			 vo:{},
+   			 price:0,
+   			 account:0,
    			 reply_list:[],
    			 cno:${no},
    			 type:3,
@@ -216,11 +227,21 @@
    			 }
    		 }).then(res=>{
    			 this.vo=res.data
+   			 let temp=res.data.goods_price.replace("원","")
+   			 temp=temp.replace(",","");
+   			 
+   		     this.price=parseInt(temp)
    		 }).catch(error=>{
    			 console.log(error.response)
+   			 
    		 })
    		 
    		 this.dataRecv()
+   	 },
+   	 computed:{
+   		 total(){
+   			 return this.price*this.account
+   		 }
    	 },
    	 methods:{
    		 replyDelete(no){
