@@ -41,7 +41,7 @@
                  <h3 class="panel-title">관리 정보</h3>
                 </div>
                 <ul class="list-group">
-                 <li class="list-group-item"><a href="#">예약정보</a></li>
+                 <li class="list-group-item"><a href="../mypage/reserve_list.do">예약정보</a></li>
                  <li class="list-group-item"><a href="#">장바구니정보</a></li>
                  <li class="list-group-item"><a href="#">구매정보</a></li>
                 </ul>

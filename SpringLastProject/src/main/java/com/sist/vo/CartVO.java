@@ -16,4 +16,5 @@ public class CartVO {
   private int cno,gno,account,isbuy;
   private String userid,dbday;
   private Date regdate;
+  private GoodsVO gvo=new GoodsVO();
 }

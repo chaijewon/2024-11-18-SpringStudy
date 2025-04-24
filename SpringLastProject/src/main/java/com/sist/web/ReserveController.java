@@ -15,11 +15,19 @@ public class ReserveController {
   @Autowired
   private ReserveService service;
   
+  @GetMapping("mypage/mypage_main.do")
+  public String mypage_main(Model model)
+  {
+	  
+	  model.addAttribute("main_jsp", "../mypage/mypage_main.jsp");
+	  return "main/main";
+  }
+  
   @GetMapping("reserve/main.do")
   public String reserve_main(Model model)
   {
-	  model.addAttribute("mypage_jsp", "../reserve/reserve_main.jsp");
-	  model.addAttribute("main_jsp", "../mypage/mypage_main.jsp");
+	  
+	  model.addAttribute("main_jsp", "../reserve/reserve_main.jsp");
 	  return "main/main";
   }
   
@@ -29,7 +37,8 @@ public class ReserveController {
 	  String userid=(String)session.getAttribute("userid");
 	  List<ReserveVO> list=service.reserveMyPageListData(userid);
 	  model.addAttribute("list", list);
-	  model.addAttribute("main_jsp", "../mypage/reserve_list.jsp");
+	  model.addAttribute("mypage_jsp", "../mypage/reserve_list.jsp");
+	  model.addAttribute("main_jsp", "../mypage/mypage_main.jsp");
 	  return "main/main";
   }
   @GetMapping("reserve/reserve_delete.do")
