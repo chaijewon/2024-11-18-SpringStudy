@@ -11,6 +11,8 @@ public interface GoodsService {
 	public GoodsVO busanGoodsDetailData(int no);
 	public void goodsCartInsert(CartVO vo);
 	public List<CartVO> goodsCartListData(String userid);
-	
-	
+	public List<CartVO> goodsBuyListData(String userid);
+	public void goodsCartCancel(int cno);
+	public void goodsBuyUpdate(int cno);
+	  
 }

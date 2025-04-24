@@ -81,8 +81,8 @@
                       <tr>
           
                         <td colspan="2" class="text-center">
-                           <button class="btn-lg btn-danger">장바구니</button> 
-                           <button class="btn-lg btn-primary">바로구매</button>              
+                           <button class="btn-lg btn-danger" @click="goodsCart()">장바구니</button> 
+                           <button class="btn-lg btn-primary" @click="goodsBuy()">바로구매</button>              
                         </td>
                       </tr>
                       </c:if>
@@ -244,6 +244,28 @@
    		 }
    	 },
    	 methods:{
+   		 // 장바구니 
+   		 goodsCart(){
+   			axios.post("../goods/cart_insert.do",null,{
+   				params:{
+   					account:this.account,
+   					gno:this.cno
+   				}
+   			}).then(res=>{
+   				if(res.data==="yes")
+   				{
+   				    location.href="../mypage/cart_list.do"	
+   				}
+   				else
+   				{
+   					alert("장바구니 담기 실패!!\n"+res.data)
+   				}
+   			})
+   		 },
+   		 // 바로구매
+   		 goodsBuy(){
+   			 
+   		 },
    		 replyDelete(no){
    			 //alert("no:"+no)
    			 axios.get('../comment/delete_vue.do',{

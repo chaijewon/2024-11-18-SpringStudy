@@ -42,8 +42,8 @@
                 </div>
                 <ul class="list-group">
                  <li class="list-group-item"><a href="../mypage/reserve_list.do">예약정보</a></li>
-                 <li class="list-group-item"><a href="#">장바구니정보</a></li>
-                 <li class="list-group-item"><a href="#">구매정보</a></li>
+                 <li class="list-group-item"><a href="../mypage/cart_list.do">장바구니정보</a></li>
+                 <li class="list-group-item"><a href="../mypage/buy_list.do">구매정보</a></li>
                 </ul>
               </div>
             </div>

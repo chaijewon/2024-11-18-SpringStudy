@@ -15,6 +15,9 @@ public class ReserveController {
   @Autowired
   private ReserveService service;
   
+  @Autowired
+  private GoodsService gService;
+  
   @GetMapping("mypage/mypage_main.do")
   public String mypage_main(Model model)
   {
@@ -23,6 +26,22 @@ public class ReserveController {
 	  return "main/main";
   }
   
+  @GetMapping("mypage/cart_delete.do")
+  public String cart_delete(int cno)
+  {
+	  gService.goodsCartCancel(cno);
+	  return "redirect:../mypage/cart_list.do";
+  }
+  @GetMapping("mypage/cart_list.do")
+  public String cart_list(HttpSession session,Model model)
+  {
+	  String userid=(String)session.getAttribute("userid");
+	  List<CartVO> list=gService.goodsCartListData(userid);
+	  model.addAttribute("list", list);
+	  model.addAttribute("mypage_jsp", "../mypage/cart_list.jsp");
+	  model.addAttribute("main_jsp", "../mypage/mypage_main.jsp");
+	  return "main/main";
+  }
   @GetMapping("reserve/main.do")
   public String reserve_main(Model model)
   {

@@ -1,8 +1,11 @@
 package com.sist.web;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sist.service.*;
@@ -42,5 +45,27 @@ public class GoodsRestController {
   {
 	  GoodsVO vo=service.busanGoodsDetailData(no);
 	  return vo;
+  }
+  // 다른 프로그램과 연동 => 요청 데이터 전송 
+  // <script> => 크롬 / FF
+  @PostMapping("goods/cart_insert.do")
+  public String cart_insert(int gno,int account,
+		  HttpSession session)
+  {
+	  String result="";
+	  String userid=(String)session.getAttribute("userid");
+	  CartVO vo=new CartVO();
+	  vo.setAccount(account);
+	  vo.setUserid(userid);
+	  vo.setGno(gno);
+	  try
+	  {
+		  service.goodsCartInsert(vo);
+		  result="yes";
+	  }catch(Exception ex)
+	  {
+		  result=ex.getMessage();  
+	  }
+	  return result;
   }
 }

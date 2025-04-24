@@ -63,4 +63,22 @@ public class GoodsServiceImpl implements GoodsService{
 		return cDao.goodsCartListData(userid);
 	}
 
+	@Override
+	public List<CartVO> goodsBuyListData(String userid) {
+		// TODO Auto-generated method stub
+		return cDao.goodsBuyListData(userid);
+	}
+
+	@Override
+	public void goodsCartCancel(int cno) {
+		// TODO Auto-generated method stub
+		cDao.goodsCartCancel(cno);
+	}
+
+	@Override
+	public void goodsBuyUpdate(int cno) {
+		// TODO Auto-generated method stub
+		cDao.goodsBuyUpdate(cno);
+	}
+
 }

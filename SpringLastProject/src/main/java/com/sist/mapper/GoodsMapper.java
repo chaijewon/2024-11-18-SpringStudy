@@ -38,7 +38,7 @@ public interface GoodsMapper {
 			REGDATE          DATE
 	    */
 	   // 장바구니 
-	   @Insert("INSERT INTO busanCart(cno,gno,userid,accout) "
+	   @Insert("INSERT INTO busanCart(cno,gno,userid,account) "
 			  +"VALUES(bc_cno_seq.nextval,#{gno},#{userid},#{account})")
 	   public void goodsCartInsert(CartVO vo);
 	   
