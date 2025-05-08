@@ -80,10 +80,36 @@
       <div class="row justify-content-center ">
         <div class="col-12 col-lg-12">
            <div class="row no-gutters">
+            <button class="btn btn-sm btn-danger" @click="test(10)">통계보기</button>
+            <button class="btn btn-sm btn-success" @click="test(20)">통계보기</button>
+            <button class="btn btn-sm btn-info" @click="test(30)">통계보기</button>
+            <img :src="'../img/'+emp">
            </div>
         </div>
       </div>
     </div>
  </section>
+ <script type="text/javascript">
+  let app=Vue.createApp({
+	  data(){
+		  return {
+			  emp:'emp10.png'
+		  }
+	  },
+	  methods:{
+		  
+		  test(no){
+			  axios.get('http://127.0.0.1:8000/web/emp/',{
+				  params:{
+					  deptno:no
+				  }
+			  })
+			  .then(res=>{
+				  this.emp="emp"+no+".png"
+			  })
+		  }
+	  }
+  }).mount("#reserveApp")
+ </script>
 </body>
 </html>
